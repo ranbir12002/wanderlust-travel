@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800;900&family=Inter:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+/* ============================================
+   CENTRALIZED COLOR PALETTE
+   ============================================
+   Change these values to update the entire app's
+   color scheme in one place. All Tailwind classes
+   (e.g. bg-primary, text-on-surface) will pick up
+   these changes automatically.
+   ============================================ */
+@theme {
+  /* ---- Fonts ---- */
+  --font-headline: "Epilogue", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  /* ---- Primary colors ---- */
+  --color-primary: #153526;
+  --color-primary-container: #2c4c3b;
+  --color-on-primary-container: #98bca6;
+
+  /* ---- Secondary colors ---- */
+  --color-secondary: #4b6452;
+  --color-secondary-container: #ceead3;
+  --color-on-secondary-container: #516a58;
+  --color-on-secondary-fixed-variant: #344c3b;
+
+  /* ---- Surface colors ---- */
+  --color-surface: #f9faf5;
+  --color-surface-container-low: #f3f4ef;
+  --color-surface-container: #edeee9;
+  --color-surface-container-highest: #e2e3de;
+
+  /* ---- Text on surface ---- */
+  --color-on-surface: #1a1c19;
+  --color-on-surface-variant: #424843;
+
+  /* ---- Outline ---- */
+  --color-outline-variant: #c1c8c2;
+
+  /* ---- Accent: Process section background ---- */
+  --color-accent-dark: #3A4B39;
+
+  /* ---- Accent: Alternate section background ---- */
+  --color-bg-alt: #F6F7F2;
+}
+
+@layer utilities {
+  .glass-nav {
+    background: rgba(249, 250, 245, 0.8);
+    backdrop-filter: blur(12px);
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
