@@ -18,7 +18,7 @@ export default async function HomePage() {
       <Process data={siteData.process} />
       <Services data={siteData.services} />
       <Portfolio data={siteData.portfolio} />
-      <Testimonial data={siteData.testimonial} />
+      <Testimonial data={siteData.testimonials} />
       <CTA data={siteData.cta} />
       <ContactForm />
     </main>
