@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { db } from '@/lib/db';
+import { getDb } from '@/lib/mongodb';
 
 export async function POST(request: Request) {
   try {
@@ -10,21 +10,20 @@ export async function POST(request: Request) {
       trip.id = Date.now().toString();
     }
 
-    const insertOrUpdate = db.prepare(`
-        INSERT OR REPLACE INTO trips (id, slug, title, badge, duration, price, thumbnail, heroImage, natureOfTrip, lodgingType, subtitle, itinerary, routeWaypoints)
-        VALUES (@id, @slug, @title, @badge, @duration, @price, @thumbnail, @heroImage, @natureOfTrip, @lodgingType, @subtitle, @itinerary, @routeWaypoints)
-    `);
+    const db = await getDb();
+    
+    // Remove _id if it exists to avoid MongoDB Error: Performing an update on the path '_id'
+    const { _id, ...updateData } = trip;
 
-    insertOrUpdate.run({
-      ...trip,
-      badge: trip.badge || null,
-      itinerary: typeof trip.itinerary === 'string' ? trip.itinerary : JSON.stringify(trip.itinerary),
-      routeWaypoints: typeof trip.routeWaypoints === 'string' ? trip.routeWaypoints : JSON.stringify(trip.routeWaypoints || [])
-    });
+    await db.collection('trips').updateOne(
+      { id: trip.id },
+      { $set: updateData },
+      { upsert: true }
+    );
 
     return NextResponse.json({ success: true, trip });
   } catch (error) {
-    console.error("Error saving trip to SQL:", error);
+    console.error("Error saving trip to MongoDB:", error);
     return NextResponse.json({ success: false, message: 'Failed to save trip' }, { status: 500 });
   }
 }
@@ -38,12 +37,12 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ success: false, message: 'Trip ID required' }, { status: 400 });
     }
 
-    const deleteStmt = db.prepare('DELETE FROM trips WHERE id = ?');
-    deleteStmt.run(id);
+    const db = await getDb();
+    await db.collection('trips').deleteOne({ id: id });
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Error deleting trip:", error);
+    console.error("Error deleting trip from MongoDB:", error);
     return NextResponse.json({ success: false, message: 'Failed to delete trip' }, { status: 500 });
   }
 }

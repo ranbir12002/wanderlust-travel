@@ -20,6 +20,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
         date={blog.date} 
         author={blog.author} 
         heroImage={blog.heroImage} 
+        videoUrl={blog.videoUrl}
       />
       
       <main className="mx-auto max-w-3xl px-6 py-16">

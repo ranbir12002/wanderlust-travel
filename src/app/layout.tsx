@@ -17,6 +17,8 @@ export const metadata: Metadata = {
   },
 };
 
+import Preloader from "@/components/ui/Preloader";
+
 export default async function RootLayout({
   children,
 }: {
@@ -31,8 +33,9 @@ export default async function RootLayout({
       "--color-accent-dark": settings.accentColor
     } as React.CSSProperties}>
       <body className="bg-surface font-body text-on-surface selection:bg-primary-container selection:text-on-primary-container min-h-screen antialiased">
+        <Preloader />
         <Header data={siteData.header} />
-        {children}
+        <main>{children}</main>
         <Footer data={siteData.footer} />
       </body>
     </html>

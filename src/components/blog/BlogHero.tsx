@@ -6,19 +6,31 @@ interface BlogHeroProps {
   date: string;
   author: string;
   heroImage: string;
+  videoUrl?: string;
 }
 
-export default function BlogHero({ title, category, date, author, heroImage }: BlogHeroProps) {
+export default function BlogHero({ title, category, date, author, heroImage, videoUrl }: BlogHeroProps) {
   return (
     <div className="relative flex min-h-[70vh] w-full flex-col justify-end overflow-hidden pb-16 pt-32">
-      {/* Background Image */}
-      <Image
-        src={heroImage}
-        alt={title}
-        fill
-        className="object-cover"
-        priority
-      />
+      {/* Background Media */}
+      {videoUrl ? (
+        <video
+          src={videoUrl}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      ) : (
+        <Image
+          src={heroImage}
+          alt={title}
+          fill
+          className="object-cover"
+          priority
+        />
+      )}
 
       {/* Overlays */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />

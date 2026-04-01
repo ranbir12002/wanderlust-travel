@@ -4,11 +4,16 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Save, Plus, Trash2, X, ChevronUp, ChevronDown, MapPin } from "lucide-react";
 import Link from "next/link";
-import { Trip, ItineraryDay } from "@/data/tripsData";
+import Image from "next/image";
+import { Trip, ItineraryDay, ItineraryActivity } from "@/data/tripsData";
+import MediaUploader from "@/components/admin/MediaUploader";
 
 import TripHero from "@/components/trip/TripHero";
 import QuickStats from "@/components/trip/QuickStats";
 import ItinerarySection from "@/components/trip/ItinerarySection";
+import Button from "@/components/ui/Button";
+import Badge from "@/components/ui/Badge";
+import { Heading, Text } from "@/components/ui/Typography";
 
 interface TripBuilderProps {
   initialData?: Trip;
@@ -26,8 +31,9 @@ export default function TripBuilder({ initialData }: TripBuilderProps) {
     badge: null,
     duration: "7 days",
     price: "15,000/- onwards",
-    thumbnail: "https://picsum.photos/seed/thumb/600/400",
-    heroImage: "https://picsum.photos/seed/hero/1920/1080",
+    thumbnail: "",
+    heroImage: "",
+    videoUrl: "",
     natureOfTrip: "Road Trip",
     lodgingType: "Camps",
     subtitle: "the journey begins",
@@ -35,7 +41,8 @@ export default function TripBuilder({ initialData }: TripBuilderProps) {
       { day: 1, title: "ARRIVAL", description: "Welcome to the starting point." }
     ],
     tags: [],
-    routeWaypoints: []
+    routeWaypoints: [],
+    gallery: []
   });
 
   const [tagInput, setTagInput] = useState("");
@@ -157,13 +164,13 @@ export default function TripBuilder({ initialData }: TripBuilderProps) {
           <Link href="/admin" className="flex items-center gap-2 text-sm font-bold text-neutral-500 hover:text-black">
             <ArrowLeft className="h-4 w-4" /> Back to Dashboard
           </Link>
-          <button
+          <Button
             onClick={handleSave}
             disabled={loading}
-            className="flex items-center gap-2 rounded-full bg-black px-6 py-2 text-sm font-bold uppercase text-white transition hover:bg-neutral-800 disabled:opacity-50"
+            size="sm"
           >
-            <Save className="h-4 w-4" /> {loading ? "Saving..." : "Save Trip"}
-          </button>
+            <Save className="h-4 w-4 mr-2" /> {loading ? "Saving..." : "Save Trip"}
+          </Button>
         </div>
 
         {error && <div className="mb-4 rounded bg-red-100 p-3 text-sm font-bold text-red-600">{error}</div>}
@@ -186,14 +193,63 @@ export default function TripBuilder({ initialData }: TripBuilderProps) {
           </label>
 
           <div className="grid grid-cols-2 gap-4">
-            <label className="flex flex-col gap-1 text-sm font-bold">
-              Hero Image URL
-              <input type="text" value={trip.heroImage} onChange={(e) => handleChange("heroImage", e.target.value)} className="rounded border border-neutral-300 p-2 font-normal" />
-            </label>
-            <label className="flex flex-col gap-1 text-sm font-bold">
-              Thumbnail Image URL
-              <input type="text" value={trip.thumbnail} onChange={(e) => handleChange("thumbnail", e.target.value)} className="rounded border border-neutral-300 p-2 font-normal" />
-            </label>
+            <MediaUploader 
+              label="Hero Image" 
+              value={trip.heroImage} 
+              onChange={(url) => handleChange("heroImage", url)} 
+              accept="image/*"
+            />
+            <MediaUploader 
+              label="Thumbnail Image" 
+              value={trip.thumbnail} 
+              onChange={(url) => handleChange("thumbnail", url)} 
+              accept="image/*"
+            />
+          </div>
+
+          <MediaUploader 
+            label="Hero Background Video (Optional)" 
+            value={trip.videoUrl || ""} 
+            onChange={(url) => handleChange("videoUrl", url)} 
+            accept="video/*"
+            maxSizeMB={100}
+          />
+
+          {/* GALLERY SECTION */}
+          <div className="flex flex-col gap-4 rounded-2xl border border-neutral-100 bg-neutral-50/50 p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-sm font-bold uppercase tracking-widest text-neutral-900">Trip Gallery</h3>
+                <p className="text-xs text-neutral-400">Add multiple photos for the experience carousel</p>
+              </div>
+              <MediaUploader 
+                label="" 
+                value="" 
+                onChange={(url) => handleChange("gallery", [...(trip.gallery || []), url])} 
+                accept="image/*"
+                className="!w-auto !aspect-square"
+              />
+            </div>
+            
+            {trip.gallery && trip.gallery.length > 0 && (
+              <div className="grid grid-cols-4 gap-2">
+                {trip.gallery.map((url, idx) => (
+                  <div key={idx} className="group relative aspect-square overflow-hidden rounded-lg border border-neutral-200 bg-white">
+                    <Image src={url} alt="Gallery" fill className="object-cover" />
+                    <button
+                      onClick={() => {
+                        const newGallery = [...(trip.gallery || [])];
+                        newGallery.splice(idx, 1);
+                        handleChange("gallery", newGallery);
+                      }}
+                      className="absolute right-1 top-1 rounded-full bg-red-500 p-1 text-white opacity-0 transition-opacity group-hover:opacity-100"
+                    >
+                      <X size={12} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="grid grid-cols-3 gap-4">
@@ -239,12 +295,12 @@ export default function TripBuilder({ initialData }: TripBuilderProps) {
             {trip.tags && trip.tags.length > 0 && (
               <div className="mt-2 flex flex-wrap gap-2">
                 {trip.tags.map(tag => (
-                  <span key={tag} className="flex items-center gap-1 rounded-full bg-neutral-200 px-3 py-1 text-xs font-semibold text-neutral-800">
+                  <Badge key={tag} variant="secondary" className="flex items-center gap-1">
                     {tag}
                     <button type="button" onClick={() => removeTag(tag)} className="ml-1 text-neutral-500 hover:text-red-500">
                       <X className="h-3 w-3" />
                     </button>
-                  </span>
+                  </Badge>
                 ))}
               </div>
             )}
@@ -321,36 +377,142 @@ export default function TripBuilder({ initialData }: TripBuilderProps) {
           {/* ITINERARY BUILDER */}
           <div className="mt-8">
             <div className="mb-4 flex items-center justify-between">
-              <h3 className="text-xl font-black uppercase">Itinerary</h3>
-              <button type="button" onClick={addDay} className="flex items-center gap-1 rounded bg-neutral-100 px-3 py-1.5 text-xs font-bold hover:bg-neutral-200">
-                <Plus className="h-3 w-3" /> Add Day
-              </button>
+              <h3 className="text-xl font-black uppercase tracking-tight">Itinerary</h3>
+              <Button type="button" variant="primary" size="sm" onClick={addDay}>
+                <Plus className="h-4 w-4 mr-1" /> Add Day
+              </Button>
             </div>
 
-            <div className="flex flex-col gap-4">
-              {trip.itinerary.map((dayObj, index) => (
-                <div key={index} className="rounded-xl border border-neutral-200 bg-neutral-50 p-4">
-                  <div className="mb-2 flex items-center justify-between">
-                    <span className="font-bold">Day {dayObj.day}</span>
-                    <button type="button" onClick={() => removeDay(index)} className="rounded-full p-1 text-red-500 hover:bg-red-100">
-                      <Trash2 className="h-4 w-4" />
-                    </button>
+            <div className="flex flex-col gap-6">
+              {trip.itinerary.map((dayObj, index) => {
+                // Inline helpers for nested itinerary items
+                const addActivity = () => {
+                  const newActivities = [...(dayObj.activities || []), { time: "09:00 AM", title: "" }];
+                  handleItineraryChange(index, "activities", newActivities);
+                };
+                const removeActivity = (aIndex: number) => {
+                  const newActivities = dayObj.activities!.filter((_, i) => i !== aIndex);
+                  handleItineraryChange(index, "activities", newActivities);
+                };
+                const updateActivity = (aIndex: number, field: keyof ItineraryActivity, val: string) => {
+                  const newActivities = [...(dayObj.activities || [])];
+                  newActivities[aIndex] = { ...newActivities[aIndex], [field]: val };
+                  handleItineraryChange(index, "activities", newActivities);
+                };
+
+                const addBullet = () => {
+                  handleItineraryChange(index, "bulletPoints", [...(dayObj.bulletPoints || []), ""]);
+                };
+                const removeBullet = (bIndex: number) => {
+                   handleItineraryChange(index, "bulletPoints", dayObj.bulletPoints!.filter((_, i) => i !== bIndex));
+                };
+                const updateBullet = (bIndex: number, val: string) => {
+                   const newBullets = [...(dayObj.bulletPoints || [])];
+                   newBullets[bIndex] = val;
+                   handleItineraryChange(index, "bulletPoints", newBullets);
+                };
+
+                return (
+                  <div key={index} className="flex flex-col gap-4 rounded-3xl border border-neutral-100 bg-neutral-50/50 p-6 shadow-sm transition-all hover:bg-neutral-50">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-900 text-xs font-black text-white">
+                          {dayObj.day}
+                        </span>
+                        <input
+                          type="text"
+                          placeholder="DAY TITLE (Ex: arrival & check-in)"
+                          value={dayObj.title}
+                          onChange={(e) => handleItineraryChange(index, "title", e.target.value)}
+                          className="w-full bg-transparent text-lg font-black lowercase tracking-tight focus:outline-none"
+                        />
+                      </div>
+                      <button type="button" onClick={() => removeDay(index)} className="rounded-full p-2 text-red-500 hover:bg-red-100">
+                        <Trash2 className="h-5 w-5" />
+                      </button>
+                    </div>
+
+                    <div className="space-y-4">
+                       <label className="flex flex-col gap-1 text-[10px] font-black uppercase tracking-widest text-neutral-400">
+                          Main Description
+                          <textarea
+                            placeholder="Overall description for the day..."
+                            value={dayObj.description}
+                            onChange={(e) => handleItineraryChange(index, "description", e.target.value)}
+                            className="h-24 w-full resize-none rounded-xl border border-neutral-200 bg-white p-3 text-sm focus:border-neutral-900 focus:outline-none"
+                          />
+                       </label>
+
+                       {/* Sub-Activities */}
+                       <div className="space-y-2">
+                          <div className="flex items-center justify-between">
+                             <h4 className="text-[10px] font-black uppercase tracking-widest text-neutral-400">Sub-Activities</h4>
+                             <button type="button" onClick={addActivity} className="text-[10px] font-bold text-blue-600 hover:underline">+ ADD ACTIVITY</button>
+                          </div>
+                          <div className="grid gap-2">
+                             {dayObj.activities?.map((activity, aIdx) => (
+                                <div key={aIdx} className="flex items-center gap-2">
+                                   <input 
+                                      type="text" 
+                                      value={activity.time} 
+                                      onChange={(e) => updateActivity(aIdx, 'time', e.target.value)}
+                                      className="w-24 rounded-lg border border-neutral-200 bg-white p-2 text-xs font-bold uppercase" 
+                                      placeholder="Time" 
+                                   />
+                                   <input 
+                                      type="text" 
+                                      value={activity.title} 
+                                      onChange={(e) => updateActivity(aIdx, 'title', e.target.value)}
+                                      className="flex-1 rounded-lg border border-neutral-200 bg-white p-2 text-xs" 
+                                      placeholder="What's happening?" 
+                                   />
+                                   <button type="button" onClick={() => removeActivity(aIdx)} className="text-red-400 hover:text-red-600">
+                                      <X size={14} />
+                                   </button>
+                                </div>
+                             ))}
+                          </div>
+                       </div>
+
+                       {/* Bullet Points */}
+                       <div className="space-y-2">
+                          <div className="flex items-center justify-between">
+                             <h4 className="text-[10px] font-black uppercase tracking-widest text-neutral-400">Bullet Points</h4>
+                             <button type="button" onClick={addBullet} className="text-[10px] font-bold text-blue-600 hover:underline">+ ADD BULLET</button>
+                          </div>
+                          <div className="grid gap-2">
+                             {dayObj.bulletPoints?.map((bp, bIdx) => (
+                                <div key={bIdx} className="flex items-center gap-2">
+                                   <span className="text-neutral-300">•</span>
+                                   <input 
+                                      type="text" 
+                                      value={bp} 
+                                      onChange={(e) => updateBullet(bIdx, e.target.value)}
+                                      className="flex-1 rounded-lg border border-neutral-200 bg-white p-2 text-xs" 
+                                      placeholder="Important point..." 
+                                   />
+                                   <button type="button" onClick={() => removeBullet(bIdx)} className="text-red-400 hover:text-red-600">
+                                      <X size={14} />
+                                   </button>
+                                </div>
+                             ))}
+                          </div>
+                       </div>
+
+                       {/* Notes */}
+                       <label className="flex flex-col gap-1 text-[10px] font-black uppercase tracking-widest text-neutral-400">
+                          Special Notes for the day
+                          <textarea
+                            placeholder="Things to carry, warnings, or special tips..."
+                            value={dayObj.notes || ""}
+                            onChange={(e) => handleItineraryChange(index, "notes", e.target.value)}
+                            className="h-16 w-full resize-none rounded-xl border border-neutral-200 bg-neutral-100 p-3 text-xs italic focus:border-neutral-900 focus:outline-none"
+                          />
+                       </label>
+                    </div>
                   </div>
-                  <input
-                    type="text"
-                    placeholder="Day Title"
-                    value={dayObj.title}
-                    onChange={(e) => handleItineraryChange(index, "title", e.target.value)}
-                    className="mb-2 w-full rounded border border-neutral-300 p-2 text-sm font-bold"
-                  />
-                  <textarea
-                    placeholder="Day Description"
-                    value={dayObj.description}
-                    onChange={(e) => handleItineraryChange(index, "description", e.target.value)}
-                    className="h-24 w-full resize-none rounded border border-neutral-300 p-2 text-sm"
-                  />
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
@@ -368,6 +530,7 @@ export default function TripBuilder({ initialData }: TripBuilderProps) {
               title={trip.title}
               subtitle={trip.subtitle}
               heroImage={trip.heroImage}
+              videoUrl={trip.videoUrl}
               routeWaypoints={trip.routeWaypoints}
             />
             <main className="mx-auto px-4 py-8 relative z-20">

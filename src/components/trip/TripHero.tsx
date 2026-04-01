@@ -6,20 +6,36 @@ interface TripHeroProps {
   title: string;
   subtitle: string;
   heroImage: string;
+  videoUrl?: string;
   routeWaypoints?: string[];
 }
 
-export default function TripHero({ title, subtitle, heroImage, routeWaypoints }: TripHeroProps) {
+export default function TripHero({ title, subtitle, heroImage, videoUrl, routeWaypoints }: TripHeroProps) {
   return (
     <div className="relative flex min-h-[85vh] w-full items-center justify-center">
-      {/* Background Image */}
-      <Image
-        src={heroImage}
-        alt={title}
-        fill
-        className="object-cover"
-        priority
-      />
+      {/* Background Media */}
+      {videoUrl ? (
+        <video
+          src={videoUrl}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      ) : heroImage ? (
+        <Image
+          src={heroImage}
+          alt={title}
+          fill
+          className="object-cover"
+          priority
+        />
+      ) : (
+        <div className="absolute inset-0 bg-neutral-200 flex items-center justify-center">
+          <span className="text-neutral-400 font-medium">No background media selected</span>
+        </div>
+      )}
 
       {/* Overlays */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-transparent" />

@@ -1,4 +1,4 @@
-import { db } from '@/lib/db';
+import { getDb } from '@/lib/mongodb';
 
 export interface Blog {
   id: string;
@@ -7,6 +7,7 @@ export interface Blog {
   date: string;
   thumbnail: string;
   heroImage: string;
+  videoUrl?: string; // Optional blog header video
   author: string;
   category: string;
   content: string[]; // array of paragraphs
@@ -14,28 +15,34 @@ export interface Blog {
 
 export async function getBlogs(): Promise<Blog[]> {
   try {
-    const rows = db.prepare('SELECT * FROM blogs').all() as any[];
-    return rows.map(row => ({
-      ...row,
-      content: JSON.parse(row.content)
-    }));
+    const db = await getDb();
+    const blogs = await db.collection<Blog>('blogs').find({}).toArray();
+    return blogs.map(blog => {
+      const { _id, ...rest } = blog as any;
+      return {
+        ...rest,
+        id: rest.id || _id.toString(),
+      } as Blog;
+    });
   } catch (error) {
-    console.error("Error fetching blogs from DB:", error);
+    console.error("Error fetching blogs from MongoDB:", error);
     return [];
   }
 }
 
 export async function getBlogBySlug(slug: string): Promise<Blog | undefined> {
   try {
-    const row = db.prepare('SELECT * FROM blogs WHERE slug = ?').get(slug) as any;
-    if (!row) return undefined;
+    const db = await getDb();
+    const blog = await db.collection<Blog>('blogs').findOne({ slug });
+    if (!blog) return undefined;
     
+    const { _id, ...rest } = blog as any;
     return {
-      ...row,
-      content: JSON.parse(row.content)
-    };
+      ...rest,
+      id: rest.id || _id.toString(),
+    } as Blog;
   } catch (error) {
-    console.error("Error fetching blog by slug:", error);
+    console.error("Error fetching blog by slug from MongoDB:", error);
     return undefined;
   }
 }

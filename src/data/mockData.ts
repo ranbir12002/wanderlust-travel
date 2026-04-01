@@ -5,10 +5,12 @@ export const siteData = {
   header: {
     logo: "Wanderlust",
     navLinks: [
-      { label: "HOME", href: "/" },
-      { label: "TRIPS", href: "/trips" },
-      { label: "BLOGS", href: "/blogs" },
-      { label: "CONTACT", href: "/#contact" },
+      { label: "Domestic Trips", href: "/trips/domestic" },
+      { label: "International Trips", href: "/trips/international" },
+      { label: "Blogs", href: "/blogs" },
+      { label: "About Us", href: "/about" },
+      { label: "Customised Trips", href: "/customised" },
+      { label: "Payments", href: "/payments" },
     ]
   },
   hero: {
@@ -99,10 +101,46 @@ export const siteData = {
       img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBnoLERA8Dc5dVAK8yNMmcLpOL9yMmphrIk4xTD7gA-ueD1cyPiTKsSDMuUyuL2X5_U3v3rT3VqMelEpBbXHWUiO3-zmhyQ7rN5ls8htjLJ0cuzqJZ0M4TXNDfAxfmbGKPWmjzlXRzI-eUQCLXi9ZXQNtDatdhTMGopF33F0ujKHLZLx9hVMpWwD4c3_p6xCR5BrCDokoZEDmCfvz3hCxO34dCe8PWmryq1cXkMCIPznvczz4pp35ROmkPVBYQTzDvjGDKsi3Xkyf22",
     },
   ],
-  testimonial: {
-    quote: "LeafLife took our sprawling, untamed backyard and turned it into a sophisticated oasis that feels like a natural extension of our home.",
-    author: "Steve Evans",
-    role: "CEO of Malibu Company"
+  testimonials: [
+    {
+      quote: "Wanderlust crafted the perfect itinerary for our anniversary. The attention to detail and curated experiences were unmatched.",
+      author: "Sarah Jenkins",
+      platform: "Google",
+      rating: 5
+    },
+    {
+      quote: "Absolutely breathtaking views and stellar organization. It felt like an exclusive, private expedition tailored just for us.",
+      author: "Michael T.",
+      platform: "Instagram",
+      rating: 5
+    },
+    {
+      quote: "The best travel agency for bespoke trips. From the moment we landed, everything was handled with pure professionalism.",
+      author: "Elena R.",
+      platform: "Google",
+      rating: 5
+    },
+    {
+      quote: "Our group tour through the Alps was unforgettable. Expert guides, premium stays, and seamless logistics.",
+      author: "David L.",
+      platform: "Instagram",
+      rating: 5
+    }
+  ],
+  social: {
+    title: "Follow Our Journey",
+    description: "Join our community of explorers. Discover inspiration for your next breathtaking expedition.",
+    instagramUrl: "#",
+    youtubeUrl: "#",
+    googleUrl: "#",
+    feedImages: [
+      "https://images.unsplash.com/photo-1527631746610-bca00c0f4f72?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=800"
+    ]
   },
   portfolio: {
     title: "GET TO KNOW OUR \nLATEST GARDEN ",
@@ -134,44 +172,26 @@ export const siteData = {
     bgImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuBiZgDdVfF1gQjKDWkZBlePIHU-H3qfvM5zFeN6yiuwftlu-BlsuU3uZFBNVTSFZOi8gsdrQOEFnVFPc4QpspR5Irborvr6gHszzstuagAABDL8Bi1D_imM_6NnL6jHq68bUBsq7G_xnrNWiPB9JaTRvbklEnxRY8vbe3vyopUt8gY66o56KM8dIBVLecxP5P94YfjbZ6jmRNAIsN0ndRzK7fvoFG-MElU6iQ5-aYW9YEb1mB4OMT4bIJO060Pj786tHn_N7mg-vTFU"
   },
   footer: {
-    logo: "LeafLife",
-    description: "Elevating architecture through organic landscape artistry. Boutique design for discerning estates.",
-    newsletterTitle: "Newsletter",
-    newsletterPlaceholder: "Email Address",
-    columns: [
-      {
-        title: "SUPPORT",
-        links: [
-          { label: "Help Center", href: "/#contact" },
-          { label: "Consultation", href: "/#contact" },
-          { label: "FAQs", href: "/#contact" },
-        ]
-      },
-      {
-        title: "LINKS",
-        links: [
-          { label: "Home", href: "/" },
-          { label: "Destinations", href: "/destinations" },
-          { label: "Our Trips", href: "/trips" },
-          { label: "Blogs", href: "/blogs" },
-        ]
-      },
-      {
-        title: "TRAVEL STYLES",
-        links: [
-          { label: "Group Tours", href: "/trips" },
-          { label: "Solo Travel", href: "/trips" },
-          { label: "Adventure", href: "/trips" },
-          { label: "Heritage", href: "/trips" },
-        ]
-      }
+    logo: "Wanderlust",
+    description: "Elevating travel through curated, bespoke itineraries. Discover the world with unparalleled sophistication and rhythm.",
+    bottomLinks: [
+      { label: "Terms & Conditions", href: "/terms" },
+      { label: "Cancellation Policy", href: "/cancellation" }
     ],
-    copyright: "© 2024 Wanderlust Travel. All rights reserved.",
-    legalLinks: [
-      { label: "Privacy Policy", href: "#" },
-      { label: "Terms of Service", href: "#" },
-      { label: "Cookie Policy", href: "#" },
-    ]
+    quickLinks: [
+      { label: "International Trips", href: "/trips/international" },
+      { label: "Group Tours", href: "/trips/group" },
+      { label: "Customised Trips", href: "/customised" },
+      { label: "Blogs", href: "/blogs" },
+      { label: "Payments", href: "/payments" },
+      { label: "About Us", href: "/about" }
+    ],
+    contactInfo: {
+      phone: "+1 (555) 123-4567",
+      email: "hello@wanderlust.com",
+      office: "123 Explorer's Ave, Suite 400\nSan Francisco, CA 94107"
+    },
+    copyright: "© 2026 Wanderlust Travel. All rights reserved.",
   }
 };
 

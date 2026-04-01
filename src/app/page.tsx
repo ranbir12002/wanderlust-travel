@@ -1,10 +1,16 @@
-import { Hero, Values, Process } from "@/components/Sections1";
-import { Services, Portfolio } from "@/components/Sections2";
+import Hero from "@/components/home/Hero";
+import Values from "@/components/home/Values";
+import Process from "@/components/home/Process";
+import Services from "@/components/home/Services";
+import Portfolio from "@/components/home/Portfolio";
+import Testimonial from "@/components/home/Testimonial";
+import CTA from "@/components/home/CTA";
 import ContactForm from "@/components/trip/ContactForm";
-import Testimonials from "@/components/trip/Testimonials";
-import { siteData } from "@/data/mockData";
+import { getSiteContent } from "@/data/siteData";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const siteData = await getSiteContent();
+  
   return (
     <main>
       <Hero data={siteData.hero} />
@@ -12,7 +18,8 @@ export default function HomePage() {
       <Process data={siteData.process} />
       <Services data={siteData.services} />
       <Portfolio data={siteData.portfolio} />
-      <Testimonials />
+      <Testimonial data={siteData.testimonial} />
+      <CTA data={siteData.cta} />
       <ContactForm />
     </main>
   );

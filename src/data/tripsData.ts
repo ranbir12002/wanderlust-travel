@@ -1,9 +1,17 @@
-import { db } from '@/lib/db';
+import { getDb } from '@/lib/mongodb';
+
+export interface ItineraryActivity {
+  time: string;
+  title: string;
+}
 
 export interface ItineraryDay {
   day: number;
   title: string;
   description: string;
+  activities?: ItineraryActivity[];
+  bulletPoints?: string[];
+  notes?: string;
 }
 
 export interface Trip {
@@ -15,42 +23,48 @@ export interface Trip {
   price: string;
   thumbnail: string;
   heroImage: string;
+  videoUrl?: string; // Optional R2 video URL
   natureOfTrip: string;
   lodgingType: string;
   subtitle: string;
   itinerary: ItineraryDay[];
   tags?: string[];
   routeWaypoints?: string[];
+  gallery?: string[];
 }
 
 export async function getTrips(): Promise<Trip[]> {
   try {
-    const rows = db.prepare('SELECT * FROM trips').all() as any[];
-    return rows.map(row => ({
-      ...row,
-      itinerary: row.itinerary ? JSON.parse(row.itinerary) : [],
-      tags: row.tags ? JSON.parse(row.tags) : [],
-      routeWaypoints: row.routeWaypoints ? JSON.parse(row.routeWaypoints) : []
-    }));
+    const db = await getDb();
+    const trips = await db.collection<Trip>('trips').find({}).toArray();
+    
+    return trips.map(trip => {
+      const { _id, ...rest } = trip as any;
+      return {
+        ...rest,
+        id: rest.id || _id.toString(),
+      } as Trip;
+    });
   } catch (error) {
-    console.error("Error fetching trips from DB:", error);
+    console.error("Error fetching trips from MongoDB:", error);
     return [];
   }
 }
 
 export async function getTripBySlug(slug: string): Promise<Trip | undefined> {
   try {
-    const row = db.prepare('SELECT * FROM trips WHERE slug = ?').get(slug) as any;
-    if (!row) return undefined;
+    const db = await getDb();
+    const trip = await db.collection<Trip>('trips').findOne({ slug });
     
+    if (!trip) return undefined;
+    
+    const { _id, ...rest } = trip as any;
     return {
-      ...row,
-      itinerary: row.itinerary ? JSON.parse(row.itinerary) : [],
-      tags: row.tags ? JSON.parse(row.tags) : [],
-      routeWaypoints: row.routeWaypoints ? JSON.parse(row.routeWaypoints) : []
-    };
+      ...rest,
+      id: rest.id || _id.toString(),
+    } as Trip;
   } catch (error) {
-    console.error("Error fetching trip by slug:", error);
+    console.error("Error fetching trip by slug from MongoDB:", error);
     return undefined;
   }
 }

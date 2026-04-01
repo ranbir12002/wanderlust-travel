@@ -5,8 +5,11 @@ import { useRouter } from "next/navigation";
 import { ArrowLeft, Save, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { Blog } from "@/data/blogsData";
-
+import MediaUploader from "@/components/admin/MediaUploader";
 import BlogHero from "@/components/blog/BlogHero";
+import Button from "@/components/ui/Button";
+import { Heading, Text } from "@/components/ui/Typography";
+import Badge from "@/components/ui/Badge";
 
 interface BlogBuilderProps {
   initialData?: Blog;
@@ -22,8 +25,9 @@ export default function BlogBuilder({ initialData }: BlogBuilderProps) {
     slug: "",
     title: "New Blog Post",
     date: new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' }),
-    thumbnail: "https://picsum.photos/seed/blogthumb/600/400",
-    heroImage: "https://picsum.photos/seed/bloghero/1920/1080",
+    thumbnail: "",
+    heroImage: "",
+    videoUrl: "",
     author: "Author Name",
     category: "Travel Guide",
     content: ["Start writing your amazing story here..."]
@@ -86,13 +90,13 @@ export default function BlogBuilder({ initialData }: BlogBuilderProps) {
           <Link href="/admin" className="flex items-center gap-2 text-sm font-bold text-neutral-500 hover:text-black">
             <ArrowLeft className="h-4 w-4" /> Back to Dashboard
           </Link>
-          <button
+          <Button
             onClick={handleSave}
             disabled={loading}
-            className="flex items-center gap-2 rounded-full bg-black px-6 py-2 text-sm font-bold uppercase text-white transition hover:bg-neutral-800 disabled:opacity-50"
+            size="sm"
           >
-            <Save className="h-4 w-4" /> {loading ? "Saving..." : "Save Blog"}
-          </button>
+            <Save className="h-4 w-4 mr-2" /> {loading ? "Saving..." : "Save Blog"}
+          </Button>
         </div>
 
         {error && <div className="mb-4 rounded bg-red-100 p-3 text-sm font-bold text-red-600">{error}</div>}
@@ -125,23 +129,34 @@ export default function BlogBuilder({ initialData }: BlogBuilderProps) {
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <label className="flex flex-col gap-1 text-sm font-bold">
-              Hero Image URL
-              <input type="text" value={blog.heroImage} onChange={(e) => handleChange("heroImage", e.target.value)} className="rounded border border-neutral-300 p-2 font-normal" />
-            </label>
-            <label className="flex flex-col gap-1 text-sm font-bold">
-              Thumbnail Image URL
-              <input type="text" value={blog.thumbnail} onChange={(e) => handleChange("thumbnail", e.target.value)} className="rounded border border-neutral-300 p-2 font-normal" />
-            </label>
+            <MediaUploader 
+              label="Hero Image" 
+              value={blog.heroImage} 
+              onChange={(url) => handleChange("heroImage", url)} 
+              accept="image/*"
+            />
+            <MediaUploader 
+              label="Thumbnail Image" 
+              value={blog.thumbnail} 
+              onChange={(url) => handleChange("thumbnail", url)} 
+              accept="image/*"
+            />
           </div>
+
+          <MediaUploader 
+            label="Header Video (Optional)" 
+            value={blog.videoUrl || ""} 
+            onChange={(url) => handleChange("videoUrl", url)} 
+            accept="video/*"
+          />
 
           {/* PARAGRAPH BUILDER */}
           <div className="mt-8">
             <div className="mb-4 flex items-center justify-between">
               <h3 className="text-xl font-black uppercase">Content Paragraphs</h3>
-              <button type="button" onClick={addParagraph} className="flex items-center gap-1 rounded bg-neutral-100 px-3 py-1.5 text-xs font-bold hover:bg-neutral-200">
-                <Plus className="h-3 w-3" /> Add Paragraph
-              </button>
+              <Button type="button" variant="blur" size="sm" onClick={addParagraph}>
+                <Plus className="h-3 w-3 mr-1" /> Add Paragraph
+              </Button>
             </div>
 
             <div className="flex flex-col gap-4">

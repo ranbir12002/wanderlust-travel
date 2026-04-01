@@ -1,4 +1,4 @@
-import { db } from '@/lib/db';
+import { getDb } from '@/lib/mongodb';
 
 export interface SiteSettings {
   primaryColor: string;
@@ -14,51 +14,46 @@ export const defaultSettings: SiteSettings = {
 
 export async function getSettings(): Promise<SiteSettings> {
   try {
-    const rows = db.prepare('SELECT key, value FROM settings').all() as {key: string, value: string}[];
-    if (rows.length === 0) {
+    const db = await getDb();
+    const settingsDoc = await db.collection('settings').findOne({ id: "global" });
+    
+    if (!settingsDoc) {
       return defaultSettings;
     }
     
-    const settings = { ...defaultSettings };
-    rows.forEach(row => {
-      if (row.key === "primaryColor") settings.primaryColor = row.value;
-      if (row.key === "secondaryColor") settings.secondaryColor = row.value;
-      if (row.key === "accentColor") settings.accentColor = row.value;
-    });
-    
-    return settings;
+    return {
+      primaryColor: settingsDoc.primaryColor || defaultSettings.primaryColor,
+      secondaryColor: settingsDoc.secondaryColor || defaultSettings.secondaryColor,
+      accentColor: settingsDoc.accentColor || defaultSettings.accentColor
+    };
   } catch (error) {
-    console.error("Error fetching settings:", error);
+    console.error("Error fetching settings from MongoDB:", error);
     return defaultSettings;
   }
 }
 
 export async function updateSettings(settings: SiteSettings): Promise<boolean> {
   try {
-    const stmt = db.prepare('INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)');
-    
-    const updateTransaction = db.transaction((sets: SiteSettings) => {
-      stmt.run("primaryColor", sets.primaryColor);
-      stmt.run("secondaryColor", sets.secondaryColor);
-      stmt.run("accentColor", sets.accentColor);
-    });
-    
-    updateTransaction(settings);
+    const db = await getDb();
+    await db.collection('settings').updateOne(
+      { id: "global" },
+      { $set: settings },
+      { upsert: true }
+    );
     return true;
   } catch (error) {
-    console.error("Error updating settings:", error);
+    console.error("Error updating settings in MongoDB:", error);
     return false;
   }
 }
 
 export async function resetSettingsToDefault(): Promise<boolean> {
   try {
-    // Alternatively, we could update the DB instead of clearing it,
-    // but clearing it seamlessly forces getSettings to use defaults.
-    db.prepare("DELETE FROM settings").run();
+    const db = await getDb();
+    await db.collection('settings').deleteOne({ id: "global" });
     return true;
   } catch (error) {
-    console.error("Error resetting settings:", error);
+    console.error("Error resetting settings in MongoDB:", error);
     return false;
   }
 }
