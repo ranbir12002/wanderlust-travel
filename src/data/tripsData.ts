@@ -30,6 +30,7 @@ export interface Trip {
   itinerary: ItineraryDay[];
   tags?: string[];
   routeWaypoints?: string[];
+  category?: "domestic" | "international" | null;
   gallery?: string[];
 }
 
@@ -66,5 +67,23 @@ export async function getTripBySlug(slug: string): Promise<Trip | undefined> {
   } catch (error) {
     console.error("Error fetching trip by slug from MongoDB:", error);
     return undefined;
+  }
+}
+
+export async function getTripsByCategory(category: "domestic" | "international"): Promise<Trip[]> {
+  try {
+    const db = await getDb();
+    const trips = await db.collection<Trip>('trips').find({ category }).toArray();
+    
+    return trips.map(trip => {
+      const { _id, ...rest } = trip as any;
+      return {
+        ...rest,
+        id: rest.id || _id.toString(),
+      } as Trip;
+    });
+  } catch (error) {
+    console.error(`Error fetching ${category} trips from MongoDB:`, error);
+    return [];
   }
 }

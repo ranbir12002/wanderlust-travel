@@ -42,6 +42,7 @@ export default function TripBuilder({ initialData }: TripBuilderProps) {
     ],
     tags: [],
     routeWaypoints: [],
+    category: "domestic",
     gallery: []
   });
 
@@ -267,6 +268,13 @@ export default function TripBuilder({ initialData }: TripBuilderProps) {
                 <option value="">None</option>
                 <option value="SPECIAL OFFERS">SPECIAL OFFERS</option>
                 <option value="BEST SELLER">BEST SELLER</option>
+              </select>
+            </label>
+            <label className="flex flex-col gap-1 text-sm font-bold">
+              Trip Category
+              <select value={trip.category || ""} onChange={(e) => handleChange("category", e.target.value === "" ? null : e.target.value)} className="rounded border border-neutral-300 p-2 font-normal">
+                <option value="domestic">Domestic</option>
+                <option value="international">International</option>
               </select>
             </label>
           </div>

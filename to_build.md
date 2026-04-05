@@ -1,6 +1,4 @@
-page wise build
-home page 
-- [x] fix navigation bar in menu no matter what section we go to the dash is still stuck under home
-- [x] fix the contact button on nav bar when clicked nothing happens i wantb it to go to the contact section of homepage
-- [x] use the testimonial and contact sections from home page and render them in all pages of the webisite i think we have 2 diffrent sections for them
-- [x] make the navbar transparent on all the pages  and move the optios to extreme right of the page and when i scroll it should dissaper untill i try to hove over it or click on it 
+-in the trip builder we need to add various options such as add bullt points or add seprate notes for the day or spearete the day into sub activities etc for a clean and easy to understand 
+
+
+-in the gallery iam unable to view video as only pngs are visible and gthey must be a auto scrool of pitures in the trip view screen every 4 seconds but it may stop if some clicks next on it and reset after 15 seconds if next is not clicked dialed back to 4 sec auto scrool
