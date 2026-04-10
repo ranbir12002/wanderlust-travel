@@ -29,20 +29,20 @@ export function Header({ data }: { data: SiteData["header"] }) {
 
   return (
     <header className="fixed top-0 z-50 w-full transition-all duration-300">
-      <div className={`w-full bg-white/90 backdrop-blur-md shadow-sm border-b border-primary/5 transition-all h-20 ${isScrolled ? 'h-16' : 'h-20'}`}>
-        <div className="mx-auto flex h-full w-full max-w-[1920px] items-center justify-between px-6 lg:px-12">
+      <div className={`w-full transition-all duration-300 ${isScrolled ? 'h-16 bg-black/80 backdrop-blur-md shadow-sm border-b border-white/5' : 'h-24 bg-transparent pt-4'} flex items-center`}>
+        <div className="mx-auto flex w-full max-w-[1920px] items-center justify-between px-6 lg:px-12">
           
-          <a href="/" className="text-2xl font-black tracking-tighter text-primary font-headline flex-shrink-0 transition-transform hover:scale-105">
+          <a href="/" className="text-2xl font-black tracking-tighter text-white font-headline flex items-center transition-transform hover:scale-105">
             {data?.logo || "Wanderlust"}
           </a>
 
           <div className="flex items-center gap-8 xl:gap-12">
             {/* Nav Options */}
-            <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
+            <nav className="hidden lg:flex items-center gap-6 xl:gap-10">
               {/* Seasonal Link */}
               <a
                 href={`/trips/seasonal`}
-                className={`font-headline text-xs font-bold uppercase tracking-tight text-secondary hover:text-primary transition-colors whitespace-nowrap`}
+                className={`text-[11px] font-medium uppercase tracking-[0.15em] text-white/80 hover:text-white transition-colors whitespace-nowrap`}
               >
                 Trips by {currentSeason}
               </a>
@@ -53,8 +53,8 @@ export function Header({ data }: { data: SiteData["header"] }) {
                 return (
                   <a
                     key={idx}
-                    className={`font-headline text-xs font-bold uppercase tracking-tight text-secondary hover:text-primary transition-colors whitespace-nowrap ${
-                      isActive ? "text-primary border-b-2 border-primary" : ""
+                    className={`text-[11px] uppercase tracking-[0.15em] hover:text-white transition-colors whitespace-nowrap ${
+                      isActive ? "text-white font-bold" : "text-white/80 font-medium"
                     }`}
                     href={link.href}
                   >
@@ -66,18 +66,18 @@ export function Header({ data }: { data: SiteData["header"] }) {
 
             {/* CTA & Icons */}
             <div className="flex items-center gap-6">
-               <button className="hidden sm:inline-flex items-center rounded-full bg-primary px-6 py-2.5 text-[10px] font-black uppercase tracking-widest text-white transition-all hover:bg-neutral-800 hover:scale-105 shadow-md">
+               <button className="hidden sm:inline-flex items-center rounded-sm bg-white px-6 py-2.5 text-[11px] font-bold uppercase tracking-widest text-[#0A0A0A] transition-all hover:bg-neutral-200">
                  Enquire Now
                </button>
                
-               <div className="flex items-center gap-4 border-l border-primary/10 pl-6">
-                <button className="hidden sm:block text-primary hover:opacity-70 transition-opacity">
-                  <Search size={18} />
+               <div className="flex items-center gap-5 sm:border-l sm:border-white/20 sm:pl-6 text-white">
+                <button className="hidden sm:block hover:opacity-70 transition-opacity">
+                  <Search size={18} strokeWidth={2} />
                 </button>
-                <button className="hidden sm:block text-primary hover:opacity-70 transition-opacity">
-                  <User size={18} />
+                <button className="hidden sm:block hover:opacity-70 transition-opacity">
+                  <User size={18} strokeWidth={2} />
                 </button>
-                <button className="lg:hidden text-primary">
+                <button className="lg:hidden text-white hover:opacity-70 transition-opacity">
                   <Menu size={24} />
                 </button>
                </div>

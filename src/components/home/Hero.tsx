@@ -1,107 +1,189 @@
 "use client";
 
-import { motion } from "motion/react";
-import { ArrowRight, Globe, Compass } from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { ArrowUpRight, MapPin } from "lucide-react";
 import type { SiteData } from "@/data/mockData";
-import Button from "../ui/Button";
-import SectionContainer from "../ui/SectionContainer";
-import { Heading, Text } from "../ui/Typography";
+
+const backgrounds = [
+  "https://images.unsplash.com/photo-1558904541-efba997d0c0c?q=80&w=2574&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=2670&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1598902108854-10e335adac99?q=80&w=2574&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1572688484438-313a6e50c333?q=80&w=2670&auto=format&fit=crop"
+];
+
+const avatars = [
+  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80",
+];
 
 export default function Hero({ data }: { data: SiteData["hero"] }) {
+  const [[currentSlide, direction], setSlideInfo] = useState([0, 1]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSlideInfo((prev) => [(prev[0] + 1) % backgrounds.length, 1]);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const selectSlide = (index: number) => {
+    if (index === currentSlide) return;
+    const newDirection = index > currentSlide ? 1 : -1;
+    setSlideInfo([index, newDirection]);
+  };
+
+  const variants = {
+    enter: (direction: number) => {
+      return {
+        x: direction > 0 ? "100%" : "-100%",
+        opacity: 0.8,
+      };
+    },
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction: number) => {
+      return {
+        zIndex: 0,
+        x: direction > 0 ? "-50%" : "50%",
+        opacity: 0,
+      };
+    }
+  };
+
   return (
-    <section className="relative h-[100svh] w-full overflow-hidden bg-[#0A0A0A] text-white">
-      {/* 3D Global Interactive - Background Layer */}
-      <div className="absolute inset-0 z-0 h-full w-full opacity-60 md:opacity-100">
-        <div className="relative h-full w-full">
-          <iframe 
-            title="Earth" 
-            frameBorder="0" 
-            allowFullScreen 
-            allow="autoplay; fullscreen; xr-spatial-tracking" 
-            src="https://sketchfab.com/models/41fc80d85dfd480281f21b74b2de2faa/embed?autospin=0.5&autostart=1&transparent=1&ui_hint=0&ui_infos=0&ui_stop=0&ui_watermark=0&ui_theme=dark"
-            className="absolute -right-1/4 h-full w-[150%] scale-110 md:right-0 md:w-full md:scale-100"
-          ></iframe>
-        </div>
-        {/* Subtle Vignette Mask */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/40 to-transparent"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent"></div>
-      </div>
+    <section className="relative h-[100svh] w-full overflow-hidden bg-[#0A0A0A] text-white font-sans flex items-center">
+      {/* Background Images */}
+      <AnimatePresence initial={false} custom={direction}>
+        <motion.img
+          key={currentSlide}
+          src={backgrounds[currentSlide]}
+          alt="Hero Background"
+          custom={direction}
+          variants={variants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute inset-0 h-full w-full object-cover object-center z-0"
+        />
+      </AnimatePresence>
 
-      <SectionContainer className="relative z-10 h-full flex flex-col justify-center pt-24 sm:pt-32">
-        <div className="max-w-4xl">
+      {/* Dark Overlay Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-black/30 z-10 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent z-10 pointer-events-none" />
+      
+      {/* Absolute Layout Container */}
+      <div className="relative z-20 h-full w-full max-w-[1920px] mx-auto px-6 lg:px-12 flex flex-col justify-center">
+        
+        {/* Center-Left: Main Content */}
+        <div className="mt-20 lg:mt-0 flex flex-col justify-center lg:w-3/4 xl:w-2/3">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="space-y-6 md:space-y-8"
+             initial={{ opacity: 0, y: 30 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            {/* Tagline */}
-            <div className="flex items-center gap-3">
-              <span className="h-[2px] w-8 bg-[#FFE400]" />
-              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#FFE400]">
-                expedition editorial
-              </span>
+            <h1 className="text-[3rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] font-bold leading-[1.05] tracking-tight uppercase mb-6 drop-shadow-lg">
+              CREATE YOUR <br/> DREAM GARDEN
+            </h1>
+            <p className="text-base sm:text-lg text-white/90 max-w-xl font-light leading-relaxed mb-10 drop-shadow">
+              Crafting dream gardens with passion, creativity, and sustainability for over a decade with our experienced landscape artists and gardener teams.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center gap-6">
+              <button className="w-full sm:w-auto px-8 py-4 bg-white text-black text-sm font-semibold hover:bg-neutral-200 transition-colors rounded-sm shadow-lg">
+                Get Started
+              </button>
+              <button className="w-full sm:w-auto px-2 py-4 bg-transparent text-white text-sm font-medium border-b-2 border-white hover:text-white/80 hover:border-white/80 transition-colors">
+                Explore Projects
+              </button>
             </div>
-
-            <Heading as="h1" variant="hero" className="max-w-2xl text-6xl font-black lowercase leading-[0.9] tracking-tighter sm:text-7xl lg:text-9xl">
-              discover curated experiences, made for you
-            </Heading>
-            
-            <Text className="max-w-md text-sm font-medium uppercase tracking-widest text-white/60 md:max-w-lg lg:text-base leading-relaxed">
-              breathtaking journeys, tailored to your rhythm. explore the world through a lens of sophistication.
-            </Text>
-
-            <motion.div 
-               initial={{ opacity: 0, y: 20 }}
-               animate={{ opacity: 1, y: 0 }}
-               transition={{ duration: 0.8, delay: 0.4 }}
-               className="flex flex-col sm:flex-row items-center gap-4 pt-6 sm:pt-8"
-            >
-              <Button size="lg" className="w-full sm:w-auto bg-[#FFE400] text-black hover:bg-white hover:text-black">
-               <Globe className="mr-2 h-5 w-5" /> Explore Trips
-              </Button>
-              <Button variant="outline" size="lg" className="w-full sm:w-auto border-white/20 text-white backdrop-blur hover:bg-white hover:text-black">
-                <Compass className="mr-2 h-5 w-5" /> Customise a Trip
-              </Button>
-            </motion.div>
           </motion.div>
         </div>
-      </SectionContainer>
 
-      {/* Premium Discovery Preview Bottom Right */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.8 }}
-        className="absolute bottom-12 right-6 md:right-12 z-20 hidden lg:block"
-      >
-        <div className="group relative overflow-hidden rounded-[2.5rem] bg-white/5 p-8 backdrop-blur-3xl border border-white/10 max-w-xs transition-all hover:bg-white/10 shadow-2xl">
-           <div className="absolute top-0 right-0 p-4">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FFE400] text-black">
-                 <ArrowRight size={20} />
-              </div>
+        {/* Top-Right: Social Proof Widget */}
+        <div className="hidden lg:flex absolute top-32 right-12 z-30">
+          <motion.div
+             initial={{ opacity: 0, x: 20 }}
+             animate={{ opacity: 1, x: 0 }}
+             transition={{ duration: 0.8, delay: 0.5 }}
+             className="flex flex-col items-end text-right"
+          >
+            <div className="flex -space-x-4 mb-3">
+              {avatars.map((avatar, i) => (
+                <img 
+                  key={i} 
+                  src={avatar} 
+                  alt="Client avatar" 
+                  className="w-12 h-12 rounded-full border-2 border-white/80 shadow-md object-cover"
+                />
+              ))}
+            </div>
+            <h3 className="text-4xl font-bold text-white mb-1 drop-shadow">500+</h3>
+            <p className="text-sm font-light text-white/80">Satisfied Clients</p>
+          </motion.div>
+        </div>
+
+        {/* Bottom-Right: Featured Project Card (Pinned to absolute right) */}
+        <div className="hidden lg:block absolute bottom-24 right-12 z-30 w-full max-w-sm">
+          <motion.div
+             initial={{ opacity: 0, y: 20 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ duration: 0.8, delay: 0.7 }}
+             className="bg-black/30 backdrop-blur-xl border border-white/10 p-6 rounded-lg shadow-2xl"
+          >
+             <div className="flex justify-between items-start mb-6">
+                <div className="p-2 border border-white/20 rounded-full">
+                  <MapPin className="w-5 h-5 text-white stroke-[1.5]" />
+                </div>
+                <button className="p-2 bg-white text-black hover:bg-neutral-200 transition-colors rounded-full">
+                  <ArrowUpRight className="w-5 h-5 stroke-2" />
+                </button>
+             </div>
+             
+             <h4 className="text-xl font-bold text-white mb-2">Hachioji Garden</h4>
+             <p className="text-sm text-white/70 font-light leading-relaxed">
+               We design Hachioji Garden as a part of our new Landscape Design Commission in the country.
+             </p>
+          </motion.div>
+        </div>
+
+        {/* Bottom-Left: Thumbnails and Slider Controls */}
+        <div className="absolute bottom-12 left-6 lg:left-12 z-30 flex flex-col gap-6 w-full lg:w-auto pr-6 lg:pr-0">
+           {/* 4 Image Selector */}
+           <div className="flex gap-4">
+             {backgrounds.map((bg, index) => (
+                <button 
+                  key={index}
+                  onClick={() => selectSlide(index)}
+                  className={`relative w-20 h-12 md:w-24 md:h-16 overflow-hidden rounded-md transition-all duration-300 border-2 ${
+                    currentSlide === index ? "border-white shadow-[0_0_15px_rgba(255,255,255,0.4)] scale-105" : "border-white/20 hover:border-white/60 opacity-60 hover:opacity-100"
+                  }`}
+                >
+                  <img src={bg} alt={`Thumbnail ${index + 1}`} className="w-full h-full object-cover" />
+                </button>
+             ))}
            </div>
            
-           <span className="mb-4 block text-[10px] font-black uppercase tracking-widest text-[#FFE400]">
-              Recent Discovery
-           </span>
-           <h3 className="mb-2 text-2xl font-black leading-none tracking-tight">
-              the silk road
-           </h3>
-           <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/40">
-              uzbekistan — cultural expedition
-           </p>
+           <div className="flex items-center gap-4">
+               <span className="text-sm font-medium w-6 shrink-0 font-mono">0{currentSlide + 1}</span>
+               <div className="relative h-[2px] w-full max-w-sm bg-white/20 overflow-hidden">
+                 <motion.div 
+                   key={currentSlide}
+                   className="absolute top-0 left-0 h-full bg-white"
+                   initial={{ width: "0%" }}
+                   animate={{ width: "100%" }}
+                   transition={{ duration: 6, ease: "linear" }}
+                 />
+               </div>
+               <span className="text-sm text-white/50 w-6 shrink-0 font-mono text-right">0{backgrounds.length}</span>
+           </div>
         </div>
-      </motion.div>
 
-      {/* Decorative Slide Indicators */}
-      <div className="absolute bottom-12 left-6 md:left-12 z-20 flex flex-col gap-3">
-        {[0, 1, 2].map((i) => (
-           <div 
-             key={i} 
-             className={`h-1 w-8 rounded-full transition-all duration-500 ${i === 0 ? 'bg-[#FFE400] w-12' : 'bg-white/20'}`} 
-           />
-        ))}
       </div>
     </section>
   );
