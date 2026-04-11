@@ -28,6 +28,17 @@ export async function POST(request: Request) {
   }
 }
 
+export async function GET() {
+  try {
+    const db = await getDb();
+    const trips = await db.collection('trips').find({}).toArray();
+    return NextResponse.json(trips);
+  } catch (error) {
+    console.error("Error fetching trips from MongoDB:", error);
+    return NextResponse.json({ success: false, message: 'Failed to fetch trips' }, { status: 500 });
+  }
+}
+
 export async function DELETE(request: Request) {
   try {
     const { searchParams } = new URL(request.url);

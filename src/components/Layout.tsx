@@ -66,9 +66,9 @@ export function Header({ data }: { data: SiteData["header"] }) {
 
             {/* CTA & Icons */}
             <div className="flex items-center gap-6">
-               <button className="hidden sm:inline-flex items-center rounded-sm bg-white px-6 py-2.5 text-[11px] font-bold uppercase tracking-widest text-[#0A0A0A] transition-all hover:bg-neutral-200">
-                 Enquire Now
-               </button>
+               <a href="/customised" className="hidden sm:inline-flex items-center rounded-sm border border-white px-6 py-2.5 text-[11px] font-bold uppercase tracking-widest text-white transition-all hover:bg-white hover:text-black">
+                 Customised Trips
+               </a>
                
                <div className="flex items-center gap-5 sm:border-l sm:border-white/20 sm:pl-6 text-white">
                 <button className="hidden sm:block hover:opacity-70 transition-opacity">

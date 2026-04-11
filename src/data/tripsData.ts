@@ -1,7 +1,6 @@
 import { getDb } from '@/lib/mongodb';
 
 export interface ItineraryActivity {
-  time: string;
   title: string;
 }
 
@@ -12,6 +11,22 @@ export interface ItineraryDay {
   activities?: ItineraryActivity[];
   bulletPoints?: string[];
   notes?: string;
+}
+
+export interface Budgeting {
+  inclusions: string[];
+  exclusions: string[];
+}
+
+export interface SidebarCard {
+  image: string;
+  title: string;
+  subtitle?: string;
+  duration?: string;
+  price?: string;
+  buttonText: string;
+  buttonLink: string;
+  isVerticalTitle?: boolean;
 }
 
 export interface Trip {
@@ -32,6 +47,10 @@ export interface Trip {
   routeWaypoints?: string[];
   category?: "domestic" | "international" | null;
   gallery?: string[];
+  budgeting?: Budgeting;
+  essentials?: string[];
+  otherInfo?: string;
+  sidebarTripSlugs?: string[];
 }
 
 export async function getTrips(): Promise<Trip[]> {

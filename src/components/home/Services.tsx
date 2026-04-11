@@ -3,16 +3,24 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
-import type { SiteData } from "@/data/mockData";
+import Link from "next/link";
 import SectionContainer from "../ui/SectionContainer";
 import { Heading, Text } from "../ui/Typography";
 import Badge from "../ui/Badge";
 
-export default function Services({ data }: { data: SiteData["services"] }) {
+export interface ServiceItem {
+  title: string;
+  desc: string;
+  img: string;
+  tags?: string[];
+  href?: string;
+}
+
+export default function Services({ data }: { data: ServiceItem[] }) {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   return (
-    <section className="py-16 sm:py-20 md:py-24 lg:py-32 bg-bg-alt">
+    <section className="py-12 sm:py-14 md:py-16 lg:py-20 bg-bg-alt">
       <SectionContainer className="flex flex-col lg:flex-row gap-4 sm:gap-5 md:gap-6 h-auto lg:h-[500px] xl:h-[600px] 2xl:h-[700px]">
         {data.map((service, idx) => (
           <motion.div
@@ -41,6 +49,7 @@ export default function Services({ data }: { data: SiteData["services"] }) {
               referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+            {service.href && <Link href={service.href} className="absolute inset-0 z-20"></Link>}
 
             {/* Top Right Arrow */}
             <div className="absolute top-4 right-4 sm:top-5 sm:right-5 md:top-6 md:right-6">

@@ -1,6 +1,38 @@
+"use client";
 
+import { useState } from "react";
 
 export default function ContactForm() {
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus("submitting");
+
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        (e.target as HTMLFormElement).reset();
+        setTimeout(() => setStatus("idle"), 5000);
+      } else {
+        setStatus("error");
+        setTimeout(() => setStatus("idle"), 5000);
+      }
+    } catch (error) {
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 5000);
+    }
+  };
+
   return (
     <section id="contact" className="w-full overflow-hidden py-16 bg-white border-t border-neutral-100">
       <div className="mx-auto max-w-4xl px-4 flex flex-col w-full">
@@ -16,7 +48,7 @@ export default function ContactForm() {
           </p>
         </header>
 
-        <form action="#" className="space-y-4 w-full" method="POST">
+        <form onSubmit={handleSubmit} className="space-y-4 w-full">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="sr-only" htmlFor="first-name">First Name</label>
@@ -24,6 +56,7 @@ export default function ContactForm() {
                 id="first-name"
                 name="first-name"
                 type="text"
+                required
                 placeholder="First Name"
                 className="w-full p-4 rounded-xl border-none bg-neutral-100 focus:bg-white focus:ring-2 focus:ring-neutral-200 transition-all placeholder:text-neutral-500"
               />
@@ -35,6 +68,7 @@ export default function ContactForm() {
                 id="last-name"
                 name="last-name"
                 type="text"
+                required
                 placeholder="Last Name"
                 className="w-full p-4 rounded-xl border-none bg-neutral-100 focus:bg-white focus:ring-2 focus:ring-neutral-200 transition-all placeholder:text-neutral-500"
               />
@@ -46,6 +80,7 @@ export default function ContactForm() {
                 id="contact-no"
                 name="contact-no"
                 type="tel"
+                required
                 placeholder="Contact No."
                 className="w-full p-4 rounded-xl border-none bg-neutral-100 focus:bg-white focus:ring-2 focus:ring-neutral-200 transition-all placeholder:text-neutral-500"
               />
@@ -57,6 +92,7 @@ export default function ContactForm() {
                 id="email-id"
                 name="email-id"
                 type="email"
+                required
                 placeholder="Email Id"
                 className="w-full p-4 rounded-xl border-none bg-neutral-100 focus:bg-white focus:ring-2 focus:ring-neutral-200 transition-all placeholder:text-neutral-500"
               />
@@ -68,19 +104,28 @@ export default function ContactForm() {
             <textarea
               id="query"
               name="query"
+              required
               placeholder="Please write your query here..."
               rows={5}
               className="w-full p-4 rounded-xl border-none bg-neutral-100 focus:bg-white focus:ring-2 focus:ring-neutral-200 transition-all resize-none placeholder:text-neutral-500"
             />
           </div>
 
-          <div className="pt-2 text-center md:text-left">
+          <div className="pt-2 flex flex-col md:flex-row items-center gap-4">
             <button
               type="submit"
-              className="inline-block px-8 py-3 bg-black text-white rounded-lg font-bold hover:bg-neutral-800 transition-colors"
+              disabled={status === "submitting"}
+              className="w-full md:w-auto inline-block px-8 py-3 bg-black text-white rounded-lg font-bold hover:bg-neutral-800 disabled:opacity-50 transition-colors"
             >
-              Send Message
+              {status === "submitting" ? "Sending..." : "Send Message"}
             </button>
+            
+            {status === "success" && (
+              <span className="text-green-600 font-medium text-sm">Message sent successfully! We will get back to you soon.</span>
+            )}
+            {status === "error" && (
+              <span className="text-red-600 font-medium text-sm">Failed to send message. Please try again.</span>
+            )}
           </div>
         </form>
       </div>

@@ -31,7 +31,11 @@ export default async function AdminDashboard() {
           {trips.map((trip) => (
             <div key={trip.id} className="flex flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition-shadow hover:shadow-md">
               <div className="relative h-40 w-full bg-neutral-200">
-                <Image src={trip.thumbnail} alt={trip.title} fill className="object-cover" />
+                {trip.thumbnail ? (
+                  <Image src={trip.thumbnail} alt={trip.title} fill className="object-cover" />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center text-xs font-bold text-neutral-400">NO IMAGE</div>
+                )}
               </div>
               <div className="flex flex-1 flex-col p-4">
                 <h3 className="line-clamp-1 font-bold">{trip.title}</h3>
@@ -62,7 +66,11 @@ export default async function AdminDashboard() {
           {blogs.map((blog) => (
             <div key={blog.id} className="flex flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition-shadow hover:shadow-md">
               <div className="relative h-40 w-full bg-neutral-200">
-                <Image src={blog.thumbnail} alt={blog.title} fill className="object-cover" />
+                {blog.thumbnail ? (
+                  <Image src={blog.thumbnail} alt={blog.title} fill className="object-cover" />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center text-xs font-bold text-neutral-400">NO IMAGE</div>
+                )}
               </div>
               <div className="flex flex-1 flex-col p-4">
                 <h3 className="line-clamp-1 font-bold">{blog.title}</h3>

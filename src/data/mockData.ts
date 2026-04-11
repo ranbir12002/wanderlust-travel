@@ -9,8 +9,6 @@ export const siteData = {
       { label: "International Trips", href: "/trips/international" },
       { label: "Blogs", href: "/blogs" },
       { label: "About Us", href: "/about" },
-      { label: "Customised Trips", href: "/customised" },
-      { label: "Payments", href: "/payments" },
     ]
   },
   hero: {

@@ -4,13 +4,14 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Facebook, Instagram, Twitter, ChevronDown } from "lucide-react";
 import StickySidebar from "./StickySidebar";
-import { ItineraryDay } from "@/data/tripsData";
+import { ItineraryDay, SidebarCard } from "@/data/tripsData";
 
 interface ItinerarySectionProps {
   itinerary: ItineraryDay[];
+  sidebarTrips?: Trip[];
 }
 
-export default function ItinerarySection({ itinerary }: ItinerarySectionProps) {
+export default function ItinerarySection({ itinerary, sidebarTrips }: ItinerarySectionProps) {
   const [openDay, setOpenDay] = useState<number | null>(1);
 
   const toggleDay = (day: number) => {
@@ -66,7 +67,6 @@ export default function ItinerarySection({ itinerary }: ItinerarySectionProps) {
                               <div key={idx} className="relative">
                                 <div className="absolute -left-[1.65rem] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-white bg-neutral-900 shadow-sm" />
                                 <div className="flex flex-col">
-                                  <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400">{activity.time}</span>
                                   <span className="text-sm font-bold text-neutral-800">{activity.title}</span>
                                 </div>
                               </div>
@@ -140,7 +140,7 @@ export default function ItinerarySection({ itinerary }: ItinerarySectionProps) {
 
       {/* Right Column: Sticky Sidebar */}
       <div className="lg:col-span-4">
-        <StickySidebar />
+        <StickySidebar trips={sidebarTrips} />
       </div>
     </div>
   );

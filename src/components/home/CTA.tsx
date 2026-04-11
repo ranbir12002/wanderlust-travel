@@ -6,7 +6,7 @@ import Button from "../ui/Button";
 
 export default function CTA({ data }: { data: SiteData["cta"] }) {
   return (
-    <section className="relative py-20 sm:py-24 md:py-32 lg:py-40 overflow-hidden">
+    <section className="relative py-14 sm:py-16 md:py-20 lg:py-28 overflow-hidden">
       <div className="absolute inset-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img

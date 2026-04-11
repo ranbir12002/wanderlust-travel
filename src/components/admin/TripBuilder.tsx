@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Save, Plus, Trash2, X, ChevronUp, ChevronDown, MapPin } from "lucide-react";
 import Link from "next/link";
@@ -23,6 +23,20 @@ export default function TripBuilder({ initialData }: TripBuilderProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [allTrips, setAllTrips] = useState<Trip[]>([]);
+
+  useEffect(() => {
+    const fetchAllTrips = async () => {
+      try {
+        const response = await fetch('/api/admin/trips');
+        const tripsData = await response.json();
+        setAllTrips(tripsData);
+      } catch (err) {
+        console.error("Failed to fetch all trips:", err);
+      }
+    };
+    fetchAllTrips();
+  }, []);
 
   const [trip, setTrip] = useState<Trip>(initialData || {
     id: "",
@@ -43,14 +57,42 @@ export default function TripBuilder({ initialData }: TripBuilderProps) {
     tags: [],
     routeWaypoints: [],
     category: "domestic",
-    gallery: []
+    gallery: [],
+    budgeting: { inclusions: [], exclusions: [] },
+    essentials: [],
+    otherInfo: "",
+    sidebarTripSlugs: []
   });
 
   const [tagInput, setTagInput] = useState("");
   const [waypointInput, setWaypointInput] = useState("");
+  const [inclusionInput, setInclusionInput] = useState("");
+  const [exclusionInput, setExclusionInput] = useState("");
+  const [essentialInput, setEssentialInput] = useState("");
 
   const handleChange = (field: keyof Trip, value: any) => {
     setTrip((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const toggleSidebarTrip = (slug: string) => {
+    const currentSlugs = [...(trip.sidebarTripSlugs || [])];
+    if (currentSlugs.includes(slug)) {
+      handleChange("sidebarTripSlugs", currentSlugs.filter(s => s !== slug));
+    } else {
+      if (currentSlugs.length < 2) {
+        handleChange("sidebarTripSlugs", [...currentSlugs, slug]);
+      }
+    }
+  };
+
+  const handleBudgetingChange = (field: "inclusions" | "exclusions", arr: string[]) => {
+    setTrip((prev) => ({
+      ...prev,
+      budgeting: {
+        ...(prev.budgeting || { inclusions: [], exclusions: [] }),
+        [field]: arr
+      }
+    }));
   };
 
   const handleItineraryChange = (index: number, field: keyof ItineraryDay, value: any) => {
@@ -88,6 +130,49 @@ export default function TripBuilder({ initialData }: TripBuilderProps) {
 
   const removeTag = (tagToRemove: string) => {
     handleChange("tags", (trip.tags || []).filter(t => t !== tagToRemove));
+  };
+
+  // Add/Remove helpers for the new string array fields
+  const addInclusion = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && inclusionInput.trim()) {
+      e.preventDefault();
+      const current = trip.budgeting?.inclusions || [];
+      handleBudgetingChange("inclusions", [...current, inclusionInput.trim()]);
+      setInclusionInput("");
+    }
+  };
+  const removeInclusion = (idx: number) => {
+    const current = [...(trip.budgeting?.inclusions || [])];
+    current.splice(idx, 1);
+    handleBudgetingChange("inclusions", current);
+  };
+
+  const addExclusion = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && exclusionInput.trim()) {
+      e.preventDefault();
+      const current = trip.budgeting?.exclusions || [];
+      handleBudgetingChange("exclusions", [...current, exclusionInput.trim()]);
+      setExclusionInput("");
+    }
+  };
+  const removeExclusion = (idx: number) => {
+    const current = [...(trip.budgeting?.exclusions || [])];
+    current.splice(idx, 1);
+    handleBudgetingChange("exclusions", current);
+  };
+
+  const addEssential = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && essentialInput.trim()) {
+      e.preventDefault();
+      const current = trip.essentials || [];
+      handleChange("essentials", [...current, essentialInput.trim()]);
+      setEssentialInput("");
+    }
+  };
+  const removeEssential = (idx: number) => {
+    const current = [...(trip.essentials || [])];
+    current.splice(idx, 1);
+    handleChange("essentials", current);
   };
 
   // Route waypoint helpers
@@ -236,8 +321,13 @@ export default function TripBuilder({ initialData }: TripBuilderProps) {
               <div className="grid grid-cols-4 gap-2">
                 {trip.gallery.map((url, idx) => (
                   <div key={idx} className="group relative aspect-square overflow-hidden rounded-lg border border-neutral-200 bg-white">
-                    <Image src={url} alt="Gallery" fill className="object-cover" />
+                    {url ? (
+                      <Image src={url} alt="Gallery" fill className="object-cover" />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center text-[10px] font-bold text-neutral-400">N/A</div>
+                    )}
                     <button
+                      type="button"
                       onClick={() => {
                         const newGallery = [...(trip.gallery || [])];
                         newGallery.splice(idx, 1);
@@ -382,6 +472,156 @@ export default function TripBuilder({ initialData }: TripBuilderProps) {
             )}
           </div>
 
+          {/* BUDGETING (INCLUSIONS / EXCLUSIONS) */}
+          <div className="mt-4 grid grid-cols-2 gap-4">
+            <label className="flex flex-col gap-1 text-sm font-bold">
+              Inclusions
+              <input 
+                type="text" 
+                value={inclusionInput}
+                onChange={(e) => setInclusionInput(e.target.value)}
+                onKeyDown={addInclusion}
+                className="rounded border border-neutral-300 p-2 font-normal text-sm" 
+                placeholder="Press Enter to add (e.g. Permits)" 
+              />
+              {trip.budgeting?.inclusions && trip.budgeting.inclusions.length > 0 && (
+                <div className="mt-2 flex flex-col gap-1">
+                  {trip.budgeting.inclusions.map((item, idx) => (
+                    <div key={idx} className="flex items-center justify-between rounded bg-green-50 p-1.5 px-2 text-xs text-green-800">
+                      <span>✓ {item}</span>
+                      <button type="button" onClick={() => removeInclusion(idx)} className="text-green-600 hover:text-red-600"><X className="h-3 w-3" /></button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </label>
+
+            <label className="flex flex-col gap-1 text-sm font-bold">
+              Exclusions
+              <input 
+                type="text" 
+                value={exclusionInput}
+                onChange={(e) => setExclusionInput(e.target.value)}
+                onKeyDown={addExclusion}
+                className="rounded border border-neutral-300 p-2 font-normal text-sm" 
+                placeholder="Press Enter to add (e.g. Flights)" 
+              />
+              {trip.budgeting?.exclusions && trip.budgeting.exclusions.length > 0 && (
+                <div className="mt-2 flex flex-col gap-1">
+                  {trip.budgeting.exclusions.map((item, idx) => (
+                    <div key={idx} className="flex items-center justify-between rounded bg-red-50 p-1.5 px-2 text-xs text-red-800">
+                      <span>✕ {item}</span>
+                      <button type="button" onClick={() => removeExclusion(idx)} className="text-red-500 hover:text-red-700"><X className="h-3 w-3" /></button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </label>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            {/* ESSENTIALS */}
+            <label className="flex flex-col gap-1 text-sm font-bold">
+              Essentials (Packing List)
+              <input 
+                type="text" 
+                value={essentialInput}
+                onChange={(e) => setEssentialInput(e.target.value)}
+                onKeyDown={addEssential}
+                className="rounded border border-neutral-300 p-2 font-normal text-sm" 
+                placeholder="Press Enter to add (e.g. Sturdy Boots)" 
+              />
+              {trip.essentials && trip.essentials.length > 0 && (
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {trip.essentials.map((item, idx) => (
+                    <Badge key={idx} variant="secondary" className="flex items-center gap-1 font-normal opacity-80">
+                      {item}
+                      <button type="button" onClick={() => removeEssential(idx)} className="ml-1 text-neutral-500 hover:text-red-500"><X className="h-3 w-3" /></button>
+                    </Badge>
+                  ))}
+                </div>
+              )}
+            </label>
+
+            {/* OTHER INFO */}
+            <label className="flex flex-col gap-1 text-sm font-bold">
+              Other Info (Guidelines / Warnings)
+              <textarea 
+                value={trip.otherInfo || ""}
+                onChange={(e) => handleChange("otherInfo", e.target.value)}
+                className="h-24 resize-none rounded-lg border border-neutral-300 p-2 font-normal text-sm" 
+                placeholder="Important details you want the traveler to know..."
+              />
+            </label>
+          </div>
+
+          {/* SIDEBAR CARDS SELECTION */}
+          <div className="mt-8 rounded-3xl border border-neutral-200 p-6 bg-white">
+            <div className="mb-4 flex items-center justify-between">
+              <h3 className="text-xl font-black uppercase tracking-tight">Sidebar Trips</h3>
+              <span className="text-xs text-neutral-400 font-bold uppercase">Featured in Side Sidebar (Max 2)</span>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {[0, 1].map((idx) => (
+                <div key={idx} className="flex flex-col gap-2">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-neutral-400">
+                    Slot {idx + 1}
+                  </label>
+                  <select 
+                    value={trip.sidebarTripSlugs?.[idx] || ""}
+                    onChange={(e) => {
+                      const newSlugs = [...(trip.sidebarTripSlugs || [])];
+                      if (e.target.value === "") {
+                         newSlugs.splice(idx, 1);
+                      } else {
+                         newSlugs[idx] = e.target.value;
+                      }
+                      handleChange("sidebarTripSlugs", newSlugs.filter(Boolean));
+                    }}
+                    className="w-full rounded-xl border border-neutral-200 bg-neutral-50 p-3 text-sm focus:border-neutral-900 focus:outline-none"
+                  >
+                    <option value="">-- No Trip Selected --</option>
+                    {allTrips
+                      .filter(t => t.slug !== trip.slug)
+                      .map(t => (
+                        <option key={t.id} value={t.slug}>{t.title}</option>
+                      ))
+                    }
+                  </select>
+                </div>
+              ))}
+            </div>
+            
+            {/* Quick Preview of selected trips */}
+            {trip.sidebarTripSlugs && trip.sidebarTripSlugs.length > 0 && (
+              <div className="mt-6 flex flex-wrap gap-4">
+                 {trip.sidebarTripSlugs.map(slug => {
+                    const selectedTrip = allTrips.find(t => t.slug === slug);
+                    if (!selectedTrip) return null;
+                    return (
+                      <div key={slug} className="flex items-center gap-3 rounded-2xl border border-neutral-100 p-2 pr-4 bg-white shadow-sm">
+                         <div className="relative h-12 w-12 overflow-hidden rounded-xl bg-neutral-100">
+                            {selectedTrip.thumbnail ? (
+                              <Image src={selectedTrip.thumbnail} alt={selectedTrip.title} fill className="object-cover" />
+                            ) : (
+                              <div className="flex h-full w-full items-center justify-center text-[8px] font-bold text-neutral-400">N/A</div>
+                            )}
+                         </div>
+                         <div className="flex flex-col">
+                            <span className="text-xs font-black uppercase leading-tight">{selectedTrip.title}</span>
+                            <span className="text-[10px] text-neutral-400 font-bold">{selectedTrip.duration}</span>
+                         </div>
+                         <button type="button" onClick={() => toggleSidebarTrip(slug)} className="ml-2 text-neutral-400 hover:text-red-500">
+                            <X size={14} />
+                         </button>
+                      </div>
+                    );
+                 })}
+              </div>
+            )}
+          </div>
+
           {/* ITINERARY BUILDER */}
           <div className="mt-8">
             <div className="mb-4 flex items-center justify-between">
@@ -395,7 +635,7 @@ export default function TripBuilder({ initialData }: TripBuilderProps) {
               {trip.itinerary.map((dayObj, index) => {
                 // Inline helpers for nested itinerary items
                 const addActivity = () => {
-                  const newActivities = [...(dayObj.activities || []), { time: "09:00 AM", title: "" }];
+                  const newActivities = [...(dayObj.activities || []), { title: "" }];
                   handleItineraryChange(index, "activities", newActivities);
                 };
                 const removeActivity = (aIndex: number) => {
@@ -460,13 +700,6 @@ export default function TripBuilder({ initialData }: TripBuilderProps) {
                           <div className="grid gap-2">
                              {dayObj.activities?.map((activity, aIdx) => (
                                 <div key={aIdx} className="flex items-center gap-2">
-                                   <input 
-                                      type="text" 
-                                      value={activity.time} 
-                                      onChange={(e) => updateActivity(aIdx, 'time', e.target.value)}
-                                      className="w-24 rounded-lg border border-neutral-200 bg-white p-2 text-xs font-bold uppercase" 
-                                      placeholder="Time" 
-                                   />
                                    <input 
                                       type="text" 
                                       value={activity.title} 
@@ -559,8 +792,68 @@ export default function TripBuilder({ initialData }: TripBuilderProps) {
 
               <div className="mt-12">
                 <h2 className="mb-8 text-3xl font-black lowercase tracking-tight">itinerary</h2>
-                <ItinerarySection itinerary={trip.itinerary} />
+                <ItinerarySection 
+                  itinerary={trip.itinerary} 
+                  sidebarTrips={
+                    trip.sidebarTripSlugs 
+                      ? trip.sidebarTripSlugs.map(slug => allTrips.find(t => t.slug === slug)).filter(Boolean) as Trip[]
+                      : undefined
+                  } 
+                />
               </div>
+
+              {/* BUDGET PREVIEW */}
+              {trip.budgeting && (trip.budgeting.inclusions.length > 0 || trip.budgeting.exclusions.length > 0) && (
+                <div className="mt-12">
+                  <h2 className="mb-4 text-3xl font-black lowercase tracking-tight">budgeting</h2>
+                  <div className="flex flex-col gap-4">
+                    {trip.budgeting.inclusions.length > 0 && (
+                      <div className="rounded-2xl bg-neutral-50 p-6">
+                        <h3 className="mb-3 text-[10px] font-bold uppercase tracking-widest text-neutral-400">Inclusions</h3>
+                        <ul className="space-y-2 text-sm text-neutral-600">
+                          {trip.budgeting.inclusions.map(inc => (
+                            <li key={inc} className="flex items-start gap-2">✓ {inc}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    {trip.budgeting.exclusions.length > 0 && (
+                      <div className="rounded-2xl bg-neutral-50 p-6">
+                        <h3 className="mb-3 text-[10px] font-bold uppercase tracking-widest text-neutral-400">Exclusions</h3>
+                        <ul className="space-y-2 text-sm text-neutral-400 font-medium">
+                          {trip.budgeting.exclusions.map(exc => (
+                            <li key={exc} className="flex items-start gap-2">✕ {exc}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* ESSENTIALS PREVIEW */}
+              {trip.essentials && trip.essentials.length > 0 && (
+                <div className="mt-12">
+                  <h2 className="mb-4 text-3xl font-black lowercase tracking-tight">essentials</h2>
+                  <div className="grid grid-cols-2 gap-2">
+                    {trip.essentials.map(item => (
+                      <div key={item} className="flex flex-col items-center justify-center p-3 rounded-xl border border-neutral-100 bg-white shadow-sm text-center">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-800">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* OTHER INFO PREVIEW */}
+              {trip.otherInfo && (
+                <div className="mt-12">
+                  <h2 className="mb-4 text-3xl font-black lowercase tracking-tight">other info</h2>
+                  <div className="rounded-2xl bg-neutral-900 p-6 text-white text-sm font-light leading-relaxed">
+                    {trip.otherInfo}
+                  </div>
+                </div>
+              )}
             </main>
           </div>
         </div>

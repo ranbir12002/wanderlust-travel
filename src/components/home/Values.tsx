@@ -16,7 +16,7 @@ const IconMap: Record<string, React.ElementType> = {
 
 export default function Values({ data }: { data: SiteData["values"] }) {
   return (
-    <section className="py-16 sm:py-20 md:py-28 lg:py-32 xl:py-40 bg-surface">
+    <section className="py-12 sm:py-14 md:py-20 lg:py-24 bg-surface">
       <SectionContainer className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 md:gap-16 lg:gap-20 items-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}

@@ -3,11 +3,25 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import type { SiteData } from "@/data/mockData";
+import Link from "next/link";
 import SectionContainer from "../ui/SectionContainer";
 import { Heading, Text } from "../ui/Typography";
 
-export default function Portfolio({ data }: { data: SiteData["portfolio"] }) {
+export interface PortfolioItem {
+  title: string;
+  loc: string; 
+  desc: string;
+  img: string;
+  href?: string;
+}
+
+export interface PortfolioData {
+  title: string;
+  highlightText: string;
+  works: PortfolioItem[];
+}
+
+export default function Portfolio({ data }: { data: PortfolioData }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
@@ -19,7 +33,7 @@ export default function Portfolio({ data }: { data: SiteData["portfolio"] }) {
   };
 
   return (
-    <section className="py-16 sm:py-20 md:py-24 lg:py-32 bg-bg-alt overflow-hidden">
+    <section className="py-12 sm:py-14 md:py-16 lg:py-20 bg-bg-alt overflow-hidden">
       <SectionContainer className="mb-8 sm:mb-10 md:mb-12 lg:mb-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -36,54 +50,63 @@ export default function Portfolio({ data }: { data: SiteData["portfolio"] }) {
 
       <div className="relative pl-4 sm:pl-6 md:pl-12 lg:pl-16 xl:pl-24 max-w-[1600px] mx-auto">
         <motion.div
-          className="flex gap-4 sm:gap-6 md:gap-8"
+          className="flex gap-4 sm:gap-6 md:gap-8 [--card-width:85%] sm:[--card-width:60%] md:[--card-width:45%] lg:[--card-width:30%] [--card-gap:1rem] sm:[--card-gap:1.5rem] md:[--card-gap:2rem]"
           animate={{
-            x: `calc(-${currentIndex * 85}% - ${currentIndex * 1}rem)`,
+            x: `calc(-${currentIndex} * var(--card-width) - ${currentIndex} * var(--card-gap))`,
           }}
           transition={{ type: "spring", stiffness: 200, damping: 25 }}
         >
           {data.works.map((work, idx) => {
             const isActive = idx === currentIndex;
-            return (
-              <div
-                key={idx}
-                className="min-w-[85%] sm:min-w-[80%] md:min-w-[75%] lg:min-w-[70%] shrink-0 transition-opacity duration-700"
-                style={{ opacity: isActive ? 1 : 0.4 }}
-              >
+            
+            const cardContent = (
+              <>
                 <div className="aspect-[16/10] sm:aspect-[16/9] overflow-hidden rounded-sm mb-4 sm:mb-5 md:mb-6 bg-surface-container">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     alt={work.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     src={work.img}
                     referrerPolicy="no-referrer"
                   />
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 lg:gap-8">
-                  <div className="flex-1">
-                    <Text variant="caption">NAME</Text>
-                    <Heading as="h4" variant="card">
+                <div className="flex flex-col gap-2 sm:gap-3">
+                  <div>
+                    <Text variant="caption">CATEGORY</Text>
+                    <Heading as="h4" variant="card" className="group-hover:text-primary transition-colors line-clamp-2">
                       {work.title}
                     </Heading>
                   </div>
-                  <div className="flex-1">
-                    <Text variant="caption">LOCATION</Text>
-                    <Heading as="h4" variant="card">
-                      {work.loc}
-                    </Heading>
-                  </div>
-                  <div className="flex-[2] hidden sm:block">
+                  <div>
                     <Text
                       variant="small"
-                      className={`transition-opacity duration-500 ${
-                        isActive ? "opacity-100" : "opacity-0"
+                      className={`transition-opacity duration-500 line-clamp-3 ${
+                        isActive ? "opacity-100" : "opacity-70"
                       }`}
                     >
                       {work.desc}
                     </Text>
                   </div>
                 </div>
+              </>
+            );
+
+            return (
+              <div
+                key={idx}
+                className="group shrink-0 transition-opacity duration-700 w-[var(--card-width)]"
+                style={{ opacity: isActive ? 1 : 0.6 }}
+              >
+                {work.href ? (
+                  <Link href={work.href} className="block w-full h-full">
+                    {cardContent}
+                  </Link>
+                ) : (
+                  <div className="block w-full h-full">
+                    {cardContent}
+                  </div>
+                )}
               </div>
             );
           })}

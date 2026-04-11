@@ -1,8 +1,15 @@
 import { Star } from "lucide-react";
 import Image from "next/image";
 
-export default function Testimonials() {
-  const REVIEWS = [
+interface TestimonialData {
+  quote: string;
+  author: string;
+  platform?: string;
+  rating: number;
+}
+
+export default function Testimonials({ data }: { data?: TestimonialData[] }) {
+  const DEFAULT_REVIEWS = [
     {
       id: 1,
       name: "JOHN DOE",
@@ -32,8 +39,19 @@ export default function Testimonials() {
     }
   ];
 
+  const reviews = data ? data.map((item, idx) => ({
+    id: idx,
+    name: item.author,
+    age: "Verified",
+    role: item.platform || "Traveler",
+    trip: "Global Journey",
+    text: item.quote,
+    image: `https://picsum.photos/seed/${item.author}/400/400`,
+    rating: item.rating
+  })) : DEFAULT_REVIEWS;
+
   return (
-    <section className="w-full overflow-hidden py-16 bg-white border-t border-neutral-100">
+    <section className="w-full overflow-hidden py-10 bg-white border-t border-neutral-100">
       <div className="mx-auto max-w-7xl px-4 flex flex-col w-full">
         <header className="relative mb-8 pt-10">
           <div className="absolute -top-2 -left-4 md:-left-8 z-0 text-[3.5rem] sm:text-[4.5rem] md:text-[5.5rem] tracking-[0.1em] leading-none opacity-5 font-extrabold uppercase pointer-events-none select-none text-neutral-900">
@@ -49,7 +67,7 @@ export default function Testimonials() {
       </div>
       
       <div className="mx-auto grid max-w-7xl gap-6 px-4 md:grid-cols-3">
-        {REVIEWS.map((review) => (
+        {reviews.map((review) => (
           <div key={review.id} className="relative h-48 overflow-hidden rounded-[2rem] bg-black text-white shadow-lg">
             <Image
               src={review.image}
@@ -61,7 +79,7 @@ export default function Testimonials() {
             
             <div className="relative z-10 flex h-full flex-col justify-end p-6">
               <div className="mb-2 flex gap-1">
-                {[...Array(5)].map((_, i) => (
+                {[...Array(review.rating || 5)].map((_, i) => (
                   <Star key={i} className="h-4 w-4 fill-white text-white" />
                 ))}
               </div>
@@ -69,7 +87,7 @@ export default function Testimonials() {
               <div className="mb-1 text-sm text-white">
                 <span className="font-bold uppercase drop-shadow-md">{review.name},</span>
                 <span className="ml-1 text-xs text-neutral-300 drop-shadow-md">
-                  {review.age} yrs old, {review.role}
+                   {review.age === "Verified" ? review.role : `${review.age} yrs old, ${review.role}`}
                 </span>
               </div>
               
@@ -77,7 +95,7 @@ export default function Testimonials() {
                 {review.trip} - {review.text}
               </p>
 
-              {review.id === 3 && (
+              {review.id === (reviews.length - 1) && reviews.length > 2 && (
                 <button className="absolute bottom-4 right-4 flex items-center text-[10px] font-bold uppercase tracking-wider text-neutral-400 transition-colors hover:text-white">
                   ALL REVIEWS &gt;
                 </button>
@@ -89,3 +107,4 @@ export default function Testimonials() {
     </section>
   );
 }
+
