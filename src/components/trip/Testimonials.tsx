@@ -17,7 +17,8 @@ export default function Testimonials({ data }: { data?: TestimonialData[] }) {
       role: "Story Teller",
       trip: "Tawang",
       text: "Lorem Ipsum Lorem Ipsum",
-      image: "https://picsum.photos/seed/user1/400/400"
+      image: "https://picsum.photos/seed/user1/400/400",
+      rating: 5
     },
     {
       id: 2,
@@ -26,7 +27,8 @@ export default function Testimonials({ data }: { data?: TestimonialData[] }) {
       role: "Story Teller",
       trip: "Tawang",
       text: "Lorem Ipsum Lorem Ipsum",
-      image: "https://picsum.photos/seed/user2/400/400"
+      image: "https://picsum.photos/seed/user2/400/400",
+      rating: 5
     },
     {
       id: 3,
@@ -35,7 +37,8 @@ export default function Testimonials({ data }: { data?: TestimonialData[] }) {
       role: "Story Teller",
       trip: "Spiti Valley",
       text: "The great cold dessert",
-      image: "https://picsum.photos/seed/user3/400/400"
+      image: "https://picsum.photos/seed/user3/400/400",
+      rating: 5
     }
   ];
 

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Facebook, Instagram, Twitter, ChevronDown } from "lucide-react";
 import StickySidebar from "./StickySidebar";
-import { ItineraryDay, SidebarCard } from "@/data/tripsData";
+import { ItineraryDay, Trip } from "@/data/tripsData";
 
 interface ItinerarySectionProps {
   itinerary: ItineraryDay[];
