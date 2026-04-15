@@ -5,6 +5,7 @@ import Services, { ServiceItem } from "@/components/home/Services";
 import Portfolio, { PortfolioData } from "@/components/home/Portfolio";
 import Testimonials from "@/components/trip/Testimonials";
 import CTA from "@/components/home/CTA";
+import DestinationBanner from "@/components/home/DestinationBanner";
 import ContactForm from "@/components/trip/ContactForm";
 import { getSiteContent } from "@/data/siteData";
 import { getTripsByCategory } from "@/data/tripsData";
@@ -72,6 +73,7 @@ export default async function HomePage() {
       <Hero data={siteData.hero} />
       <Values data={siteData.values} />
       {/* <Process data={siteData.process} /> */}
+      <DestinationBanner />
       <Services data={tripCards} />
       <Portfolio data={portfolioData} />
       <Testimonials data={siteData.testimonials} />

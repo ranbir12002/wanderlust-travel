@@ -4,10 +4,12 @@ import { useState, useEffect } from "react";
 import { Search, User, Menu, ArrowRight } from "lucide-react";
 import { usePathname } from "next/navigation";
 import type { SiteData } from "@/data/mockData";
+import TripRequestModal from "./trip/TripRequestModal";
 
 export function Header({ data }: { data: SiteData["header"] }) {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,9 +68,12 @@ export function Header({ data }: { data: SiteData["header"] }) {
 
             {/* CTA & Icons */}
             <div className="flex items-center gap-6">
-               <a href="/customised" className="hidden sm:inline-flex items-center rounded-sm border border-white px-6 py-2.5 text-[11px] font-bold uppercase tracking-widest text-white transition-all hover:bg-white hover:text-black">
+               <button 
+                onClick={() => setIsModalOpen(true)}
+                className="hidden sm:inline-flex items-center rounded-sm border border-white px-6 py-2.5 text-[11px] font-bold uppercase tracking-widest text-white transition-all hover:bg-white hover:text-black"
+               >
                  Customised Trips
-               </a>
+               </button>
                
                <div className="flex items-center gap-5 sm:border-l sm:border-white/20 sm:pl-6 text-white">
                 <button className="hidden sm:block hover:opacity-70 transition-opacity">
@@ -85,6 +90,7 @@ export function Header({ data }: { data: SiteData["header"] }) {
           </div>
         </div>
       </div>
+      <TripRequestModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </header>
   );
 }
@@ -92,7 +98,12 @@ export function Header({ data }: { data: SiteData["header"] }) {
 import { Phone, Mail, MapPin } from "lucide-react";
 
 export function Footer({ data }: { data: SiteData["footer"] }) {
+  // We can also add modal state to Footer if needed, but usually the header is enough.
+  // Or we could lift it to a context. For now, let's just make the footer link also functional.
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
+    <>
     <footer className="bg-primary text-white pt-20 pb-12">
       <div className="mx-auto max-w-[1920px] px-6 lg:px-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-24 mb-20">
@@ -118,16 +129,28 @@ export function Footer({ data }: { data: SiteData["footer"] }) {
           <div className="lg:col-span-2">
             <h5 className="text-[10px] font-black uppercase tracking-[0.4em] text-[#FFE400] mb-10">Quick Links</h5>
             <div className="grid grid-cols-2 gap-x-8 gap-y-4">
-              {data?.quickLinks?.map((link, idx) => (
-                <a 
-                  key={idx} 
-                  href={link.href} 
-                  className="group flex items-center gap-3 text-sm font-bold transition-all hover:translate-x-1"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-white/10 group-hover:bg-[#FFE400] transition-colors" />
-                  <span className="text-white/70 group-hover:text-white">{link.label}</span>
-                </a>
-              ))}
+              {data?.quickLinks?.map((link, idx) => {
+                const isCustom = link.href === "/customised";
+                return isCustom ? (
+                  <button 
+                    key={idx} 
+                    onClick={() => setIsModalOpen(true)}
+                    className="group flex items-center gap-3 text-sm font-bold transition-all hover:translate-x-1 text-left"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-white/10 group-hover:bg-[#FFE400] transition-colors" />
+                    <span className="text-white/70 group-hover:text-white">{link.label}</span>
+                  </button>
+                ) : (
+                  <a 
+                    key={idx} 
+                    href={link.href} 
+                    className="group flex items-center gap-3 text-sm font-bold transition-all hover:translate-x-1"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-white/10 group-hover:bg-[#FFE400] transition-colors" />
+                    <span className="text-white/70 group-hover:text-white">{link.label}</span>
+                  </a>
+                );
+              })}
             </div>
           </div>
 
@@ -172,5 +195,7 @@ export function Footer({ data }: { data: SiteData["footer"] }) {
         </div>
       </div>
     </footer>
+    <TripRequestModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+    </>
   );
 }
