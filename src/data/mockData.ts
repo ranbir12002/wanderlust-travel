@@ -3,7 +3,7 @@ import React from "react";
 
 export const siteData = {
   header: {
-    logo: "Wanderlust",
+    logo: "Beaches to Mountains",
     navLinks: [
       { label: "Domestic Trips", href: "/trips/domestic" },
       { label: "International Trips", href: "/trips/international" },
@@ -101,7 +101,7 @@ export const siteData = {
   ],
   testimonials: [
     {
-      quote: "Wanderlust crafted the perfect itinerary for our anniversary. The attention to detail and curated experiences were unmatched.",
+      quote: "Beaches to Mountains crafted the perfect itinerary for our anniversary. The attention to detail and curated experiences were unmatched.",
       author: "Sarah Jenkins",
       platform: "Google",
       rating: 5
@@ -123,13 +123,33 @@ export const siteData = {
       author: "David L.",
       platform: "Instagram",
       rating: 5
+    },
+    {
+      quote: "It was a great trip to Kerala. It was my first trip with friends, and I enjoyed a lot, all thanks to Beaches2Mountains. I got to experience mountains, beaches, beautiful sceneries, and most wonderful of all the boathouses. Accommodation, services, and food were well taken care of by Beaches2Mountains. Special thanks to Dhanush Anna for making our trip beautiful and successful. Looking forward to more trips with Beaches2Mountains.",
+      author: "KEERTHANA REDDY INTURI",
+      platform: "Google",
+      rating: 5
+    },
+    {
+      quote: "As the first foreigner B2M ever hosted, it was an amazing experience. Harnath made sure to make my stay as enjoyable and safe as possible for me as a solo female traveler for the first time in India and made the arrangements on short notice. The group was very friendly and Kerala was magnificent. Would definitely recommend.",
+      author: "HEND RABIE",
+      platform: "Google",
+      rating: 5
+    },
+    {
+      quote: "I am a solo traveler, chose this group with few doubts but trust me it broke all the reluctance I had. I met many new people who are so sweet and fun to be with. They even made the trip the best. The itinerary was good. You can enjoy all the days without any second thought. You can enjoy the water activities there, rain DJ dance, and my favorite part of the trip. Special mention to Harnath, our trip organizer who was very fun and sweet and made the trip the best.",
+      author: "DEEPIKA",
+      platform: "Google",
+      rating: 5
     }
   ],
   social: {
     title: "Follow Our Journey",
     description: "Join our community of explorers. Discover inspiration for your next breathtaking expedition.",
-    instagramUrl: "#",
-    youtubeUrl: "#",
+    instagramUrl: "https://www.instagram.com/beaches2mountains_?igsh=NHhoOXAzbHNxb2I4",
+    youtubeUrl: "https://youtube.com/@beaches2mountainss?si=BreNQUa_N-VPK7zK",
+    twitterUrl: "https://x.com/b2m39?s=21",
+    linkedinUrl: "https://www.linkedin.com/company/beaches2mountains/",
     googleUrl: "#",
     feedImages: [
       "https://images.unsplash.com/photo-1527631746610-bca00c0f4f72?auto=format&fit=crop&q=80&w=800",
@@ -170,7 +190,7 @@ export const siteData = {
     bgImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuBiZgDdVfF1gQjKDWkZBlePIHU-H3qfvM5zFeN6yiuwftlu-BlsuU3uZFBNVTSFZOi8gsdrQOEFnVFPc4QpspR5Irborvr6gHszzstuagAABDL8Bi1D_imM_6NnL6jHq68bUBsq7G_xnrNWiPB9JaTRvbklEnxRY8vbe3vyopUt8gY66o56KM8dIBVLecxP5P94YfjbZ6jmRNAIsN0ndRzK7fvoFG-MElU6iQ5-aYW9YEb1mB4OMT4bIJO060Pj786tHn_N7mg-vTFU"
   },
   footer: {
-    logo: "Wanderlust",
+    logo: "Beaches to Mountains",
     description: "Elevating travel through curated, bespoke itineraries. Discover the world with unparalleled sophistication and rhythm.",
     bottomLinks: [
       { label: "Terms & Conditions", href: "/terms" },
@@ -186,10 +206,10 @@ export const siteData = {
     ],
     contactInfo: {
       phone: "+1 (555) 123-4567",
-      email: "hello@wanderlust.com",
+      email: "hello@beachestomountains.com",
       office: "123 Explorer's Ave, Suite 400\nSan Francisco, CA 94107"
     },
-    copyright: "© 2026 Wanderlust Travel. All rights reserved.",
+    copyright: "© 2026 Beaches to Mountains. All rights reserved.",
   }
 };
 

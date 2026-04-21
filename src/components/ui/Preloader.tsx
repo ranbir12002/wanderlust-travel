@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function Preloader() {
   const [isVisible, setIsVisible] = useState(true);
@@ -25,14 +26,20 @@ export default function Preloader() {
         >
           {/* Main Logo Container */}
           <div className="relative overflow-hidden">
-            <motion.h1
+            <motion.div
               initial={{ y: 100, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-              className="text-4xl font-black lowercase tracking-tighter sm:text-6xl md:text-8xl"
+              className="flex justify-center"
             >
-              Wanderlust
-            </motion.h1>
+              <Image 
+                src="/logo.png" 
+                alt="Beaches to Mountains Logo" 
+                width={450} 
+                height={150} 
+                className="h-32 w-auto object-contain brightness-0 invert"
+              />
+            </motion.div>
             
             {/* Elegant Loading Line */}
             <motion.div 

@@ -6,16 +6,16 @@ import { ArrowUpRight, MapPin } from "lucide-react";
 import type { SiteData } from "@/data/mockData";
 
 const backgrounds = [
-  "https://images.unsplash.com/photo-1558904541-efba997d0c0c?q=80&w=2574&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=2670&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1598902108854-10e335adac99?q=80&w=2574&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1572688484438-313a6e50c333?q=80&w=2670&auto=format&fit=crop"
-];
+  "/hero banner/2webp.webp",
+  "/hero banner/IMG_6669_Original.jpg",
+  "/hero banner/licensed-image.jfif",
+  "/hero banner/1.jpg"]
 
 const avatars = [
   "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80",
   "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&auto=format&fit=crop&q=80",
   "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80"
 ];
 
 export default function Hero({ data }: { data: SiteData["hero"] }) {
@@ -76,19 +76,19 @@ export default function Hero({ data }: { data: SiteData["hero"] }) {
       {/* Dark Overlay Gradient */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-black/30 z-10 pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent z-10 pointer-events-none" />
-      
+
       {/* Absolute Layout Container */}
       <div className="relative z-20 h-full w-full max-w-[1920px] mx-auto px-6 lg:px-12 flex flex-col justify-center">
-        
+
         {/* Center-Left: Main Content */}
         <div className="mt-20 lg:mt-0 flex flex-col justify-center lg:w-3/4 xl:w-2/3">
           <motion.div
-             initial={{ opacity: 0, y: 30 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
             <h1 className="text-[3rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] font-bold leading-[1.05] tracking-tight uppercase mb-6 drop-shadow-lg">
-              CREATE YOUR <br/> DREAM GARDEN
+              CREATE YOUR <br /> DREAM GARDEN
             </h1>
             <p className="text-base sm:text-lg text-white/90 max-w-xl font-light leading-relaxed mb-10 drop-shadow">
               Crafting dream gardens with passion, creativity, and sustainability for over a decade with our experienced landscape artists and gardener teams.
@@ -108,17 +108,17 @@ export default function Hero({ data }: { data: SiteData["hero"] }) {
         {/* Top-Right: Social Proof Widget */}
         <div className="hidden lg:flex absolute top-32 right-12 z-30">
           <motion.div
-             initial={{ opacity: 0, x: 20 }}
-             animate={{ opacity: 1, x: 0 }}
-             transition={{ duration: 0.8, delay: 0.5 }}
-             className="flex flex-col items-end text-right"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="flex flex-col items-end text-right"
           >
             <div className="flex -space-x-4 mb-3">
               {avatars.map((avatar, i) => (
-                <img 
-                  key={i} 
-                  src={avatar} 
-                  alt="Client avatar" 
+                <img
+                  key={i}
+                  src={avatar}
+                  alt="Client avatar"
                   className="w-12 h-12 rounded-full border-2 border-white/80 shadow-md object-cover"
                 />
               ))}
@@ -131,57 +131,56 @@ export default function Hero({ data }: { data: SiteData["hero"] }) {
         {/* Bottom-Right: Featured Project Card (Pinned to absolute right) */}
         <div className="hidden lg:block absolute bottom-24 right-12 z-30 w-full max-w-sm">
           <motion.div
-             initial={{ opacity: 0, y: 20 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.8, delay: 0.7 }}
-             className="bg-black/30 backdrop-blur-xl border border-white/10 p-6 rounded-lg shadow-2xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="bg-black/30 backdrop-blur-xl border border-white/10 p-6 rounded-lg shadow-2xl"
           >
-             <div className="flex justify-between items-start mb-6">
-                <div className="p-2 border border-white/20 rounded-full">
-                  <MapPin className="w-5 h-5 text-white stroke-[1.5]" />
-                </div>
-                <button className="p-2 bg-white text-black hover:bg-neutral-200 transition-colors rounded-full">
-                  <ArrowUpRight className="w-5 h-5 stroke-2" />
-                </button>
-             </div>
-             
-             <h4 className="text-xl font-bold text-white mb-2">Hachioji Garden</h4>
-             <p className="text-sm text-white/70 font-light leading-relaxed">
-               We design Hachioji Garden as a part of our new Landscape Design Commission in the country.
-             </p>
+            <div className="flex justify-between items-start mb-6">
+              <div className="p-2 border border-white/20 rounded-full">
+                <MapPin className="w-5 h-5 text-white stroke-[1.5]" />
+              </div>
+              <button className="p-2 bg-white text-black hover:bg-neutral-200 transition-colors rounded-full">
+                <ArrowUpRight className="w-5 h-5 stroke-2" />
+              </button>
+            </div>
+
+            <h4 className="text-xl font-bold text-white mb-2">Hachioji Garden</h4>
+            <p className="text-sm text-white/70 font-light leading-relaxed">
+              We design Hachioji Garden as a part of our new Landscape Design Commission in the country.
+            </p>
           </motion.div>
         </div>
 
         {/* Bottom-Left: Thumbnails and Slider Controls */}
         <div className="absolute bottom-12 left-6 lg:left-12 z-30 flex flex-col gap-6 w-full lg:w-auto pr-6 lg:pr-0">
-           {/* 4 Image Selector */}
-           <div className="flex gap-4">
-             {backgrounds.map((bg, index) => (
-                <button 
-                  key={index}
-                  onClick={() => selectSlide(index)}
-                  className={`relative w-20 h-12 md:w-24 md:h-16 overflow-hidden rounded-md transition-all duration-300 border-2 ${
-                    currentSlide === index ? "border-white shadow-[0_0_15px_rgba(255,255,255,0.4)] scale-105" : "border-white/20 hover:border-white/60 opacity-60 hover:opacity-100"
+          {/* 4 Image Selector */}
+          <div className="flex gap-4">
+            {backgrounds.map((bg, index) => (
+              <button
+                key={index}
+                onClick={() => selectSlide(index)}
+                className={`relative w-20 h-12 md:w-24 md:h-16 overflow-hidden rounded-md transition-all duration-300 border-2 ${currentSlide === index ? "border-white shadow-[0_0_15px_rgba(255,255,255,0.4)] scale-105" : "border-white/20 hover:border-white/60 opacity-60 hover:opacity-100"
                   }`}
-                >
-                  <img src={bg} alt={`Thumbnail ${index + 1}`} className="w-full h-full object-cover" />
-                </button>
-             ))}
-           </div>
-           
-           <div className="flex items-center gap-4">
-               <span className="text-sm font-medium w-6 shrink-0 font-mono">0{currentSlide + 1}</span>
-               <div className="relative h-[2px] w-full max-w-sm bg-white/20 overflow-hidden">
-                 <motion.div 
-                   key={currentSlide}
-                   className="absolute top-0 left-0 h-full bg-white"
-                   initial={{ width: "0%" }}
-                   animate={{ width: "100%" }}
-                   transition={{ duration: 6, ease: "linear" }}
-                 />
-               </div>
-               <span className="text-sm text-white/50 w-6 shrink-0 font-mono text-right">0{backgrounds.length}</span>
-           </div>
+              >
+                <img src={bg} alt={`Thumbnail ${index + 1}`} className="w-full h-full object-cover" />
+              </button>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-4">
+            <span className="text-sm font-medium w-6 shrink-0 font-mono">0{currentSlide + 1}</span>
+            <div className="relative h-[2px] w-full max-w-sm bg-white/20 overflow-hidden">
+              <motion.div
+                key={currentSlide}
+                className="absolute top-0 left-0 h-full bg-white"
+                initial={{ width: "0%" }}
+                animate={{ width: "100%" }}
+                transition={{ duration: 6, ease: "linear" }}
+              />
+            </div>
+            <span className="text-sm text-white/50 w-6 shrink-0 font-mono text-right">0{backgrounds.length}</span>
+          </div>
         </div>
 
       </div>

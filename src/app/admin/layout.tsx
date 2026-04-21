@@ -18,7 +18,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <header className="sticky top-0 z-50 flex items-center justify-between border-b border-neutral-200 bg-white px-6 py-4 shadow-sm">
         <div className="flex items-center gap-4">
           <Link href="/admin" className="text-xl font-black uppercase text-neutral-900">
-            Wanderlust Admin
+            Beaches to Mountains Admin
           </Link>
           <span className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-bold text-neutral-500">
             v1.0

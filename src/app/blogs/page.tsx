@@ -1,9 +1,10 @@
 import Image from "next/image";
-import { Facebook, Instagram, Youtube } from "lucide-react";
+import { Facebook, Instagram, Youtube, Twitter, Linkedin } from "lucide-react";
 import BlogCard from "@/components/blog/BlogCard";
 import ContactForm from "@/components/trip/ContactForm";
 import Testimonials from "@/components/trip/Testimonials";
 import { getBlogs } from "@/data/blogsData";
+import { siteData } from "@/data/mockData";
 
 export default async function BlogsPage() {
   const blogsData = await getBlogs();
@@ -41,15 +42,26 @@ export default async function BlogsPage() {
 
         {/* Social Icons */}
         <div className="absolute left-6 top-1/4 z-20 flex flex-col gap-4 rounded-full bg-white p-2 shadow-lg">
-          <a href="#" className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-100 transition-colors hover:bg-neutral-200">
-            <Facebook className="h-4 w-4 text-neutral-900" />
-          </a>
-          <a href="#" className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-100 transition-colors hover:bg-neutral-200">
-            <Instagram className="h-4 w-4 text-neutral-900" />
-          </a>
-          <a href="#" className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-100 transition-colors hover:bg-neutral-200">
-            <Youtube className="h-4 w-4 text-neutral-900" />
-          </a>
+          {siteData.social.instagramUrl && (
+            <a href={siteData.social.instagramUrl} target="_blank" rel="noreferrer" className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-100 transition-colors hover:bg-[#FFE400] hover:text-black">
+              <Instagram className="h-4 w-4 text-neutral-900" />
+            </a>
+          )}
+          {siteData.social.youtubeUrl && (
+            <a href={siteData.social.youtubeUrl} target="_blank" rel="noreferrer" className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-100 transition-colors hover:bg-[#FFE400] hover:text-black">
+              <Youtube className="h-4 w-4 text-neutral-900" />
+            </a>
+          )}
+          {siteData.social.twitterUrl && (
+            <a href={siteData.social.twitterUrl} target="_blank" rel="noreferrer" className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-100 transition-colors hover:bg-[#FFE400] hover:text-black">
+              <Twitter className="h-4 w-4 text-neutral-900" />
+            </a>
+          )}
+          {siteData.social.linkedinUrl && (
+            <a href={siteData.social.linkedinUrl} target="_blank" rel="noreferrer" className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-100 transition-colors hover:bg-[#FFE400] hover:text-black">
+              <Linkedin className="h-4 w-4 text-neutral-900" />
+            </a>
+          )}
         </div>
       </div>
 

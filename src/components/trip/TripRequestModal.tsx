@@ -114,7 +114,7 @@ export default function TripRequestModal({ isOpen, onClose }: TripRequestModalPr
                 </div>
                 <h2 className="text-3xl font-black text-white uppercase tracking-tighter">Request Received!</h2>
                 <p className="text-white/60 max-w-md">
-                  Thank you for starting your journey with Wanderlust. Henriette or one of our team members will get in touch with you shortly.
+                  Thank you for starting your journey with Beaches to Mountains. Henriette or one of our team members will get in touch with you shortly.
                 </p>
                 <Button variant="outline" onClick={onClose}>
                   Close
@@ -297,7 +297,7 @@ export default function TripRequestModal({ isOpen, onClose }: TripRequestModalPr
                           </label>
                         </div>
                         <label htmlFor="terms" className="text-sm text-white/70 leading-relaxed cursor-pointer select-none">
-                          When I click "Start the journey", I agree that the Up Norway team can get in touch with me about my request. <span className="text-red-500">*</span>
+                          When I click "Start the journey", I agree that the Beaches to Mountains team can get in touch with me about my request. <span className="text-red-500">*</span>
                         </label>
                       </div>
 
@@ -317,7 +317,7 @@ export default function TripRequestModal({ isOpen, onClose }: TripRequestModalPr
                           </label>
                         </div>
                         <label htmlFor="newsletter" className="text-sm text-white/70 leading-relaxed cursor-pointer select-none">
-                          Yes, I would like to be inspired with Up Norway insider news.
+                          Yes, I would like to be inspired with Beaches to Mountains insider news.
                         </label>
                       </div>
                     </div>
