@@ -6,12 +6,14 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { siteData, type SiteData } from "@/data/mockData";
 import TripRequestModal from "./trip/TripRequestModal";
+import SearchOverlay from "./ui/SearchOverlay";
 import { AnimatePresence, motion } from "framer-motion";
 
 export function Header({ data }: { data: SiteData["header"] }) {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -23,12 +25,13 @@ export function Header({ data }: { data: SiteData["header"] }) {
   }, []);
 
   useEffect(() => {
-    if (isMobileMenuOpen) document.body.style.overflow = "hidden";
+    if (isMobileMenuOpen || isSearchOpen) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "unset";
-  }, [isMobileMenuOpen]);
+  }, [isMobileMenuOpen, isSearchOpen]);
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    setIsSearchOpen(false);
   }, [pathname]);
 
   const getSeason = () => {
@@ -96,7 +99,10 @@ export function Header({ data }: { data: SiteData["header"] }) {
                  </button>
                  
                  <div className="flex items-center gap-5 sm:border-l sm:border-white/20 sm:pl-6 text-white">
-                  <button className="hidden sm:block hover:opacity-70 transition-opacity">
+                  <button 
+                    onClick={() => setIsSearchOpen(true)}
+                    className="hidden sm:block hover:opacity-70 transition-opacity"
+                  >
                     <Search size={18} strokeWidth={2} />
                   </button>
                   <button className="hidden sm:block hover:opacity-70 transition-opacity">
@@ -125,6 +131,15 @@ export function Header({ data }: { data: SiteData["header"] }) {
               className="absolute top-[100%] left-0 w-full z-40 bg-[#111] backdrop-blur-3xl border-b border-white/10 px-8 py-8 flex flex-col shadow-2xl max-h-[80vh] overflow-y-auto"
             >
                <nav className="flex flex-col gap-5">
+                 {/* Mobile Search Trigger */}
+                 <button 
+                  onClick={() => { setIsMobileMenuOpen(false); setIsSearchOpen(true); }}
+                  className="flex items-center gap-3 text-xl font-bold text-[#FFE400] mb-4"
+                 >
+                   <Search size={20} />
+                   Search
+                 </button>
+
                  <a
                     href={`/`}
                     className="text-xl font-bold text-white/80 hover:text-white transition-colors"
@@ -168,9 +183,11 @@ export function Header({ data }: { data: SiteData["header"] }) {
         </AnimatePresence>
       </header>
       <TripRequestModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <SearchOverlay isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </>
   );
 }
+
 
 export function Footer({ data }: { data: SiteData["footer"] }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
