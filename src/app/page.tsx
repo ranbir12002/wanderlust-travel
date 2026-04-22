@@ -76,7 +76,7 @@ export default async function HomePage() {
       <DestinationBanner />
       <Services data={tripCards} />
       <Portfolio data={portfolioData} />
-      <Testimonials data={siteData.testimonials} />
+      <Testimonials />
       <CTA data={siteData.cta} />
       <ContactForm />
     </main>

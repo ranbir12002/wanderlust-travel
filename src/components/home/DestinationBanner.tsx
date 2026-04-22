@@ -22,9 +22,9 @@ export default function DestinationBanner() {
     <section className="py-20 lg:py-32 bg-white overflow-hidden">
       <SectionContainer>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          
+
           {/* Left Content */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -35,15 +35,15 @@ export default function DestinationBanner() {
               <Heading as="h2" variant="section" className="text-black font-headline">
                 Designed for Every {"\n"}Destination
               </Heading>
-              
+
               <div className="flex items-center gap-4 py-2">
                 <div className="flex -space-x-4 overflow-hidden">
                   {avatars.map((url, i) => (
-                    <img 
-                      key={i} 
-                      src={url} 
-                      alt="user" 
-                      className="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" 
+                    <img
+                      key={i}
+                      src={url}
+                      alt="user"
+                      className="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover"
                     />
                   ))}
                 </div>
@@ -57,11 +57,11 @@ export default function DestinationBanner() {
               Every journey is unique, from mountain peaks to coastal escapes, GoVista helps you find experiences that match your mood, style, and sense of adventure. Our trusted partners ensure every moment of your trip is smooth, safe, and memorable.
             </Text>
 
-            <Button 
-                variant="primary" 
-                size="lg" 
-                className="bg-[#60A5FA] border-none hover:bg-blue-500 rounded-lg text-white font-bold tracking-normal py-4 px-10 shadow-lg shadow-blue-500/20"
-                onClick={() => setIsModalOpen(true)}
+            <Button
+              variant="primary"
+              size="lg"
+              className="bg-[#60A5FA] border-none hover:bg-blue-500 rounded-lg text-white font-bold tracking-normal py-4 px-10 shadow-lg shadow-blue-500/20"
+              onClick={() => setIsModalOpen(true)}
             >
               Get Started
             </Button>
@@ -76,13 +76,13 @@ export default function DestinationBanner() {
             className="relative"
           >
             <div className="rounded-[2rem] overflow-hidden shadow-2xl relative z-10 aspect-[4/3] lg:aspect-auto h-[400px] lg:h-[500px]">
-              <img 
-                src="https://images.unsplash.com/photo-1544254420-994df22be15f?auto=format&fit=crop&q=80&w=1200" 
-                alt="Scenic travel" 
+              <img
+                src="/hero banner/image.png"
+                alt="Scenic travel"
                 className="w-full h-full object-cover"
               />
             </div>
-            
+
             {/* Simple decorative element */}
             <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl -z-10"></div>
           </motion.div>
