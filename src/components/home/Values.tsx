@@ -67,7 +67,7 @@ export default function Values({ data }: { data: SiteData["values"] }) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 pt-4 sm:pt-6 md:pt-8">
             {data.features.map((feature, idx) => {
-              const IconComp = IconMap[feature.iconName] || Leaf;
+              const IconComp = IconMap[feature.iconName] || MapPin;
               return (
                 <motion.div
                   key={idx}
