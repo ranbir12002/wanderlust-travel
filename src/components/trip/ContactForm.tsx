@@ -37,10 +37,10 @@ export default function ContactForm() {
     <section id="contact" className="w-full overflow-hidden py-16 bg-white border-t border-neutral-100">
       <div className="mx-auto max-w-4xl px-4 flex flex-col w-full">
         <header className="relative mb-8 pt-10">
-          <div className="absolute -top-2 -left-4 md:-left-8 z-0 text-[4rem] sm:text-[5rem] md:text-[6rem] tracking-[0.1em] leading-none opacity-5 font-extrabold uppercase pointer-events-none select-none text-neutral-900">
+          <div className="absolute -top-2 -left-4 md:-left-8 z-0 text-[4rem] sm:text-[5rem] md:text-[6rem] tracking-[0.1em] leading-none opacity-5 font-extrabold uppercase pointer-events-none select-none text-[var(--color-ocean-blue)]">
             GET IN TOUCH
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold relative z-10 lowercase mb-4 text-neutral-900">
+          <h2 className="text-3xl sm:text-4xl font-extrabold relative z-10 lowercase mb-4 text-[var(--color-ocean-blue)]">
             get in touch
           </h2>
           <p className="text-neutral-600 text-sm md:text-base max-w-2xl leading-relaxed relative z-10">
@@ -58,7 +58,7 @@ export default function ContactForm() {
                 type="text"
                 required
                 placeholder="First Name"
-                className="w-full p-4 rounded-xl border-none bg-neutral-100 focus:bg-white focus:ring-2 focus:ring-neutral-200 transition-all placeholder:text-neutral-500"
+                className="w-full p-4 rounded-xl border-none bg-[var(--color-sky-blue)]/10 focus:bg-white focus:ring-2 focus:ring-[var(--color-ocean-blue)]/30 transition-all placeholder:text-neutral-500"
               />
             </div>
             
@@ -70,7 +70,7 @@ export default function ContactForm() {
                 type="text"
                 required
                 placeholder="Last Name"
-                className="w-full p-4 rounded-xl border-none bg-neutral-100 focus:bg-white focus:ring-2 focus:ring-neutral-200 transition-all placeholder:text-neutral-500"
+                className="w-full p-4 rounded-xl border-none bg-[var(--color-sky-blue)]/10 focus:bg-white focus:ring-2 focus:ring-[var(--color-ocean-blue)]/30 transition-all placeholder:text-neutral-500"
               />
             </div>
             
@@ -82,7 +82,7 @@ export default function ContactForm() {
                 type="tel"
                 required
                 placeholder="Contact No."
-                className="w-full p-4 rounded-xl border-none bg-neutral-100 focus:bg-white focus:ring-2 focus:ring-neutral-200 transition-all placeholder:text-neutral-500"
+                className="w-full p-4 rounded-xl border-none bg-[var(--color-sky-blue)]/10 focus:bg-white focus:ring-2 focus:ring-[var(--color-ocean-blue)]/30 transition-all placeholder:text-neutral-500"
               />
             </div>
             
@@ -94,7 +94,7 @@ export default function ContactForm() {
                 type="email"
                 required
                 placeholder="Email Id"
-                className="w-full p-4 rounded-xl border-none bg-neutral-100 focus:bg-white focus:ring-2 focus:ring-neutral-200 transition-all placeholder:text-neutral-500"
+                className="w-full p-4 rounded-xl border-none bg-[var(--color-sky-blue)]/10 focus:bg-white focus:ring-2 focus:ring-[var(--color-ocean-blue)]/30 transition-all placeholder:text-neutral-500"
               />
             </div>
           </div>
@@ -107,7 +107,7 @@ export default function ContactForm() {
               required
               placeholder="Please write your query here..."
               rows={5}
-              className="w-full p-4 rounded-xl border-none bg-neutral-100 focus:bg-white focus:ring-2 focus:ring-neutral-200 transition-all resize-none placeholder:text-neutral-500"
+              className="w-full p-4 rounded-xl border-none bg-[var(--color-sky-blue)]/10 focus:bg-white focus:ring-2 focus:ring-[var(--color-ocean-blue)]/30 transition-all resize-none placeholder:text-neutral-500"
             />
           </div>
 
@@ -115,7 +115,7 @@ export default function ContactForm() {
             <button
               type="submit"
               disabled={status === "submitting"}
-              className="w-full md:w-auto inline-block px-8 py-3 bg-black text-white rounded-lg font-bold hover:bg-neutral-800 disabled:opacity-50 transition-colors"
+              className="w-full md:w-auto inline-block px-10 py-4 bg-[var(--color-ocean-blue)] text-white rounded-lg font-bold hover:brightness-110 disabled:opacity-50 transition-all shadow-lg hover:shadow-xl active:scale-95"
             >
               {status === "submitting" ? "Sending..." : "Send Message"}
             </button>

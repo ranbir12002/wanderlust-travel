@@ -43,7 +43,7 @@ export default function Portfolio({ data }: { data: PortfolioData }) {
         >
           <Heading>
             {data.title}
-            <span className="text-outline-variant">{data.highlightText}</span>
+            <span className="text-[var(--color-sun-gold)]"> {data.highlightText}</span>
           </Heading>
         </motion.div>
       </SectionContainer>
@@ -74,7 +74,7 @@ export default function Portfolio({ data }: { data: PortfolioData }) {
                 <div className="flex flex-col gap-2 sm:gap-3">
                   <div>
                     <Text variant="caption">CATEGORY</Text>
-                    <Heading as="h4" variant="card" className="group-hover:text-primary transition-colors line-clamp-2">
+                    <Heading as="h4" variant="card" className="group-hover:text-[var(--color-ocean-blue)] transition-colors line-clamp-2">
                       {work.title}
                     </Heading>
                   </div>
@@ -116,13 +116,13 @@ export default function Portfolio({ data }: { data: PortfolioData }) {
         <div className="flex gap-3 mt-6 sm:mt-8 lg:hidden justify-center pr-4 sm:pr-6">
           <button
             onClick={prevSlide}
-            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-primary/30 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all"
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-[var(--color-sun-gold)] flex items-center justify-center text-[var(--color-sun-gold)] hover:bg-[var(--color-sun-gold)] hover:text-[var(--color-ocean-blue)] transition-all"
           >
             <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
           <button
             onClick={nextSlide}
-            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-primary/30 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all"
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-[var(--color-sun-gold)] flex items-center justify-center text-[var(--color-sun-gold)] hover:bg-[var(--color-sun-gold)] hover:text-[var(--color-ocean-blue)] transition-all"
           >
             <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
@@ -132,7 +132,7 @@ export default function Portfolio({ data }: { data: PortfolioData }) {
         <div className="absolute top-0 right-0 w-[30%] h-[calc(100%-100px)] hidden lg:flex items-center justify-center pointer-events-none">
           <button
             onClick={nextSlide}
-            className="w-24 h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 rounded-full border border-primary/30 flex items-center justify-center text-primary font-body text-xs sm:text-sm tracking-widest hover:bg-primary hover:text-white transition-all duration-300 pointer-events-auto backdrop-blur-sm"
+            className="w-24 h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 rounded-full border border-[var(--color-sun-gold)] flex items-center justify-center text-[var(--color-sun-gold)] font-headline font-bold text-xs sm:text-sm tracking-widest hover:bg-[var(--color-sun-gold)] hover:text-[var(--color-ocean-blue)] transition-all duration-500 pointer-events-auto backdrop-blur-md shadow-2xl hover:scale-110"
           >
             NEXT
           </button>

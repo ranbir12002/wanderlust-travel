@@ -32,7 +32,7 @@ export default function DestinationBanner() {
             className="space-y-8"
           >
             <div className="space-y-4">
-              <Heading as="h2" variant="section" className="text-black font-headline">
+              <Heading as="h2" variant="section" className="text-[var(--color-ocean-blue)] font-headline">
                 Designed for Every {"\n"}Destination
               </Heading>
 
@@ -47,7 +47,7 @@ export default function DestinationBanner() {
                     />
                   ))}
                 </div>
-                <div className="text-xl font-black text-black tracking-tighter">
+                <div className="text-xl font-black text-[var(--color-ocean-blue)] tracking-tighter">
                   86 M+
                 </div>
               </div>
@@ -60,7 +60,7 @@ export default function DestinationBanner() {
             <Button
               variant="primary"
               size="lg"
-              className="bg-[#60A5FA] border-none hover:bg-blue-500 rounded-lg text-white font-bold tracking-normal py-4 px-10 shadow-lg shadow-blue-500/20"
+              className="bg-[var(--color-sun-gold)] border-none hover:brightness-110 rounded-lg text-[var(--color-ocean-blue)] font-bold tracking-normal py-4 px-10 shadow-lg shadow-gold-500/20"
               onClick={() => setIsModalOpen(true)}
             >
               Get Started
@@ -84,7 +84,7 @@ export default function DestinationBanner() {
             </div>
 
             {/* Simple decorative element */}
-            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl -z-10"></div>
+            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-[var(--color-sun-gold)]/20 rounded-full blur-2xl -z-10"></div>
           </motion.div>
 
         </div>

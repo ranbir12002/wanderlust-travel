@@ -15,7 +15,7 @@ export default function CTA({ data }: { data: SiteData["cta"] }) {
           src={data.bgImage}
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-primary/80 mix-blend-multiply"></div>
+        <div className="absolute inset-0 bg-[var(--color-ocean-blue)]/80 mix-blend-multiply"></div>
       </div>
       <div className="relative z-10 px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 flex flex-col items-center text-center space-y-6 sm:space-y-8 md:space-y-10 max-w-[1600px] mx-auto">
         <motion.h2
@@ -33,9 +33,9 @@ export default function CTA({ data }: { data: SiteData["cta"] }) {
            transition={{ delay: 0.2 }}
            className="w-full sm:w-auto"
         >
-          <Button variant="outline" size="xl" fullWidth>
+          <button className="px-12 py-5 bg-[var(--color-sun-gold)] text-[var(--color-ocean-blue)] font-headline font-black text-lg sm:text-xl rounded-sm hover:scale-105 transition-transform duration-300 shadow-2xl uppercase tracking-widest">
             {data.buttonText}
-          </Button>
+          </button>
         </motion.div>
       </div>
     </section>

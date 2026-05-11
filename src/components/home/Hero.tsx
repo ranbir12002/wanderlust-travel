@@ -74,8 +74,8 @@ export default function Hero({ data }: { data: SiteData["hero"] }) {
       </AnimatePresence>
 
       {/* Dark Overlay Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-black/30 z-10 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-ocean-blue)]/90 via-[var(--color-ocean-blue)]/50 to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-ocean-blue)]/70 via-transparent to-transparent z-10 pointer-events-none" />
 
       {/* Absolute Layout Container */}
       <div className="relative z-20 h-full w-full max-w-[1920px] mx-auto px-6 lg:px-12 flex flex-col justify-center">
@@ -87,19 +87,24 @@ export default function Hero({ data }: { data: SiteData["hero"] }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h1 className="text-[3rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] font-bold leading-[1.05] tracking-tight uppercase mb-6 drop-shadow-lg">
-              CREATE YOUR <br /> DREAM GARDEN
+            <h1 
+              className="text-[3rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] font-black leading-[1.05] tracking-tighter uppercase mb-6 text-white whitespace-pre-line"
+              style={{ 
+                textShadow: '4px 4px 0px rgba(0,0,0,0.5), 8px 8px 20px rgba(0,0,0,0.4)' 
+              }}
+            >
+              {data.title}
             </h1>
             <p className="text-base sm:text-lg text-white/90 max-w-xl font-light leading-relaxed mb-10 drop-shadow">
-              Crafting dream gardens with passion, creativity, and sustainability for over a decade with our experienced landscape artists and gardener teams.
+              {data.description}
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-6">
-              <button className="w-full sm:w-auto px-8 py-4 bg-white text-black text-sm font-semibold hover:bg-neutral-200 transition-colors rounded-sm shadow-lg">
-                Get Started
+              <button className="w-full sm:w-auto px-8 py-4 bg-[var(--color-sun-gold)] text-[var(--color-ocean-blue)] text-sm font-bold hover:brightness-110 transition-all rounded-sm shadow-lg uppercase tracking-wider">
+                Book Your Journey
               </button>
-              <button className="w-full sm:w-auto px-2 py-4 bg-transparent text-white text-sm font-medium border-b-2 border-white hover:text-white/80 hover:border-white/80 transition-colors">
-                Explore Projects
+              <button className="w-full sm:w-auto px-2 py-4 bg-transparent text-white text-sm font-medium border-b-2 border-[var(--color-sun-gold)] hover:text-[var(--color-sun-gold)] transition-colors uppercase tracking-wider">
+                Explore Destinations
               </button>
             </div>
           </motion.div>
@@ -145,9 +150,9 @@ export default function Hero({ data }: { data: SiteData["hero"] }) {
               </button>
             </div>
 
-            <h4 className="text-xl font-bold text-white mb-2">Hachioji Garden</h4>
+            <h4 className="text-xl font-bold text-white mb-2">{data.nextProject.name}</h4>
             <p className="text-sm text-white/70 font-light leading-relaxed">
-              We design Hachioji Garden as a part of our new Landscape Design Commission in the country.
+              {data.nextProject.location}
             </p>
           </motion.div>
         </div>

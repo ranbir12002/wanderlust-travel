@@ -54,16 +54,16 @@ export default function Services({ data }: { data: ServiceItem[] }) {
             {/* Top Right Arrow */}
             <div className="absolute top-4 right-4 sm:top-5 sm:right-5 md:top-6 md:right-6">
               <div
-                className={`rounded-full bg-white flex items-center justify-center text-black hover:scale-110 transition-transform duration-300 cursor-pointer ${
+                className={`rounded-full bg-[var(--color-sun-gold)] flex items-center justify-center text-[var(--color-ocean-blue)] hover:scale-110 transition-transform duration-300 cursor-pointer shadow-lg ${
                   idx === 3
                     ? "w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16"
                     : "w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14"
                 }`}
               >
                 <ArrowUpRight
-                  size={idx === 3 ? 20 : 16}
-                  strokeWidth={1.5}
-                  className="sm:[&]:w-5 sm:[&]:h-5 md:[&]:w-6 md:[&]:h-6"
+                  size={idx === 3 ? 24 : 18}
+                  strokeWidth={2.5}
+                  className="sm:[&]:w-6 sm:[&]:h-6 md:[&]:w-7 md:[&]:h-7"
                 />
               </div>
             </div>

@@ -1,6 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800;900&family=Inter:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
+:root {
+  --color-ocean-blue: #165D91;
+  --color-sky-blue: #8CB5D5;
+  --color-sun-gold: #F5B33D;
+}
+
 /* ============================================
    CENTRALIZED COLOR PALETTE
    ============================================
@@ -11,38 +17,38 @@
    ============================================ */
 @theme {
   /* ---- Fonts ---- */
-  --font-headline: "Epilogue", sans-serif;
+  --font-headline: "Neue Haas Grotesk", "Epilogue", "Inter", sans-serif;
   --font-body: "Inter", sans-serif;
 
-  /* ---- Primary colors ---- */
-  --color-primary: #153526;
-  --color-primary-container: #2c4c3b;
-  --color-on-primary-container: #98bca6;
+  /* Brand Typography Base */
+  --heading-color: var(--color-ocean-blue);
 
-  /* ---- Secondary colors ---- */
-  --color-secondary: #4b6452;
-  --color-secondary-container: #ceead3;
-  --color-on-secondary-container: #516a58;
-  --color-on-secondary-fixed-variant: #344c3b;
+  /* ---- Brand Colors (B2M) ---- */
+  --color-ocean-blue: #165D91;
+  --color-sky-blue: #8CB5D5;
+  --color-sun-gold: #F5B33D;
+  --color-white: #FFFFFF;
 
-  /* ---- Surface colors ---- */
-  --color-surface: #f9faf5;
-  --color-surface-container-low: #f3f4ef;
-  --color-surface-container: #edeee9;
-  --color-surface-container-highest: #e2e3de;
+  /* ---- Semantic Aliases ---- */
+  --color-primary: var(--color-ocean-blue);
+  --color-primary-container: #1a6fac;
+  --color-on-primary-container: var(--color-white);
 
-  /* ---- Text on surface ---- */
-  --color-on-surface: #1a1c19;
-  --color-on-surface-variant: #424843;
+  --color-secondary: var(--color-sky-blue);
+  --color-secondary-container: #a3c4de;
+  --color-on-secondary-container: var(--color-ocean-blue);
 
-  /* ---- Outline ---- */
-  --color-outline-variant: #c1c8c2;
+  --color-accent: var(--color-sun-gold);
+  --color-on-accent: var(--color-ocean-blue);
 
-  /* ---- Accent: Process section background ---- */
-  --color-accent-dark: #3A4B39;
+  --color-surface: var(--color-white);
+  --color-on-surface: var(--color-ocean-blue);
+  --color-on-surface-variant: #4079a5;
 
-  /* ---- Accent: Alternate section background ---- */
-  --color-bg-alt: #F6F7F2;
+  --color-outline-variant: var(--color-sky-blue);
+
+  /* ---- Backwards compatibility / Extras ---- */
+  --color-bg-alt: var(--color-sky-blue);
 }
 
 @layer utilities {
@@ -68,6 +74,13 @@
     border-radius: 20px;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 228, 0, 0.3);
+    background: rgba(245, 179, 61, 0.3);
+  }
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-headline;
+    color: var(--color-ocean-blue);
   }
 }

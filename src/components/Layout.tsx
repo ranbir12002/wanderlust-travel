@@ -15,8 +15,10 @@ export function Header({ data }: { data: SiteData["header"] }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
@@ -47,16 +49,16 @@ export function Header({ data }: { data: SiteData["header"] }) {
   return (
     <>
       <header className="fixed top-0 z-50 w-full transition-all duration-300">
-        <div className={`w-full transition-all duration-300 ${isScrolled || isMobileMenuOpen ? 'h-16 bg-black/80 backdrop-blur-md shadow-sm border-b border-white/5' : 'h-24 bg-transparent pt-4'} flex items-center`}>
+        <div className={`w-full transition-all duration-300 ${(mounted && (isScrolled || isMobileMenuOpen)) ? 'h-24 bg-[var(--color-ocean-blue)]/90 backdrop-blur-md shadow-lg border-b border-white/10' : 'h-36 bg-transparent pt-4'} flex items-center`}>
           <div className="mx-auto flex w-full max-w-[1920px] items-center justify-between px-6 lg:px-12">
             
             <a href="/" className="flex items-center transition-transform hover:scale-105 z-[60]">
               <Image 
                 src="/logo.png" 
                 alt={data?.logo || "Beaches to Mountains"} 
-                width={240} 
-                height={80} 
-                className="h-14 w-auto object-contain"
+                width={720} 
+                height={240} 
+                className={`${(mounted && isScrolled) ? 'h-20' : 'h-32'} w-auto object-contain brightness-0 invert transition-all duration-300`}
                 priority
               />
             </a>
@@ -91,12 +93,12 @@ export function Header({ data }: { data: SiteData["header"] }) {
 
               {/* CTA & Icons */}
               <div className="flex items-center gap-6 z-[60]">
-                 <button 
-                  onClick={() => setIsModalOpen(true)}
-                  className="hidden sm:inline-flex items-center rounded-sm border border-white px-6 py-2.5 text-[11px] font-bold uppercase tracking-widest text-white transition-all hover:bg-white hover:text-black"
-                 >
-                   Customised Trips
-                 </button>
+                  <button 
+                    onClick={() => setIsModalOpen(true)}
+                    className="hidden sm:inline-flex items-center rounded-sm border border-[var(--color-sun-gold)] px-6 py-2.5 text-[11px] font-bold uppercase tracking-widest text-[var(--color-sun-gold)] transition-all hover:bg-[var(--color-sun-gold)] hover:text-[var(--color-ocean-blue)]"
+                  >
+                    Customised Trips
+                  </button>
                  
                  <div className="flex items-center gap-5 sm:border-l sm:border-white/20 sm:pl-6 text-white">
                   <button 
@@ -128,13 +130,13 @@ export function Header({ data }: { data: SiteData["header"] }) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ type: "tween", duration: 0.2 }}
-              className="absolute top-[100%] left-0 w-full z-40 bg-[#111] backdrop-blur-3xl border-b border-white/10 px-8 py-8 flex flex-col shadow-2xl max-h-[80vh] overflow-y-auto"
+              className="absolute top-[100%] left-0 w-full z-40 bg-[var(--color-ocean-blue)] backdrop-blur-3xl border-b border-white/10 px-8 py-8 flex flex-col shadow-2xl max-h-[80vh] overflow-y-auto"
             >
                <nav className="flex flex-col gap-5">
                  {/* Mobile Search Trigger */}
                  <button 
                   onClick={() => { setIsMobileMenuOpen(false); setIsSearchOpen(true); }}
-                  className="flex items-center gap-3 text-xl font-bold text-[#FFE400] mb-4"
+                  className="flex items-center gap-3 text-xl font-bold text-[var(--color-sun-gold)] mb-4"
                  >
                    <Search size={20} />
                    Search
@@ -166,7 +168,7 @@ export function Header({ data }: { data: SiteData["header"] }) {
                  
                  <button 
                   onClick={() => { setIsMobileMenuOpen(false); setIsModalOpen(true); }}
-                  className="w-full text-left text-xl font-bold text-[#FFE400]"
+                  className="w-full text-left text-xl font-bold text-[var(--color-sun-gold)]"
                  >
                    Customised Trips
                  </button>
@@ -194,7 +196,7 @@ export function Footer({ data }: { data: SiteData["footer"] }) {
 
   return (
     <>
-    <footer className="bg-primary text-white pt-20 pb-12">
+    <footer className="bg-[var(--color-ocean-blue)] text-white pt-20 pb-12">
       <div className="mx-auto max-w-[1920px] px-6 lg:px-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-24 mb-20">
           
@@ -216,22 +218,22 @@ export function Footer({ data }: { data: SiteData["footer"] }) {
             {/* Social Icons */}
             <div className="flex items-center gap-4 pt-2">
               {siteData.social.instagramUrl && (
-                <a href={siteData.social.instagramUrl} target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#FFE400] hover:text-black transition-all">
+                <a href={siteData.social.instagramUrl} target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-[var(--color-sun-gold)] hover:text-[var(--color-ocean-blue)] transition-all">
                   <Instagram size={16} />
                 </a>
               )}
               {siteData.social.youtubeUrl && (
-                <a href={siteData.social.youtubeUrl} target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#FFE400] hover:text-black transition-all">
+                <a href={siteData.social.youtubeUrl} target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-[var(--color-sun-gold)] hover:text-[var(--color-ocean-blue)] transition-all">
                   <Youtube size={16} />
                 </a>
               )}
               {siteData.social.twitterUrl && (
-                <a href={siteData.social.twitterUrl} target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#FFE400] hover:text-black transition-all">
+                <a href={siteData.social.twitterUrl} target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-[var(--color-sun-gold)] hover:text-[var(--color-ocean-blue)] transition-all">
                   <Twitter size={16} />
                 </a>
               )}
               {siteData.social.linkedinUrl && (
-                <a href={siteData.social.linkedinUrl} target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#FFE400] hover:text-black transition-all">
+                <a href={siteData.social.linkedinUrl} target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-[var(--color-sun-gold)] hover:text-[var(--color-ocean-blue)] transition-all">
                   <Linkedin size={16} />
                 </a>
               )}
@@ -239,7 +241,7 @@ export function Footer({ data }: { data: SiteData["footer"] }) {
 
             <div className="flex flex-col gap-2 pt-4">
               {data?.bottomLinks?.map((link, idx) => (
-                <a key={idx} href={link.href} className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 hover:text-[#FFE400] transition-colors">
+                <a key={idx} href={link.href} className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 hover:text-[var(--color-sun-gold)] transition-colors">
                   {link.label}
                 </a>
               ))}
@@ -248,7 +250,7 @@ export function Footer({ data }: { data: SiteData["footer"] }) {
 
           {/* Middle Section: Quick Links */}
           <div className="lg:col-span-2">
-            <h5 className="text-[10px] font-black uppercase tracking-[0.4em] text-[#FFE400] mb-10">Quick Links</h5>
+            <h5 className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--color-sun-gold)] mb-10">Quick Links</h5>
             <div className="grid grid-cols-2 gap-x-8 gap-y-4">
               {data?.quickLinks?.map((link, idx) => {
                 const isCustom = link.href === "/customised";
@@ -258,7 +260,7 @@ export function Footer({ data }: { data: SiteData["footer"] }) {
                     onClick={() => setIsModalOpen(true)}
                     className="group flex items-center gap-3 text-sm font-bold transition-all hover:translate-x-1 text-left"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-white/10 group-hover:bg-[#FFE400] transition-colors" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-white/10 group-hover:bg-[var(--color-sun-gold)] transition-colors" />
                     <span className="text-white/70 group-hover:text-white">{link.label}</span>
                   </button>
                 ) : (
@@ -267,7 +269,7 @@ export function Footer({ data }: { data: SiteData["footer"] }) {
                     href={link.href} 
                     className="group flex items-center gap-3 text-sm font-bold transition-all hover:translate-x-1"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-white/10 group-hover:bg-[#FFE400] transition-colors" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-white/10 group-hover:bg-[var(--color-sun-gold)] transition-colors" />
                     <span className="text-white/70 group-hover:text-white">{link.label}</span>
                   </a>
                 );
@@ -277,18 +279,18 @@ export function Footer({ data }: { data: SiteData["footer"] }) {
 
           {/* Right Section: Contact Details */}
           <div className="space-y-10">
-            <h5 className="text-[10px] font-black uppercase tracking-[0.4em] text-[#FFE400]">Contact Details</h5>
+            <h5 className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--color-sun-gold)]">Contact Details</h5>
             <div className="space-y-6">
               <a href={`tel:${data?.contactInfo?.phone}`} className="flex items-center gap-4 group">
-                <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-[#FFE400] group-hover:border-[#FFE400] transition-all">
-                  <Phone className="w-4 h-4 text-white group-hover:text-primary transition-colors" />
+                <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-[var(--color-sun-gold)] group-hover:border-[var(--color-sun-gold)] transition-all">
+                  <Phone className="w-4 h-4 text-white group-hover:text-[var(--color-ocean-blue)] transition-colors" />
                 </div>
                 <span className="text-sm font-bold text-white/70 group-hover:text-white transition-colors">{data?.contactInfo?.phone}</span>
               </a>
 
               <a href={`mailto:${data?.contactInfo?.email}`} className="flex items-center gap-4 group">
-                <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-[#FFE400] group-hover:border-[#FFE400] transition-all">
-                  <Mail className="w-4 h-4 text-white group-hover:text-primary transition-colors" />
+                <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-[var(--color-sun-gold)] group-hover:border-[var(--color-sun-gold)] transition-all">
+                  <Mail className="w-4 h-4 text-white group-hover:text-[var(--color-ocean-blue)] transition-colors" />
                 </div>
                 <span className="text-sm font-bold text-white/70 group-hover:text-white transition-colors">{data?.contactInfo?.email}</span>
               </a>

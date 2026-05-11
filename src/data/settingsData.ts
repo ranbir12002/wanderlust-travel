@@ -7,9 +7,9 @@ export interface SiteSettings {
 }
 
 export const defaultSettings: SiteSettings = {
-  primaryColor: "#153526",
-  secondaryColor: "#4b6452",
-  accentColor: "#3A4B39"
+  primaryColor: "#165D91",
+  secondaryColor: "#8CB5D5",
+  accentColor: "#F5B33D"
 };
 
 export async function getSettings(): Promise<SiteSettings> {

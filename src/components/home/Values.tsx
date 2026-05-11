@@ -1,17 +1,17 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Leaf, Droplet, PenTool, Scissors } from "lucide-react";
+import { MapPin, Compass, Camera, Sun } from "lucide-react";
 import type { SiteData } from "@/data/mockData";
 import Button from "../ui/Button";
 import SectionContainer from "../ui/SectionContainer";
 import { Heading, Subheading, Text } from "../ui/Typography";
 
 const IconMap: Record<string, React.ElementType> = {
-  Leaf,
-  PenTool,
-  Scissors,
-  Droplet,
+  MapPin,
+  Compass,
+  Camera,
+  Sun,
 };
 
 export default function Values({ data }: { data: SiteData["values"] }) {
@@ -32,11 +32,11 @@ export default function Values({ data }: { data: SiteData["values"] }) {
             src={data.image}
             referrerPolicy="no-referrer"
           />
-          <div className="absolute -bottom-6 -right-6 md:-bottom-8 md:-right-8 xl:-bottom-10 xl:-right-10 hidden md:flex flex-col justify-center items-center w-40 h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 xl:w-64 xl:h-64 bg-secondary-container p-4 md:p-6 xl:p-8 shadow-xl">
-            <span className="text-primary font-headline font-black text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
+          <div className="absolute -bottom-6 -right-6 md:-bottom-8 md:-right-8 xl:-bottom-10 xl:-right-10 hidden md:flex flex-col justify-center items-center w-40 h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 xl:w-64 xl:h-64 bg-[var(--color-sun-gold)] p-4 md:p-6 xl:p-8 shadow-xl">
+            <span className="text-[var(--color-ocean-blue)] font-headline font-black text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
               {data.yearsExperience}
             </span>
-            <Text variant="caption" className="mt-1 md:mt-2 text-center text-on-secondary-fixed-variant">
+            <Text variant="caption" className="mt-1 md:mt-2 text-center text-[var(--color-ocean-blue)]/80 font-bold uppercase tracking-widest">
               {data.yearsText}
             </Text>
           </div>
@@ -77,7 +77,7 @@ export default function Values({ data }: { data: SiteData["values"] }) {
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
                   className="space-y-3 sm:space-y-4"
                 >
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-secondary-container rounded-full flex items-center justify-center text-primary [&_svg]:w-4 [&_svg]:h-4 sm:[&_svg]:w-5 sm:[&_svg]:h-5 md:[&_svg]:w-6 md:[&_svg]:h-6">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-[var(--color-sky-blue)]/20 rounded-full flex items-center justify-center text-[var(--color-ocean-blue)] [&_svg]:w-4 [&_svg]:h-4 sm:[&_svg]:w-5 sm:[&_svg]:h-5 md:[&_svg]:w-6 md:[&_svg]:h-6">
                     <IconComp />
                   </div>
                   <Heading variant="card" as="h4">

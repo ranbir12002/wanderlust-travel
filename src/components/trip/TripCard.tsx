@@ -15,7 +15,7 @@ export default function TripCard({ trip }: { trip: Trip }) {
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
       
       {trip.badge && (
-        <div className="absolute left-6 top-6 rounded-full bg-yellow-400 px-4 py-1 text-xs font-black uppercase text-neutral-900 shadow-sm">
+        <div className="absolute left-6 top-6 rounded-full bg-[var(--color-sun-gold)] px-4 py-1 text-xs font-black uppercase text-[var(--color-ocean-blue)] shadow-sm">
           {trip.badge}
         </div>
       )}
@@ -26,12 +26,12 @@ export default function TripCard({ trip }: { trip: Trip }) {
         </h3>
         
         <div className="flex flex-col items-end gap-1">
-          <div className="flex items-center gap-1 text-sm font-semibold drop-shadow-md">
+          <div className="flex items-center gap-1 text-sm font-semibold drop-shadow-md text-[var(--color-sun-gold)]">
             <Calendar className="h-4 w-4" />
             <span>{trip.duration}</span>
           </div>
-          <div className="flex items-center gap-1 text-sm font-semibold drop-shadow-md">
-            <IndianRupee className="h-4 w-4" />
+          <div className="flex items-center gap-1 text-sm font-semibold drop-shadow-md text-white">
+            <IndianRupee className="h-4 w-4 text-[var(--color-sun-gold)]" />
             <span>{trip.price}</span>
           </div>
         </div>

@@ -109,13 +109,13 @@ export default function TripsPageContent({
         
         {/* Typography */}
         <div className="relative z-10 px-8 md:px-24">
-          <div className="absolute -left-4 top-1/2 -z-10 -translate-y-1/2 text-[8rem] font-black tracking-tighter text-white/10 sm:text-[14rem] uppercase">
+          <div className="absolute -left-4 top-1/2 -z-10 -translate-y-1/2 text-[8rem] font-black tracking-tighter text-white/5 sm:text-[14rem] uppercase">
             {title}
           </div>
-          <h1 className="text-5xl font-black lowercase tracking-tight text-white drop-shadow-lg md:text-7xl">
+          <h1 className="text-5xl font-black uppercase tracking-tight text-white drop-shadow-xl md:text-8xl" style={{ textShadow: '4px 4px 0px rgba(0,0,0,0.3)' }}>
             {title}
           </h1>
-          <p className="mt-4 text-lg font-bold text-white/80 lowercase tracking-widest">{subtitle}</p>
+          <p className="mt-4 text-lg font-bold text-[var(--color-sun-gold)] uppercase tracking-[0.3em]">{subtitle}</p>
         </div>
 
         {/* Social Icons (left floating) */}

@@ -108,14 +108,14 @@ export default function Testimonials() {
           <div className="flex items-center gap-3 relative z-10">
             <button 
               onClick={prevSlide}
-              className="p-3 rounded-full bg-neutral-100 hover:bg-black hover:text-white transition-all duration-300"
+              className="p-3 rounded-full bg-[var(--color-sky-blue)]/20 text-[var(--color-ocean-blue)] hover:bg-[var(--color-ocean-blue)] hover:text-white transition-all duration-300"
               aria-label="Previous"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button 
               onClick={nextSlide}
-              className="p-3 rounded-full bg-neutral-100 hover:bg-black hover:text-white transition-all duration-300"
+              className="p-3 rounded-full bg-[var(--color-sky-blue)]/20 text-[var(--color-ocean-blue)] hover:bg-[var(--color-ocean-blue)] hover:text-white transition-all duration-300"
               aria-label="Next"
             >
               <ChevronRight className="w-5 h-5" />
@@ -147,7 +147,7 @@ export default function Testimonials() {
                 <div className="relative z-10 flex h-full flex-col justify-end p-6">
                   <div className="mb-3 flex gap-1">
                     {[...Array(review.rating)].map((_, i) => (
-                      <Star key={i} className="h-3 w-3 fill-white text-white" />
+                      <Star key={i} className="h-3 w-3 fill-[var(--color-sun-gold)] text-[var(--color-sun-gold)]" />
                     ))}
                   </div>
                   
@@ -173,8 +173,8 @@ export default function Testimonials() {
             <button
               key={i}
               onClick={() => setCurrentIndex(i)}
-              className={`h-1 rounded-full transition-all duration-300 ${
-                currentIndex === i ? "w-6 bg-black" : "w-2 bg-neutral-200 hover:bg-neutral-300"
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                currentIndex === i ? "w-8 bg-[var(--color-sun-gold)]" : "w-3 bg-[var(--color-sky-blue)]/30 hover:bg-[var(--color-sky-blue)]/50"
               }`}
             />
           ))}

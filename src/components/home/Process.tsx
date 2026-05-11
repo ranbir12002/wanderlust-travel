@@ -7,7 +7,7 @@ import { Heading, Subheading, Text } from "../ui/Typography";
 
 export default function Process({ data }: { data: SiteData["process"] }) {
   return (
-    <section className="py-16 sm:py-20 md:py-24 lg:py-32 bg-accent-dark text-white relative min-h-[600px] sm:min-h-[700px] md:min-h-[800px] flex flex-col justify-center overflow-hidden">
+    <section className="py-16 sm:py-20 md:py-24 lg:py-32 bg-[var(--color-ocean-blue)] text-white relative min-h-[600px] sm:min-h-[700px] md:min-h-[800px] flex flex-col justify-center overflow-hidden">
       <SectionContainer className="relative z-10">
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start mb-16 sm:mb-20 md:mb-24 lg:mb-32 xl:mb-40">
@@ -105,22 +105,8 @@ export default function Process({ data }: { data: SiteData["process"] }) {
 
       {/* Logo Bottom Right */}
       <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 lg:bottom-12 lg:right-12 flex items-center gap-2 text-white/40">
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="sm:w-6 sm:h-6"
-        >
-          <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
-          <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
-        </svg>
         <Heading variant="accent" light as="span">
-          leaflife
+          Beaches to Mountains
         </Heading>
       </div>
     </section>

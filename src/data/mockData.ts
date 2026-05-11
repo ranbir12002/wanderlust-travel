@@ -12,42 +12,42 @@ export const siteData = {
     ]
   },
   hero: {
-    title: "DREAM \nGARDEN",
-    description: "A decade of passion for creating breathtaking outdoor living spaces. We blend architectural precision with organic beauty to transform your environment.",
-    bgImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuBHha1j5QPBgUI-45_H45Mixlkn8NkDJ4l_C9s6DKA3ELWlx4eBgML8J9mI6TR_nrpyM7AfQhRbhv7pn4agweoKZ6tcB8KUdPTDMofHSL1tjz3xP2FyOg1EjjV86LH3AvUgTO6suh85Pt5LD55f3UCfqzVlZ8WVlvZxfcs9zmquk9qkH6bqecSwH0mWQSBosuSgLKIZqyVSWmGnLUzR4MwTSTJ4BQ-QQ8mNDTMyif6_5JhtpJiT_k109TKbe9jDR90t4dgk3Hz28sdz",
+    title: "BEACHES TO \nMOUNTAINS",
+    description: "A modern travel brand representing the journey from serene beaches to adventurous mountains. We combine exploration, freedom, and premium curated experiences.",
+    bgImage: "/hero banner/1.jpg",
     nextProject: {
-      name: "Hachioji Garden",
-      location: "Tokyo, Japan — Zen Minimalism",
+      name: "Serene Maldives",
+      location: "Indian Ocean — Coastal Luxury",
       current: "01",
       total: "04"
     }
   },
   values: {
-    title: "WE ARE DIFFERENT \nIN EVERY WAYS",
-    description: "Each project is a blank canvas. We don't just plant trees; we curate experiences that evolve with the seasons and integrate seamlessly with your architecture.",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAiN_c9vhRU47Hahhan6K7i37hzLqotQdk6nnjZNKE0kwe-IirBJbIgn6jzYQ2WYIuSxzT2QEHzfdeCPxFv3mTrkdsW50aGprI-eiph149sRK_trPg7mPC3sSqi4GdPXCOAkhcZN0qf6tPy4BmQxDxaOfz-f9sDsexCKJcoFvAbut6Xpb67r4QsnFBzIQwF8CqmGLDXlReWY8uYSk4sWLgwM8hggVn0tlxXw1e_GkqChmJqP9SQ5FBbDkEBOdEDI7dBJjKM2U2-CN-R",
+    title: "UNFORGETTABLE \nEXPERIENCES",
+    description: "Every journey is a unique story. We don't just book trips; we curate moments that stay with you forever, from hidden coastal gems to majestic mountain peaks.",
+    image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=800",
     yearsExperience: "10+",
-    yearsText: "Years of excellence in design",
+    yearsText: "Years of crafting memories",
     features: [
       {
-        iconName: "Leaf",
-        title: "Sustainability",
-        desc: "Xeriscaping and native planting strategies for minimal maintenance.",
+        iconName: "MapPin",
+        title: "Curated Locales",
+        desc: "Handpicked destinations that offer both serenity and adventure.",
       },
       {
-        iconName: "PenTool",
-        title: "Design-Led",
-        desc: "Our architects craft layouts that enhance the flow of your estate.",
+        iconName: "Compass",
+        title: "Expert Guides",
+        desc: "Local experts who bring the soul of every destination to life.",
       },
       {
-        iconName: "Scissors",
-        title: "Precision",
-        desc: "Expert craftsmanship in every stone placement and shrub pruning.",
+        iconName: "Camera",
+        title: "Unique Moments",
+        desc: "Tailored activities designed for the modern explorer.",
       },
       {
-        iconName: "Droplet",
-        title: "Hydro-Efficiency",
-        desc: "Smart irrigation systems that conserve resources beautifully.",
+        iconName: "Sun",
+        title: "All Seasons",
+        desc: "Breathtaking experiences available throughout the entire year.",
       },
     ]
   },
@@ -161,33 +161,33 @@ export const siteData = {
     ]
   },
   portfolio: {
-    title: "GET TO KNOW OUR \nLATEST GARDEN ",
-    highlightText: "WORKS",
+    title: "EXPLORE OUR \nRECENT ",
+    highlightText: "EXPEDITIONS",
     works: [
       {
-        title: "URBAN EDEN",
-        loc: "SAN FRANCISCO, CA",
-        desc: "An urban backyard transformed into a vibrant, green escape with blooming flowers and winding paths.",
-        img: "https://lh3.googleusercontent.com/aida-public/AB6AXuC5s0TGJFgm3bnUIPC_MUhE6prburXPDmXIErOJfnBttRplqtS5vIWBZmuwTC13lGahklKZmrh-Et9a1lLS_oo_epuDlEK0lwRpFpxkaTag7jQLXSxmBeaNNpFHjYGIVQENgOq_Ovja0TcfqVpFSf9aj__feuQQVuNx44rlOOLHIwSXnBXFKCZW4NV2IVxQdQFDp_1IizLUm2QMPfEwhAVaXKmyOlKRntp6Mo-AT5CliDFjLfAh2xeYlJhDYhzVix0ENscmxyzLOgoO",
+        title: "ALPINE ESCAPE",
+        loc: "SWITZERLAND",
+        desc: "A breathtaking journey through the Swiss Alps, staying in premium mountain lodges.",
+        img: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=800",
       },
       {
-        title: "SERENE RETREAT",
-        loc: "SUNNYVALE, CA",
-        desc: "A peaceful garden designed for relaxation and meditation.",
-        img: "https://lh3.googleusercontent.com/aida-public/AB6AXuD4PjgrCingmmdATnngBfMsrH9DbyjcV_fOIIWr-A6vIks2dJJEqaUXaqmmZ4vNv5YNR8gevAYSnOqWeF8yG51ftAMry9WH16QIpir0MkSd93pKarqJ-iudBGtaOgO-EKcgy1jzMcRsTd-NhyzVcTNB6Rnp4PwmOjMTFOFDtdHgP7UXwR5DG2Hfe-UvhfqqGDooGcxanqFppaGLsvwbYv31qxoQFjWobmkVkTdA2PPPTdnt2lj2ZluPpayHGMGOSiiiGKzciOuly-b8",
+        title: "COASTAL BLISS",
+        loc: "MALDIVES",
+        desc: "Crystal clear waters and white sandy beaches in the heart of the Indian Ocean.",
+        img: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&q=80&w=800",
       },
       {
-        title: "MODERN MANOR",
-        loc: "SURREY, UK",
-        desc: "A contemporary landscape blending sleek design with natural elements.",
-        img: "https://lh3.googleusercontent.com/aida-public/AB6AXuD-VllUjZh2493QIvoAolP5paChzPI4RVXlyUOXWSHn0FmTURX2Vw7w8OJTK4LCjGI_zpHdHDFzjtQw3IaBx0AVc5NSM_F6ioqnsnh48Yv9T-eGG-2o-WgFfwK66hcW1zb5-xbjVu22fmY27ZXZeSYQmlkITV06QRL-MmXKH_ruHmZzI1XYX4j8AEr2cmh1NJj9WotF4HNR1AeVQt16ImvWvbssimr_hixAu6Mu4ScCw0RLu8R9KMHFR8HCUahoKlMmshgc8To-Yf6B",
+        title: "CULTURAL ODYSSEY",
+        loc: "KYOTO, JAPAN",
+        desc: "Discovering the ancient traditions and serene temples of Japan's cultural heart.",
+        img: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80&w=800",
       },
     ]
   },
   cta: {
-    title: "READY TO TRANSFORM YOUR GARDEN?",
-    buttonText: "CONTACT US",
-    bgImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuBiZgDdVfF1gQjKDWkZBlePIHU-H3qfvM5zFeN6yiuwftlu-BlsuU3uZFBNVTSFZOi8gsdrQOEFnVFPc4QpspR5Irborvr6gHszzstuagAABDL8Bi1D_imM_6NnL6jHq68bUBsq7G_xnrNWiPB9JaTRvbklEnxRY8vbe3vyopUt8gY66o56KM8dIBVLecxP5P94YfjbZ6jmRNAIsN0ndRzK7fvoFG-MElU6iQ5-aYW9YEb1mB4OMT4bIJO060Pj786tHn_N7mg-vTFU"
+    title: "READY TO START YOUR NEXT ADVENTURE?",
+    buttonText: "BOOK NOW",
+    bgImage: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=1200"
   },
   footer: {
     logo: "Beaches to Mountains",

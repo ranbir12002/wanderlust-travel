@@ -27,7 +27,7 @@ export default function SocialLinks({ data }: { data: SiteData["social"] }) {
             <div className="flex flex-col gap-4">
               <a 
                 href={data.instagramUrl} 
-                className="group flex items-center justify-between p-4 rounded-2xl border border-primary/5 bg-surface hover:bg-primary hover:text-white transition-all duration-300"
+                className="group flex items-center justify-between p-4 rounded-2xl border border-[var(--color-ocean-blue)]/10 bg-[var(--color-sky-blue)]/5 hover:bg-[var(--color-ocean-blue)] hover:text-white transition-all duration-300"
               >
                 <div className="flex items-center gap-4">
                   <div className="p-2.5 rounded-xl bg-pink-50 group-hover:bg-white/20 transition-colors">
@@ -40,7 +40,7 @@ export default function SocialLinks({ data }: { data: SiteData["social"] }) {
 
               <a 
                 href={data.youtubeUrl} 
-                className="group flex items-center justify-between p-4 rounded-2xl border border-primary/5 bg-surface hover:bg-primary hover:text-white transition-all duration-300"
+                className="group flex items-center justify-between p-4 rounded-2xl border border-[var(--color-ocean-blue)]/10 bg-[var(--color-sky-blue)]/5 hover:bg-[var(--color-ocean-blue)] hover:text-white transition-all duration-300"
               >
                 <div className="flex items-center gap-4">
                   <div className="p-2.5 rounded-xl bg-red-50 group-hover:bg-white/20 transition-colors">
@@ -53,7 +53,7 @@ export default function SocialLinks({ data }: { data: SiteData["social"] }) {
 
               <a 
                 href={data.googleUrl} 
-                className="group flex items-center justify-between p-4 rounded-2xl border border-primary/5 bg-surface hover:bg-primary hover:text-white transition-all duration-300"
+                className="group flex items-center justify-between p-4 rounded-2xl border border-[var(--color-ocean-blue)]/10 bg-[var(--color-sky-blue)]/5 hover:bg-[var(--color-ocean-blue)] hover:text-white transition-all duration-300"
               >
                 <div className="flex items-center gap-4">
                   <div className="p-2.5 rounded-xl bg-blue-50 group-hover:bg-white/20 transition-colors">

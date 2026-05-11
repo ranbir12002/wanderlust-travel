@@ -5,14 +5,14 @@ import { getSettings } from "@/data/settingsData";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "LeafLife — Premium Landscape Design",
+  title: "Beaches to Mountains — Premium Bespoke Travel",
   description:
-    "A decade of passion for creating breathtaking outdoor living spaces. We blend architectural precision with organic beauty to transform your environment.",
+    "A modern travel brand representing the journey from serene beaches to adventurous mountains. We combine exploration, freedom, and premium curated experiences.",
   openGraph: {
-    title: "LeafLife — Premium Landscape Design",
+    title: "Beaches to Mountains — Premium Bespoke Travel",
     description:
-      "Elevating architecture through organic landscape artistry. Boutique design for discerning estates.",
-    siteName: "LeafLife",
+      "Serene beaches to adventurous mountains. Movement, freedom, and premium curated experiences.",
+    siteName: "Beaches to Mountains",
     type: "website",
   },
 };

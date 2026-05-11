@@ -17,11 +17,11 @@ export default function Button({
   const baseStyles = "font-headline font-bold uppercase tracking-widest rounded-sm transition-all duration-300 inline-flex items-center justify-center text-center disabled:opacity-50 disabled:cursor-not-allowed";
   
   const variants = {
-    primary: "bg-primary text-white hover:bg-primary-container shadow-sm hover:shadow-md",
-    secondary: "bg-secondary text-white hover:bg-secondary-container hover:translate-y-[-2px] hover:shadow-lg",
+    primary: "bg-[var(--color-ocean-blue)] text-white hover:brightness-110 shadow-sm hover:shadow-md",
+    secondary: "bg-[var(--color-sky-blue)] text-white hover:brightness-110 hover:translate-y-[-2px] hover:shadow-lg",
     outline: "border border-white/30 text-white hover:bg-white/20",
     blur: "bg-surface-container-highest/20 backdrop-blur-md text-white hover:bg-white/20",
-    ghost: "bg-transparent text-primary hover:bg-primary/10",
+    ghost: "bg-transparent text-[var(--color-ocean-blue)] hover:bg-[var(--color-ocean-blue)]/10",
     danger: "bg-red-600 text-white hover:bg-red-700 shadow-sm hover:shadow-md",
   };
 
