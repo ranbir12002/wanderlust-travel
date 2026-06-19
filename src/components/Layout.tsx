@@ -8,14 +8,17 @@ import { siteData, type SiteData } from "@/data/mockData";
 import TripRequestModal from "./trip/TripRequestModal";
 import SearchOverlay from "./ui/SearchOverlay";
 import { AnimatePresence, motion } from "framer-motion";
+import { Destination } from "@/data/destinationsData";
 
-export function Header({ data }: { data: SiteData["header"] }) {
+export function Header({ data, destinations = [] }: { data: SiteData["header"]; destinations?: Destination[] }) {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+
+  if (pathname?.startsWith("/admin")) return null;
 
   useEffect(() => {
     setMounted(true);
@@ -76,6 +79,36 @@ export function Header({ data }: { data: SiteData["header"] }) {
 
                 {data?.navLinks?.map((link, idx) => {
                   const isActive = pathname === link.href;
+                  
+                  const isTripsLink = link.href === "/trips/domestic" || link.href === "/trips/international";
+                  const linkCategory = link.href.includes("domestic") ? "domestic" : "international";
+                  const subDestinations = destinations.filter(d => d.category === linkCategory);
+
+                  if (isTripsLink && subDestinations.length > 0) {
+                    return (
+                      <div key={idx} className="relative group py-4">
+                        <a
+                          className={`text-[11px] uppercase tracking-[0.15em] hover:text-white transition-colors whitespace-nowrap ${
+                            isActive ? "text-white font-bold" : "text-white/80 font-medium"
+                          }`}
+                          href={link.href}
+                        >
+                          {link.label}
+                        </a>
+                        <div className="absolute top-[80%] left-0 hidden group-hover:flex flex-col bg-[var(--color-ocean-blue)]/95 backdrop-blur-xl text-white rounded-xl shadow-2xl overflow-hidden min-w-[220px] border border-white/10 transition-all opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0">
+                          {subDestinations.map(dest => (
+                            <a 
+                              key={dest.id} 
+                              href={`/trips/${dest.category}/${dest.slug}`}
+                              className="px-6 py-3.5 text-[11px] font-bold uppercase tracking-[0.15em] hover:bg-white/10 hover:text-[var(--color-sun-gold)] transition-colors border-b border-white/5 last:border-0"
+                            >
+                              {dest.title}
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  }
                   
                   return (
                     <a
@@ -154,15 +187,36 @@ export function Header({ data }: { data: SiteData["header"] }) {
                   >
                     Trips by {currentSeason}
                   </a>
-                 {data?.navLinks?.map((link, idx) => (
-                    <a
-                      key={idx}
-                      className="text-xl font-bold text-white/80 hover:text-white transition-colors"
-                      href={link.href}
-                    >
-                      {link.label}
-                    </a>
-                 ))}
+                 {data?.navLinks?.map((link, idx) => {
+                    const isTripsLink = link.href === "/trips/domestic" || link.href === "/trips/international";
+                    const linkCategory = link.href.includes("domestic") ? "domestic" : "international";
+                    const subDestinations = destinations.filter(d => d.category === linkCategory);
+
+                    return (
+                      <div key={idx} className="flex flex-col gap-3">
+                        <a
+                          className="text-xl font-bold text-white/80 hover:text-white transition-colors"
+                          href={link.href}
+                        >
+                          {link.label}
+                        </a>
+                        {isTripsLink && subDestinations.length > 0 && (
+                          <div className="flex flex-col gap-2 pl-4 border-l-2 border-white/10 ml-2">
+                            {subDestinations.map(dest => (
+                              <a 
+                                key={dest.id}
+                                href={`/trips/${dest.category}/${dest.slug}`}
+                                className="text-sm font-bold text-white/60 hover:text-white transition-colors"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                              >
+                                {dest.title}
+                              </a>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    );
+                 })}
                  
                  <div className="h-px bg-white/10 my-2" />
                  
@@ -192,7 +246,10 @@ export function Header({ data }: { data: SiteData["header"] }) {
 
 
 export function Footer({ data }: { data: SiteData["footer"] }) {
+  const pathname = usePathname();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  if (pathname?.startsWith("/admin")) return null;
 
   return (
     <>

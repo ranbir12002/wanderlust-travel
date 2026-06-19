@@ -2,10 +2,9 @@
 
 import { useState } from "react";
 import { motion } from "motion/react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, MapPin, Star } from "lucide-react";
 import Link from "next/link";
 import SectionContainer from "../ui/SectionContainer";
-import { Heading, Text } from "../ui/Typography";
 import Badge from "../ui/Badge";
 
 export interface ServiceItem {
@@ -14,14 +13,16 @@ export interface ServiceItem {
   img: string;
   tags?: string[];
   href?: string;
+  price?: string;
+  location?: string;
 }
 
 export default function Services({ data }: { data: ServiceItem[] }) {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   return (
-    <section className="py-12 sm:py-14 md:py-16 lg:py-20 bg-bg-alt">
-      <SectionContainer className="flex flex-col lg:flex-row gap-4 sm:gap-5 md:gap-6 h-auto lg:h-[500px] xl:h-[600px] 2xl:h-[700px]">
+    <section className="py-10 sm:py-12 md:py-14 lg:py-16 bg-bg-alt">
+      <SectionContainer className="flex flex-col lg:flex-row gap-3 sm:gap-4 md:gap-5 h-auto lg:h-[380px] xl:h-[420px] 2xl:h-[460px]">
         {data.map((service, idx) => (
           <motion.div
             key={idx}
@@ -31,9 +32,9 @@ export default function Services({ data }: { data: ServiceItem[] }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: idx * 0.1 }}
-            className={`relative group overflow-hidden rounded-2xl sm:rounded-[1.5rem] lg:rounded-[2rem] min-h-[250px] sm:min-h-[300px] md:min-h-[350px] lg:min-h-0 transition-all duration-700 ease-out w-full ${
+            className={`relative group overflow-hidden rounded-2xl sm:rounded-[1.5rem] lg:rounded-[2rem] min-h-[200px] sm:min-h-[220px] md:min-h-[240px] lg:min-h-0 transition-all duration-700 ease-out w-full ${
               hoveredIdx === null
-                ? idx === 3
+                ? idx === data.length - 1
                   ? "lg:w-[40%]"
                   : "lg:w-[20%]"
                 : hoveredIdx === idx
@@ -48,29 +49,21 @@ export default function Services({ data }: { data: ServiceItem[] }) {
               src={service.img}
               referrerPolicy="no-referrer"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
             {service.href && <Link href={service.href} className="absolute inset-0 z-20"></Link>}
 
             {/* Top Right Arrow */}
-            <div className="absolute top-4 right-4 sm:top-5 sm:right-5 md:top-6 md:right-6">
+            <div className="absolute top-3 right-3 sm:top-4 sm:right-4">
               <div
-                className={`rounded-full bg-[var(--color-sun-gold)] flex items-center justify-center text-[var(--color-ocean-blue)] hover:scale-110 transition-transform duration-300 cursor-pointer shadow-lg ${
-                  idx === 3
-                    ? "w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16"
-                    : "w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14"
-                }`}
+                className="rounded-full bg-[var(--color-sun-gold)] flex items-center justify-center text-[var(--color-ocean-blue)] hover:scale-110 transition-transform duration-300 cursor-pointer shadow-lg w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10"
               >
-                <ArrowUpRight
-                  size={idx === 3 ? 24 : 18}
-                  strokeWidth={2.5}
-                  className="sm:[&]:w-6 sm:[&]:h-6 md:[&]:w-7 md:[&]:h-7"
-                />
+                <ArrowUpRight size={16} strokeWidth={2.5} />
               </div>
             </div>
 
-            {/* Tags for the 4th card */}
+            {/* Tags */}
             {service.tags && (
-              <div className="absolute top-4 left-4 sm:top-6 sm:left-6 md:top-8 md:left-8 flex flex-wrap gap-1.5 sm:gap-2 max-w-[70%]">
+              <div className="absolute top-3 left-3 sm:top-4 sm:left-4 flex flex-wrap gap-1.5 max-w-[70%]">
                 {service.tags.map((tag) => (
                   <Badge key={tag} variant="white">
                     {tag}
@@ -80,21 +73,52 @@ export default function Services({ data }: { data: ServiceItem[] }) {
             )}
 
             {/* Bottom Content */}
-            <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 md:bottom-8 md:left-8 md:right-8">
-              <Heading
-                as="h3"
-                light
-                className={`uppercase leading-none mb-2 sm:mb-3 md:mb-4 ${
-                  idx === 3
-                    ? "text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
-                    : "text-xl sm:text-2xl md:text-3xl lg:text-4xl"
-                }`}
+            <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 md:bottom-5 md:left-5 md:right-5">
+              {/* Location */}
+              {service.location && (
+                <div className="flex items-center gap-1 mb-1.5">
+                  <MapPin className="h-3 w-3 text-[var(--color-sun-gold)]" />
+                  <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-white/70">
+                    {service.location}
+                  </span>
+                </div>
+              )}
+
+              {/* Title */}
+              <h3
+                className={`uppercase leading-tight mb-1 sm:mb-1.5 font-black text-white ${
+                  hoveredIdx === idx
+                    ? "text-lg sm:text-xl md:text-2xl lg:text-3xl"
+                    : "text-base sm:text-lg md:text-xl lg:text-2xl"
+                } transition-all duration-500`}
               >
                 {service.title}
-              </Heading>
-              <Text light variant="small" className="max-w-md">
+              </h3>
+
+              {/* Description — only when hovered or on mobile */}
+              <p className={`text-white/70 text-xs sm:text-[13px] leading-snug max-w-sm mb-2 transition-all duration-500 ${
+                hoveredIdx === idx ? "opacity-100" : "lg:opacity-0 lg:h-0 lg:mb-0"
+              }`}>
                 {service.desc}
-              </Text>
+              </p>
+
+              {/* Rating + Price Row */}
+              <div className="flex items-center justify-between gap-3 flex-wrap">
+                {/* 5 Star Rating */}
+                <div className="flex items-center gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-3 w-3 sm:h-3.5 sm:w-3.5 fill-[var(--color-sun-gold)] text-[var(--color-sun-gold)]" />
+                  ))}
+                  <span className="text-[10px] font-bold text-white/50 ml-1">5.0</span>
+                </div>
+
+                {/* Price */}
+                {service.price && (
+                  <span className="text-[11px] sm:text-xs font-bold text-white/90 bg-white/10 backdrop-blur-sm rounded-full px-3 py-1 border border-white/10">
+                    Starting {service.price}
+                  </span>
+                )}
+              </div>
             </div>
           </motion.div>
         ))}

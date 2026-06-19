@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { MapPin, Compass, Camera, Sun } from "lucide-react";
+import { MapPin, Compass, Camera, Sun, CheckCircle2, Car, ShieldCheck, Users, Headset } from "lucide-react";
 import type { SiteData } from "@/data/mockData";
 import Button from "../ui/Button";
 import SectionContainer from "../ui/SectionContainer";
@@ -12,6 +12,11 @@ const IconMap: Record<string, React.ElementType> = {
   Compass,
   Camera,
   Sun,
+  CheckCircle2,
+  Car,
+  ShieldCheck,
+  Users,
+  Headset,
 };
 
 export default function Values({ data }: { data: SiteData["values"] }) {
@@ -50,19 +55,17 @@ export default function Values({ data }: { data: SiteData["values"] }) {
             transition={{ duration: 0.6 }}
             className="space-y-3 sm:space-y-4"
           >
-            <Subheading accent>[ VALUES ]</Subheading>
-            
+            {/* <Subheading accent>[ WHY TRAVEL WITH US? ]</Subheading> */}
+
             <Heading>
               {data.title}
             </Heading>
-            
-            <Text className="max-w-lg">
-              {data.description}
-            </Text>
 
-            <Button variant="secondary" size="lg" className="mt-4 sm:mt-6 md:mt-8">
-              GET STARTED
-            </Button>
+            {data.description && (
+              <Text className="max-w-lg">
+                {data.description}
+              </Text>
+            )}
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 pt-4 sm:pt-6 md:pt-8">

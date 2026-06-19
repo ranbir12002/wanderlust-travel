@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Header, Footer } from "@/components/Layout";
 import { siteData } from "@/data/mockData";
 import { getSettings } from "@/data/settingsData";
+import { getDestinations } from "@/data/destinationsData";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const settings = await getSettings();
+  const destinations = await getDestinations();
 
   return (
     <html lang="en" style={{
@@ -34,7 +36,7 @@ export default async function RootLayout({
     } as React.CSSProperties}>
       <body className="bg-surface font-body text-on-surface selection:bg-primary-container selection:text-on-primary-container min-h-screen antialiased">
         <Preloader />
-        <Header data={siteData.header} />
+        <Header data={siteData.header} destinations={destinations} />
         <main>{children}</main>
         <Footer data={siteData.footer} />
       </body>

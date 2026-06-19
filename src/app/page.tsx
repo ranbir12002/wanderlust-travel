@@ -8,44 +8,87 @@ import CTA from "@/components/home/CTA";
 import DestinationBanner from "@/components/home/DestinationBanner";
 import ContactForm from "@/components/trip/ContactForm";
 import { getSiteContent } from "@/data/siteData";
-import { getTripsByCategory } from "@/data/tripsData";
+import { getTrips, getTripsByCategory } from "@/data/tripsData";
 import { getBlogs } from "@/data/blogsData";
+import { getDestinations } from "@/data/destinationsData";
+import { getFeaturedCards } from "@/data/featuredCardsData";
 
 export default async function HomePage() {
   const siteData = await getSiteContent();
   
-  // Fetch dynamic trips
-  const domesticTrips = await getTripsByCategory("domestic");
-  const internationalTrips = await getTripsByCategory("international");
+  // Fetch featured cards config
+  const featuredCards = await getFeaturedCards();
   
   const tripCards: ServiceItem[] = [];
-  
-  const addTripToCards = (trip: any) => {
-     tripCards.push({
-       title: trip.title,
-       desc: trip.subtitle || `Explore our ${trip.category} experience`,
-       img: trip.thumbnail || trip.heroImage || "",
-       tags: trip.tags || [trip.category],
-       href: `/trips/${trip.slug}`
-     });
-  };
 
-  // Try to use 2 domestic and 2 international
-  domesticTrips.slice(0, 2).forEach(addTripToCards);
-  internationalTrips.slice(0, 2).forEach(addTripToCards);
-  
-  // Pad with mock data if we have less than 4 trips
-  if (tripCards.length < 4) {
-      siteData.services.forEach(mockService => {
-         if (tripCards.length < 4) {
-            tripCards.push({
-               title: mockService.title,
-               desc: mockService.desc,
-               img: mockService.img,
-               tags: mockService.tags,
-            });
-         }
-      });
+  if (featuredCards.length > 0) {
+    // Admin has configured featured cards — resolve each one
+    const allTrips = await getTrips();
+    const allDestinations = await getDestinations();
+
+    for (const card of featuredCards) {
+      if (card.type === "trip") {
+        const trip = allTrips.find(t => t.slug === card.slug);
+        if (trip) {
+          tripCards.push({
+            title: card.customTitle || trip.title,
+            desc: card.customDesc || trip.subtitle || `Explore our ${trip.category} experience`,
+            img: card.customImage || trip.thumbnail || trip.heroImage || "",
+            tags: trip.tags || [trip.category || ""],
+            href: `/trips/${trip.slug}`,
+            price: trip.price || "",
+            location: trip.category === "domestic" ? "India" : "International",
+          });
+        }
+      } else {
+        const dest = allDestinations.find(d => d.slug === card.slug);
+        if (dest) {
+          tripCards.push({
+            title: card.customTitle || dest.title,
+            desc: card.customDesc || dest.description || `Discover ${dest.title}`,
+            img: card.customImage || dest.heroImage || "",
+            tags: [dest.category],
+            href: `/trips/${dest.category}/${dest.slug}`,
+            location: dest.category === "domestic" ? "India" : "International",
+          });
+        }
+      }
+    }
+  }
+
+  // Fallback: if no featured cards configured (or none resolved), use old 2+2 logic
+  if (tripCards.length === 0) {
+    const domesticTrips = await getTripsByCategory("domestic");
+    const internationalTrips = await getTripsByCategory("international");
+
+    const addTripToCards = (trip: any) => {
+       tripCards.push({
+         title: trip.title,
+         desc: trip.subtitle || `Explore our ${trip.category} experience`,
+         img: trip.thumbnail || trip.heroImage || "",
+         tags: trip.tags || [trip.category],
+         href: `/trips/${trip.slug}`,
+         price: trip.price || "",
+         location: trip.category === "domestic" ? "India" : "International",
+       });
+    };
+
+    domesticTrips.slice(0, 2).forEach(addTripToCards);
+    internationalTrips.slice(0, 2).forEach(addTripToCards);
+    
+    // Pad with mock data if we have less than 4 trips
+    if (tripCards.length < 4) {
+        siteData.services.forEach(mockService => {
+           if (tripCards.length < 4) {
+              tripCards.push({
+                 title: mockService.title,
+                 desc: mockService.desc,
+                 img: mockService.img,
+                 tags: mockService.tags,
+              });
+           }
+        });
+    }
   }
 
   // Fetch blogs

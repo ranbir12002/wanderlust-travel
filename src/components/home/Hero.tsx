@@ -101,61 +101,36 @@ export default function Hero({ data }: { data: SiteData["hero"] }) {
 
             <div className="flex flex-col sm:flex-row items-center gap-6">
               <button className="w-full sm:w-auto px-8 py-4 bg-[var(--color-sun-gold)] text-[var(--color-ocean-blue)] text-sm font-bold hover:brightness-110 transition-all rounded-sm shadow-lg uppercase tracking-wider">
-                Book Your Journey
+                Explore Trips
               </button>
               <button className="w-full sm:w-auto px-2 py-4 bg-transparent text-white text-sm font-medium border-b-2 border-[var(--color-sun-gold)] hover:text-[var(--color-sun-gold)] transition-colors uppercase tracking-wider">
-                Explore Destinations
+                Plan My Trip
               </button>
             </div>
-          </motion.div>
-        </div>
 
-        {/* Top-Right: Social Proof Widget */}
-        <div className="hidden lg:flex absolute top-32 right-12 z-30">
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="flex flex-col items-end text-right"
-          >
-            <div className="flex -space-x-4 mb-3">
-              {avatars.map((avatar, i) => (
-                <img
-                  key={i}
-                  src={avatar}
-                  alt="Client avatar"
-                  className="w-12 h-12 rounded-full border-2 border-white/80 shadow-md object-cover"
-                />
-              ))}
-            </div>
-            <h3 className="text-4xl font-bold text-white mb-1 drop-shadow">500+</h3>
-            <p className="text-sm font-light text-white/80">Satisfied Clients</p>
-          </motion.div>
-        </div>
-
-        {/* Bottom-Right: Featured Project Card (Pinned to absolute right) */}
-        <div className="hidden lg:block absolute bottom-24 right-12 z-30 w-full max-w-sm">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="bg-black/30 backdrop-blur-xl border border-white/10 p-6 rounded-lg shadow-2xl"
-          >
-            <div className="flex justify-between items-start mb-6">
-              <div className="p-2 border border-white/20 rounded-full">
-                <MapPin className="w-5 h-5 text-white stroke-[1.5]" />
+            {/* Trust Indicators */}
+            <div className="mt-12 flex flex-wrap gap-6 sm:gap-8 text-white pt-6 border-t border-white/10">
+              <div className="flex flex-col">
+                <span className="text-3xl font-bold text-[var(--color-sun-gold)] drop-shadow-md">5,000+</span>
+                <span className="text-xs sm:text-sm font-medium uppercase tracking-wider opacity-90 mt-1">Travelers</span>
               </div>
-              <button className="p-2 bg-white text-black hover:bg-neutral-200 transition-colors rounded-full">
-                <ArrowUpRight className="w-5 h-5 stroke-2" />
-              </button>
+              <div className="flex flex-col border-l border-white/20 pl-6 sm:pl-8">
+                <span className="text-3xl font-bold text-[var(--color-sun-gold)] drop-shadow-md">21</span>
+                <span className="text-xs sm:text-sm font-medium uppercase tracking-wider opacity-90 mt-1">States Covered</span>
+              </div>
+              <div className="flex flex-col border-l border-white/20 pl-6 sm:pl-8">
+                <span className="text-3xl font-bold text-[var(--color-sun-gold)] drop-shadow-md">100+</span>
+                <span className="text-xs sm:text-sm font-medium uppercase tracking-wider opacity-90 mt-1">Destinations</span>
+              </div>
+              <div className="flex flex-col border-l border-white/20 pl-6 sm:pl-8 justify-center">
+                <span className="text-sm font-bold uppercase tracking-wider text-[var(--color-sun-gold)] drop-shadow-md">Domestic &</span>
+                <span className="text-xs sm:text-sm font-medium uppercase tracking-wider opacity-90 mt-1">International Tours</span>
+              </div>
             </div>
-
-            <h4 className="text-xl font-bold text-white mb-2">{data.nextProject.name}</h4>
-            <p className="text-sm text-white/70 font-light leading-relaxed">
-              {data.nextProject.location}
-            </p>
           </motion.div>
         </div>
+
+
 
         {/* Bottom-Left: Thumbnails and Slider Controls */}
         <div className="absolute bottom-12 left-6 lg:left-12 z-30 flex flex-col gap-6 w-full lg:w-auto pr-6 lg:pr-0">

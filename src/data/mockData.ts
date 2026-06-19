@@ -9,11 +9,13 @@ export const siteData = {
       { label: "International Trips", href: "/trips/international" },
       { label: "Blogs", href: "/blogs" },
       { label: "About Us", href: "/about" },
+      { label: "Payments", href: "/payments" },
+      { label: "Enquire Now", href: "/enquire" },
     ]
   },
   hero: {
-    title: "BEACHES TO \nMOUNTAINS",
-    description: "A modern travel brand representing the journey from serene beaches to adventurous mountains. We combine exploration, freedom, and premium curated experiences.",
+    title: "Travel Beyond\nthe Ordinary",
+    description: "From weekend getaways and group adventures to customised holidays across India and the world- we plan the journey, you live the story.",
     bgImage: "/hero banner/1.jpg",
     nextProject: {
       name: "Serene Maldives",
@@ -23,31 +25,41 @@ export const siteData = {
     }
   },
   values: {
-    title: "UNFORGETTABLE \nEXPERIENCES",
-    description: "Every journey is a unique story. We don't just book trips; we curate moments that stay with you forever, from hidden coastal gems to majestic mountain peaks.",
+    title: "WHY TRAVEL \nWITH US?",
+    description: "",
     image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=800",
     yearsExperience: "10+",
     yearsText: "Years of crafting memories",
     features: [
       {
-        iconName: "MapPin",
-        title: "Curated Locales",
-        desc: "Handpicked destinations that offer both serenity and adventure.",
-      },
-      {
         iconName: "Compass",
-        title: "Expert Guides",
-        desc: "Local experts who bring the soul of every destination to life.",
+        title: "Travel Without The Guesswork",
+        desc: "From stays and transportation to on-ground support, every detail is handled by our team so you can focus on making memories.",
       },
       {
-        iconName: "Camera",
-        title: "Unique Moments",
-        desc: "Tailored activities designed for the modern explorer.",
+        iconName: "CheckCircle2",
+        title: "Verified Stays",
+        desc: "We handpick stays that offer the perfect balance of comfort, location, and value. Whether it's a cozy homestay in the mountains or a lakeside resort, we ensure every stay enhances your experience.",
       },
       {
-        iconName: "Sun",
-        title: "All Seasons",
-        desc: "Breathtaking experiences available throughout the entire year.",
+        iconName: "Car",
+        title: "Safe & Comfortable Transportation",
+        desc: "Travel in well-maintained vehicles driven by experienced professionals. From winding mountain roads to long highway journeys, safety and comfort remain our top priorities.",
+      },
+      {
+        iconName: "ShieldCheck",
+        title: "No Middlemen. No Hidden Markups.",
+        desc: "Unlike many travel companies, Beaches2Mountains operates through its own in-house team. We don't rely on third-party vendors or hidden B2B partnerships, ensuring better transparency, quality control, and support throughout your journey.",
+      },
+      {
+        iconName: "Users",
+        title: "Dedicated Trip Coordinators",
+        desc: "Our young and experienced trip coordinators travel with you every step of the way. With strong local knowledge, problem-solving skills, and a passion for creating memorable experiences, they're much more than just guides.",
+      },
+      {
+        iconName: "Headset",
+        title: "Support Before, During & After Your Trip",
+        desc: "Questions before booking? Need assistance during the journey? Looking for recommendations after your trip? Our team is always just a call or message away.",
       },
     ]
   },
