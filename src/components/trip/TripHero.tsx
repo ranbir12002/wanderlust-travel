@@ -43,8 +43,8 @@ export default function TripHero({ title, subtitle, heroImage, videoUrl, routeWa
 
       {/* Typography */}
       <div className="absolute left-6 bottom-16 sm:left-12 md:left-24 sm:bottom-24 z-10 flex flex-col">
-        <h2 className="text-lg font-light lowercase text-white/90 sm:text-2xl md:text-3xl">{subtitle}</h2>
-        <h1 className="text-4xl sm:text-6xl font-black lowercase tracking-tight text-white drop-shadow-lg md:text-8xl">{title}</h1>
+        <h2 className="text-lg font-light lowercase text-neutral-800 sm:text-2xl md:text-3xl">{subtitle}</h2>
+        <h1 className="text-4xl sm:text-6xl font-black lowercase tracking-tight text-black md:text-8xl">{title}</h1>
       </div>
 
       {/* Route Map Overlay */}

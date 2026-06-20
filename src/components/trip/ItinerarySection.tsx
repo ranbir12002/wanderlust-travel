@@ -19,7 +19,7 @@ export default function ItinerarySection({ itinerary, sidebarTrips }: ItineraryS
   };
 
   return (
-    <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-8 lg:grid-cols-12">
+    <div className="relative mx-auto grid max-w-7xl gap-8 lg:gap-12 px-4 py-8 lg:grid-cols-12">
       {/* Left Column: Accordion */}
       <div className="lg:col-span-8">
         <div className="space-y-4">
@@ -27,7 +27,7 @@ export default function ItinerarySection({ itinerary, sidebarTrips }: ItineraryS
             <div key={dayObj.day} className="overflow-hidden rounded-3xl border border-neutral-100 bg-white shadow-sm transition-all hover:border-neutral-200">
               <button
                 onClick={() => toggleDay(dayObj.day)}
-                className="flex w-full items-center justify-between p-6 text-left focus:outline-none"
+                className="flex w-full items-center justify-between p-4 sm:p-6 text-left focus:outline-none"
               >
                 <div className="flex items-center gap-4">
                   <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-neutral-900 text-xs font-black text-white shadow-lg">
@@ -53,7 +53,7 @@ export default function ItinerarySection({ itinerary, sidebarTrips }: ItineraryS
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
                   >
-                    <div className="border-t border-neutral-50 p-6 pt-0">
+                    <div className="border-t border-neutral-50 p-4 sm:p-6 pt-0">
                       <div className="mt-4 flex flex-col gap-8">
                         {/* Description */}
                         <div className="text-sm font-medium leading-relaxed text-neutral-600">
@@ -78,7 +78,7 @@ export default function ItinerarySection({ itinerary, sidebarTrips }: ItineraryS
                         {dayObj.bulletPoints && dayObj.bulletPoints.length > 0 && (
                           <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                             {dayObj.bulletPoints.map((bp, idx) => (
-                              <li key={idx} className="flex items-start gap-3 rounded-2xl bg-neutral-50 p-4">
+                              <li key={idx} className="flex items-start gap-3 rounded-2xl bg-neutral-50 p-3 sm:p-4">
                                 <span className="mt-1 flex h-1.5 w-1.5 flex-shrink-0 rounded-full bg-neutral-900" />
                                 <span className="text-xs font-semibold leading-snug text-neutral-700">{bp}</span>
                               </li>
@@ -88,7 +88,7 @@ export default function ItinerarySection({ itinerary, sidebarTrips }: ItineraryS
 
                         {/* Notes Callout */}
                         {dayObj.notes && (
-                          <div className="rounded-3xl border border-[#FFE400]/30 bg-[#FFE400]/5 p-5">
+                          <div className="rounded-3xl border border-[#FFE400]/30 bg-[#FFE400]/5 p-4 sm:p-5">
                             <div className="mb-2 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-neutral-500">
                               💡 pro-tip / note
                             </div>
@@ -112,11 +112,11 @@ export default function ItinerarySection({ itinerary, sidebarTrips }: ItineraryS
             NOTE: Numerous factors such as weather, road conditions, the physical ability of the participants etc. may dictate itinerary change. We reserve the rights to change any schedule in the interest of safety, comfort and general wellbeing.
           </p>
 
-          <div className="flex flex-wrap items-center gap-4">
-            <button className="mr-4 rounded-full bg-neutral-900 px-8 py-3 font-semibold text-white transition-transform hover:scale-105">
+          <div className="flex flex-row items-center gap-3 sm:gap-4 w-full sm:w-auto">
+            <button className="flex-1 sm:flex-initial rounded-full bg-neutral-900 px-6 sm:px-8 py-3 text-sm sm:text-base font-semibold text-white transition-transform hover:scale-105 text-center">
               BOOK NOW
             </button>
-            <button className="rounded-full bg-neutral-900 px-8 py-3 font-semibold text-white transition-transform hover:scale-105">
+            <button className="flex-1 sm:flex-initial rounded-full bg-neutral-900 px-6 sm:px-8 py-3 text-sm sm:text-base font-semibold text-white transition-transform hover:scale-105 text-center">
               INQUIRE
             </button>
           </div>

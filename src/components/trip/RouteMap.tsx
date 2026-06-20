@@ -69,7 +69,7 @@ export default function RouteMap({ waypoints }: RouteMapProps) {
   return (
     <div
       ref={containerRef}
-      className="hidden lg:block absolute right-4 xl:right-8 top-1/2 -translate-y-1/2 z-10 pointer-events-none"
+      className="absolute right-0 sm:right-4 xl:right-8 top-1/2 -translate-y-1/2 z-10 pointer-events-none scale-[0.8] xs:scale-[0.9] sm:scale-95 md:scale-100 origin-right"
     >
       <svg
         width={svgWidth}
@@ -141,9 +141,9 @@ export default function RouteMap({ waypoints }: RouteMapProps) {
                 fill="white"
                 textAnchor={textAnchor}
                 dominantBaseline="middle"
-                className="text-[11px] font-semibold"
+                className="text-xs sm:text-[13px] font-bold"
                 style={{
-                  textShadow: "0 1px 4px rgba(0,0,0,0.6), 0 0 8px rgba(0,0,0,0.3)",
+                  textShadow: "0 2px 6px rgba(0,0,0,0.8), 0 0 12px rgba(0,0,0,0.4)",
                   letterSpacing: "0.02em",
                 }}
               >

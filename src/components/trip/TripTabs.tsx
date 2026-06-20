@@ -49,12 +49,12 @@ export default function TripTabs() {
   }, []);
 
   return (
-    <div className="sticky top-0 z-30 mx-auto flex w-full max-w-5xl flex-wrap justify-center gap-2 bg-white/80 px-4 py-4 backdrop-blur-md md:gap-4 md:py-6">
+    <div className="sticky top-0 z-30 mx-auto flex w-full max-w-5xl overflow-x-auto whitespace-nowrap no-scrollbar justify-start sm:justify-center gap-2 bg-white/80 px-4 py-3.5 backdrop-blur-md md:gap-4 md:py-6 border-b border-neutral-100">
       {TABS.map((tab) => (
         <button
           key={tab.id}
           onClick={() => scrollToSection(tab.id)}
-          className={`rounded-full px-4 py-2 text-[10px] font-bold tracking-widest transition-all md:px-6 md:text-xs ${
+          className={`shrink-0 rounded-full px-4 py-2 text-[10px] font-bold tracking-widest transition-all md:px-6 md:text-xs ${
             activeTab === tab.id
               ? "bg-neutral-900 text-white shadow-lg shadow-black/20"
               : "bg-neutral-100 text-neutral-400 hover:bg-neutral-200 hover:text-neutral-600"

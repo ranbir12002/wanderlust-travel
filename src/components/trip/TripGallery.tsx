@@ -118,35 +118,35 @@ export default function TripGallery({ images = [], tripTitle = "Trip" }: TripGal
         </AnimatePresence>
 
         {/* Navigation Controls */}
-        <div className="absolute inset-x-0 bottom-8 flex items-center justify-between px-8">
+        <div className="absolute inset-x-0 bottom-4 sm:bottom-8 flex items-center justify-between px-4 sm:px-8">
           <div className="flex gap-2">
             <button
               onClick={manualPrev}
-              className="group flex h-12 w-12 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-md transition-all hover:bg-white hover:text-black"
+              className="group flex h-9 w-9 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-md transition-all hover:bg-white hover:text-black"
               aria-label="Previous image"
             >
-              <ChevronLeft size={24} className="transition-transform group-hover:-translate-x-1" />
+              <ChevronLeft className="h-4 w-4 sm:h-6 sm:w-6 transition-transform group-hover:-translate-x-0.5 sm:group-hover:-translate-x-1" />
             </button>
             <button
               onClick={manualNext}
-              className="group flex h-12 w-12 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-md transition-all hover:bg-white hover:text-black"
+              className="group flex h-9 w-9 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-md transition-all hover:bg-white hover:text-black"
               aria-label="Next image"
             >
-              <ChevronRight size={24} className="transition-transform group-hover:translate-x-1" />
+              <ChevronRight className="h-4 w-4 sm:h-6 sm:w-6 transition-transform group-hover:translate-x-0.5 sm:group-hover:translate-x-1" />
             </button>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             {!isAutoPlaying && (
-              <div className="flex items-center gap-2 rounded-full bg-black/60 px-4 py-2 text-[10px] font-black uppercase tracking-widest text-white backdrop-blur">
+              <div className="hidden xs:flex items-center gap-2 rounded-full bg-black/60 px-3 py-1.5 sm:px-4 sm:py-2 text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-white backdrop-blur">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#FFE400]" />
                 Paused
               </div>
             )}
             {/* Indicator */}
-            <div className="flex items-center gap-4 rounded-full bg-black/40 px-6 py-2 text-xs font-bold tracking-widest text-white backdrop-blur-lg">
+            <div className="flex items-center gap-2 sm:gap-4 rounded-full bg-black/40 px-3 py-1.5 sm:px-6 sm:py-2 text-[10px] sm:text-xs font-bold tracking-widest text-white backdrop-blur-lg">
               <span>{(currentIndex + 1).toString().padStart(2, '0')}</span>
-              <div className="h-[1px] w-8 bg-white/30" />
+              <div className="h-[1px] w-4 sm:w-8 bg-white/30" />
               <span className="text-white/50">{images.length.toString().padStart(2, '0')}</span>
             </div>
           </div>

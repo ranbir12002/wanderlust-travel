@@ -85,12 +85,12 @@ export default async function TripDetailPage({ params }: { params: Promise<{ slu
 
         {/* Dynamic Essentials Section */}
         {essentials.length > 0 && (
-          <section id="essentials" className="mx-auto max-w-7xl px-4 py-24 border-t border-neutral-100">
-            <h2 className="mb-8 text-4xl font-black lowercase tracking-tight">essentials</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <section id="essentials" className="mx-auto max-w-7xl px-4 py-12 sm:py-24 border-t border-neutral-100">
+            <h2 className="mb-6 sm:mb-8 text-3xl sm:text-4xl font-black lowercase tracking-tight">essentials</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
               {essentials.map((item, idx) => (
-                <div key={idx} className="flex flex-col items-center justify-center p-6 rounded-2xl border border-neutral-100 bg-white shadow-sm text-center">
-                  <span className="text-sm font-bold uppercase tracking-wider text-neutral-800">{item}</span>
+                <div key={idx} className="flex flex-col items-center justify-center p-4 sm:p-6 rounded-2xl border border-neutral-100 bg-white shadow-sm text-center">
+                  <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-800">{item}</span>
                 </div>
               ))}
             </div>
