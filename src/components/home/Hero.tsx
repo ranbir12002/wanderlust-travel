@@ -81,50 +81,50 @@ export default function Hero({ data }: { data: SiteData["hero"] }) {
       <div className="relative z-20 h-full w-full max-w-[1920px] mx-auto px-6 lg:px-12 flex flex-col justify-center">
 
         {/* Center-Left: Main Content */}
-        <div className="mt-20 lg:mt-0 flex flex-col justify-center lg:w-3/4 xl:w-2/3">
+        <div className="mt-24 sm:mt-20 lg:mt-0 flex flex-col justify-center lg:w-3/4 xl:w-2/3">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <h1 
-              className="text-[3rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] font-black leading-[1.05] tracking-tighter uppercase mb-6 text-white whitespace-pre-line"
+              className="text-[2.25rem] xs:text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] font-black leading-[1.05] tracking-tighter uppercase mb-4 sm:mb-6 text-white whitespace-pre-line"
               style={{ 
                 textShadow: '4px 4px 0px rgba(0,0,0,0.5), 8px 8px 20px rgba(0,0,0,0.4)' 
               }}
             >
               {data.title}
             </h1>
-            <p className="text-base sm:text-lg text-white/90 max-w-xl font-light leading-relaxed mb-10 drop-shadow">
+            <p className="text-sm sm:text-base md:text-lg text-white/90 max-w-xl font-light leading-relaxed mb-6 sm:mb-10 drop-shadow">
               {data.description}
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center gap-6">
-              <button className="w-full sm:w-auto px-8 py-4 bg-[var(--color-sun-gold)] text-[var(--color-ocean-blue)] text-sm font-bold hover:brightness-110 transition-all rounded-sm shadow-lg uppercase tracking-wider">
+            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+              <button className="w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 bg-[var(--color-sun-gold)] text-[var(--color-ocean-blue)] text-sm font-bold hover:brightness-110 transition-all rounded-sm shadow-lg uppercase tracking-wider">
                 Explore Trips
               </button>
-              <button className="w-full sm:w-auto px-2 py-4 bg-transparent text-white text-sm font-medium border-b-2 border-[var(--color-sun-gold)] hover:text-[var(--color-sun-gold)] transition-colors uppercase tracking-wider">
+              <button className="w-full sm:w-auto px-2 py-3 sm:py-4 bg-transparent text-white text-sm font-medium border-b-2 border-[var(--color-sun-gold)] hover:text-[var(--color-sun-gold)] transition-colors uppercase tracking-wider">
                 Plan My Trip
               </button>
             </div>
 
             {/* Trust Indicators */}
-            <div className="mt-12 flex flex-wrap gap-6 sm:gap-8 text-white pt-6 border-t border-white/10">
+            <div className="mt-8 sm:mt-12 flex flex-wrap gap-4 sm:gap-8 text-white pt-4 sm:pt-6 border-t border-white/10">
               <div className="flex flex-col">
-                <span className="text-3xl font-bold text-[var(--color-sun-gold)] drop-shadow-md">5,000+</span>
-                <span className="text-xs sm:text-sm font-medium uppercase tracking-wider opacity-90 mt-1">Travelers</span>
+                <span className="text-2xl sm:text-3xl font-bold text-[var(--color-sun-gold)] drop-shadow-md">5,000+</span>
+                <span className="text-[10px] sm:text-sm font-medium uppercase tracking-wider opacity-90 mt-1">Travelers</span>
               </div>
-              <div className="flex flex-col border-l border-white/20 pl-6 sm:pl-8">
-                <span className="text-3xl font-bold text-[var(--color-sun-gold)] drop-shadow-md">21</span>
-                <span className="text-xs sm:text-sm font-medium uppercase tracking-wider opacity-90 mt-1">States Covered</span>
+              <div className="flex flex-col border-l border-white/20 pl-4 sm:pl-8">
+                <span className="text-2xl sm:text-3xl font-bold text-[var(--color-sun-gold)] drop-shadow-md">21</span>
+                <span className="text-[10px] sm:text-sm font-medium uppercase tracking-wider opacity-90 mt-1">States Covered</span>
               </div>
-              <div className="flex flex-col border-l border-white/20 pl-6 sm:pl-8">
-                <span className="text-3xl font-bold text-[var(--color-sun-gold)] drop-shadow-md">100+</span>
-                <span className="text-xs sm:text-sm font-medium uppercase tracking-wider opacity-90 mt-1">Destinations</span>
+              <div className="flex flex-col border-l border-white/20 pl-4 sm:pl-8">
+                <span className="text-2xl sm:text-3xl font-bold text-[var(--color-sun-gold)] drop-shadow-md">100+</span>
+                <span className="text-[10px] sm:text-sm font-medium uppercase tracking-wider opacity-90 mt-1">Destinations</span>
               </div>
-              <div className="flex flex-col border-l border-white/20 pl-6 sm:pl-8 justify-center">
-                <span className="text-sm font-bold uppercase tracking-wider text-[var(--color-sun-gold)] drop-shadow-md">Domestic &</span>
-                <span className="text-xs sm:text-sm font-medium uppercase tracking-wider opacity-90 mt-1">International Tours</span>
+              <div className="flex flex-col border-l border-white/20 pl-4 sm:pl-8 justify-center">
+                <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[var(--color-sun-gold)] drop-shadow-md">Domestic &</span>
+                <span className="text-[10px] sm:text-sm font-medium uppercase tracking-wider opacity-90 mt-1">International Tours</span>
               </div>
             </div>
           </motion.div>
@@ -133,9 +133,9 @@ export default function Hero({ data }: { data: SiteData["hero"] }) {
 
 
         {/* Bottom-Left: Thumbnails and Slider Controls */}
-        <div className="absolute bottom-12 left-6 lg:left-12 z-30 flex flex-col gap-6 w-full lg:w-auto pr-6 lg:pr-0">
+        <div className="absolute bottom-6 sm:bottom-12 left-6 lg:left-12 z-30 flex flex-col gap-3 sm:gap-6 w-[calc(100%-3rem)] sm:w-auto pr-6 lg:pr-0">
           {/* 4 Image Selector */}
-          <div className="flex gap-4">
+          <div className="hidden sm:flex gap-4">
             {backgrounds.map((bg, index) => (
               <button
                 key={index}
@@ -150,7 +150,7 @@ export default function Hero({ data }: { data: SiteData["hero"] }) {
 
           <div className="flex items-center gap-4">
             <span className="text-sm font-medium w-6 shrink-0 font-mono">0{currentSlide + 1}</span>
-            <div className="relative h-[2px] w-full max-w-sm bg-white/20 overflow-hidden">
+            <div className="relative h-[2px] w-full max-w-xs sm:max-w-sm bg-white/20 overflow-hidden">
               <motion.div
                 key={currentSlide}
                 className="absolute top-0 left-0 h-full bg-white"

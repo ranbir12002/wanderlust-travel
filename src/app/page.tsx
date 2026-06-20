@@ -1,4 +1,5 @@
 import Hero from "@/components/home/Hero";
+import CategoryBar from "@/components/home/CategoryBar";
 import Values from "@/components/home/Values";
 import Process from "@/components/home/Process";
 import Services, { ServiceItem } from "@/components/home/Services";
@@ -14,18 +15,18 @@ import { getDestinations } from "@/data/destinationsData";
 import { getFeaturedCards } from "@/data/featuredCardsData";
 
 export default async function HomePage() {
-  const siteData = await getSiteContent();
-  
-  // Fetch featured cards config
-  const featuredCards = await getFeaturedCards();
+  const [siteData, featuredCards, allTrips, allDestinations, blogs] = await Promise.all([
+    getSiteContent(),
+    getFeaturedCards(),
+    getTrips(),
+    getDestinations(),
+    getBlogs()
+  ]);
   
   const tripCards: ServiceItem[] = [];
 
   if (featuredCards.length > 0) {
     // Admin has configured featured cards — resolve each one
-    const allTrips = await getTrips();
-    const allDestinations = await getDestinations();
-
     for (const card of featuredCards) {
       if (card.type === "trip") {
         const trip = allTrips.find(t => t.slug === card.slug);
@@ -58,8 +59,8 @@ export default async function HomePage() {
 
   // Fallback: if no featured cards configured (or none resolved), use old 2+2 logic
   if (tripCards.length === 0) {
-    const domesticTrips = await getTripsByCategory("domestic");
-    const internationalTrips = await getTripsByCategory("international");
+    const domesticTrips = allTrips.filter(t => t.category === "domestic");
+    const internationalTrips = allTrips.filter(t => t.category === "international");
 
     const addTripToCards = (trip: any) => {
        tripCards.push({
@@ -90,9 +91,6 @@ export default async function HomePage() {
         });
     }
   }
-
-  // Fetch blogs
-  const blogs = await getBlogs();
   const portfolioData: PortfolioData = {
     title: "READ OUR \nLATEST TRAVEL ",
     highlightText: "STORIES",
@@ -114,10 +112,11 @@ export default async function HomePage() {
   return (
     <main>
       <Hero data={siteData.hero} />
-      <Values data={siteData.values} />
+      <CategoryBar />
       {/* <Process data={siteData.process} /> */}
       <DestinationBanner />
       <Services data={tripCards} />
+      <Values data={siteData.values} />
       <Portfolio data={portfolioData} />
       <Testimonials />
       <CTA data={siteData.cta} />

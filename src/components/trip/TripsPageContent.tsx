@@ -94,7 +94,7 @@ export default function TripsPageContent({
     <div className="min-h-screen bg-[#F5F5F5]">
       
       {/* Hero Section */}
-      <div className="relative flex min-h-[60vh] w-full flex-col justify-center overflow-hidden">
+      <div className="relative flex min-h-[50vh] sm:min-h-[60vh] pt-24 sm:pt-32 w-full flex-col justify-center overflow-hidden">
         <Image
           src={heroImage}
           alt={title}
@@ -119,7 +119,7 @@ export default function TripsPageContent({
         </div>
 
         {/* Social Icons (left floating) */}
-        <div className="absolute left-6 top-1/4 z-20 flex flex-col gap-4 rounded-full bg-white p-2 shadow-lg">
+        <div className="hidden md:flex absolute left-6 top-1/3 z-20 flex-col gap-4 rounded-full bg-white p-2 shadow-lg">
           <a href="#" className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-100 transition-colors hover:bg-neutral-200">
             <Facebook className="h-4 w-4 text-neutral-900" />
           </a>
@@ -141,8 +141,8 @@ export default function TripsPageContent({
       />
 
       {/* Trips Grid */}
-      <main className="mx-auto max-w-7xl px-4 py-16">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+      <main className="mx-auto max-w-7xl px-4 py-8 sm:py-16">
+        <div className="grid grid-cols-2 gap-3 xs:gap-4 sm:gap-6 md:grid-cols-3">
           {filteredTrips.length > 0 ? (
             filteredTrips.map((trip) => (
               <TripCard key={trip.id} trip={trip} />

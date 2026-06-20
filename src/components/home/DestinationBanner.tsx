@@ -19,9 +19,9 @@ export default function DestinationBanner() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <section className="py-20 lg:py-32 bg-white overflow-hidden">
+    <section className="py-10 sm:py-16 lg:py-32 bg-white overflow-hidden">
       <SectionContainer>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
 
           {/* Left Content */}
           <motion.div
@@ -29,38 +29,38 @@ export default function DestinationBanner() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="space-y-8"
+            className="space-y-6 sm:space-y-8"
           >
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               <Heading as="h2" variant="section" className="text-[var(--color-ocean-blue)] font-headline">
-                Designed for Every {"\n"}Destination
+                Designed for Every <br className="hidden sm:inline" />Destination
               </Heading>
 
-              <div className="flex items-center gap-4 py-2">
-                <div className="flex -space-x-4 overflow-hidden">
+              <div className="flex items-center gap-3 py-1 xs:py-2">
+                <div className="flex -space-x-3 xs:-space-x-4 overflow-hidden">
                   {avatars.map((url, i) => (
                     <img
                       key={i}
                       src={url}
                       alt="user"
-                      className="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover"
+                      className="inline-block h-8 w-8 xs:h-10 xs:w-10 rounded-full ring-2 ring-white object-cover"
                     />
                   ))}
                 </div>
-                <div className="text-xl font-black text-[var(--color-ocean-blue)] tracking-tighter">
+                <div className="text-lg xs:text-xl font-black text-[var(--color-ocean-blue)] tracking-tighter">
                   86 M+
                 </div>
               </div>
             </div>
 
-            <Text className="text-neutral-500 max-w-xl leading-relaxed text-base">
+            <Text className="text-neutral-500 max-w-xl leading-relaxed text-sm sm:text-base">
               Every journey is unique, from mountain peaks to coastal escapes, GoVista helps you find experiences that match your mood, style, and sense of adventure. Our trusted partners ensure every moment of your trip is smooth, safe, and memorable.
             </Text>
 
             <Button
               variant="primary"
               size="lg"
-              className="bg-[var(--color-sun-gold)] border-none hover:brightness-110 rounded-lg text-[var(--color-ocean-blue)] font-bold tracking-normal py-4 px-10 shadow-lg shadow-gold-500/20"
+              className="w-full sm:w-auto bg-[var(--color-sun-gold)] border-none hover:brightness-110 rounded-lg text-[var(--color-ocean-blue)] font-bold tracking-normal py-3.5 px-8 xs:py-4 xs:px-10 shadow-lg shadow-gold-500/20 text-sm sm:text-base"
               onClick={() => setIsModalOpen(true)}
             >
               Get Started
@@ -75,7 +75,7 @@ export default function DestinationBanner() {
             transition={{ duration: 1 }}
             className="relative"
           >
-            <div className="rounded-[2rem] overflow-hidden shadow-2xl relative z-10 aspect-[4/3] lg:aspect-auto h-[400px] lg:h-[500px]">
+            <div className="rounded-2xl sm:rounded-[2rem] overflow-hidden shadow-2xl relative z-10 aspect-[4/3] lg:aspect-auto h-[260px] xs:h-[300px] sm:h-[400px] lg:h-[500px]">
               <img
                 src="/hero banner/image.png"
                 alt="Scenic travel"
@@ -84,7 +84,7 @@ export default function DestinationBanner() {
             </div>
 
             {/* Simple decorative element */}
-            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-[var(--color-sun-gold)]/20 rounded-full blur-2xl -z-10"></div>
+            <div className="absolute -bottom-4 -right-4 xs:-bottom-6 xs:-right-6 w-24 h-24 xs:w-32 xs:h-32 bg-[var(--color-sun-gold)]/20 rounded-full blur-2xl -z-10"></div>
           </motion.div>
 
         </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, X } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 export default function TripsFilterBar({
@@ -40,6 +40,12 @@ export default function TripsFilterBar({
   const currentBudget = searchParams.getAll("budget");
   const currentNature = searchParams.getAll("nature");
 
+  const hasActiveFilters = 
+    currentDestination.length > 0 ||
+    currentDuration.length > 0 ||
+    currentBudget.length > 0 ||
+    currentNature.length > 0;
+
   const toggleFilter = (key: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString());
     const current = params.getAll(key);
@@ -56,6 +62,15 @@ export default function TripsFilterBar({
     router.push("?" + params.toString(), { scroll: false });
   };
 
+  const clearFilters = () => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("destination");
+    params.delete("duration");
+    params.delete("budget");
+    params.delete("nature");
+    router.push("?" + params.toString(), { scroll: false });
+  };
+
   const filters = [
     { id: "destination", label: "Destination", options: destinations, current: currentDestination },
     { id: "duration", label: "Duration", options: durations, current: currentDuration },
@@ -64,7 +79,7 @@ export default function TripsFilterBar({
   ];
 
   return (
-    <div ref={containerRef} className="relative z-20 mx-auto -mt-8 flex w-full max-w-4xl flex-wrap items-center justify-center gap-4 px-4 sm:-mt-10 md:gap-6">
+    <div ref={containerRef} className="relative z-20 mx-auto -mt-8 flex w-full max-w-4xl flex-wrap items-center justify-center gap-2 px-4 sm:-mt-10 sm:gap-4 md:gap-6">
       
       {filters.map(filter => (
         <div key={filter.id} className="group relative">
@@ -73,14 +88,14 @@ export default function TripsFilterBar({
               e.preventDefault();
               toggleDropdown(filter.id);
             }}
-            className={`flex min-w-[140px] items-center justify-between rounded-full px-6 py-3 text-sm font-bold uppercase shadow-lg transition-transform hover:scale-105 ${
+            className={`flex min-w-[110px] sm:min-w-[140px] items-center justify-between rounded-full px-3.5 py-2.5 sm:px-6 sm:py-3 text-xs sm:text-sm font-bold uppercase shadow-lg transition-transform hover:scale-105 ${
               filter.current.length > 0 
                 ? "bg-neutral-900 text-white" 
                 : "bg-white text-neutral-900"
             }`}
           >
             <span>{filter.label} {filter.current.length > 0 ? `(${filter.current.length})` : ''}</span>
-            <ChevronDown className={`ml-2 h-4 w-4 ${filter.current.length > 0 ? 'text-neutral-400' : 'text-neutral-500'}`} />
+            <ChevronDown className={`ml-1.5 sm:ml-2 h-3.5 w-3.5 sm:h-4 sm:w-4 ${filter.current.length > 0 ? 'text-neutral-400' : 'text-neutral-500'}`} />
           </button>
           
           {openDropdown === filter.id && filter.options.length > 0 && (
@@ -100,6 +115,19 @@ export default function TripsFilterBar({
           )}
         </div>
       ))}
+
+      {hasActiveFilters && (
+        <button 
+          onClick={(e) => {
+            e.preventDefault();
+            clearFilters();
+          }}
+          className="flex min-w-[110px] sm:min-w-[140px] items-center justify-center rounded-full border border-neutral-200 bg-white px-3.5 py-2.5 text-xs font-bold uppercase text-neutral-600 shadow-lg transition-transform hover:scale-105 hover:bg-neutral-50 hover:text-neutral-950 sm:px-6 sm:py-3 sm:text-sm"
+        >
+          <span className="mr-1.5 sm:mr-2">Clear All</span>
+          <X className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-neutral-500" />
+        </button>
+      )}
       
     </div>
   );

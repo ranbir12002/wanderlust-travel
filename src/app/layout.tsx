@@ -25,8 +25,10 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const settings = await getSettings();
-  const destinations = await getDestinations();
+  const [settings, destinations] = await Promise.all([
+    getSettings(),
+    getDestinations(),
+  ]);
 
   return (
     <html lang="en" style={{

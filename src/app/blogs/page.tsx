@@ -13,7 +13,7 @@ export default async function BlogsPage() {
     <div className="min-h-screen bg-[#F5F5F5]">
       
       {/* Hero Section */}
-      <div className="relative flex min-h-[60vh] w-full flex-col justify-center overflow-hidden">
+      <div className="relative flex min-h-[50vh] sm:min-h-[60vh] pt-24 sm:pt-32 w-full flex-col justify-center overflow-hidden">
         {/* Background Image */}
         <Image
           src="https://picsum.photos/seed/blogs-hero/1920/1080"
@@ -41,7 +41,7 @@ export default async function BlogsPage() {
         </div>
 
         {/* Social Icons */}
-        <div className="absolute left-6 top-1/4 z-20 flex flex-col gap-4 rounded-full bg-white p-2 shadow-lg">
+        <div className="hidden md:flex absolute left-6 top-1/3 z-20 flex-col gap-4 rounded-full bg-white p-2 shadow-lg">
           {siteData.social.instagramUrl && (
             <a href={siteData.social.instagramUrl} target="_blank" rel="noreferrer" className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-100 transition-colors hover:bg-[#FFE400] hover:text-black">
               <Instagram className="h-4 w-4 text-neutral-900" />

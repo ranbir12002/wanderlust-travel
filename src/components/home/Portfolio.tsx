@@ -73,7 +73,7 @@ export default function Portfolio({ data }: { data: PortfolioData }) {
 
                 <div className="flex flex-col gap-2 sm:gap-3">
                   <div>
-                    <Text variant="caption">CATEGORY</Text>
+                    <Text variant="caption">{work.loc}</Text>
                     <Heading as="h4" variant="card" className="group-hover:text-[var(--color-ocean-blue)] transition-colors line-clamp-2">
                       {work.title}
                     </Heading>

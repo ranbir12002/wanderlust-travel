@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Search, User, Menu, ArrowRight, X, Phone, Mail, MapPin, Instagram, Youtube, Twitter, Linkedin } from "lucide-react";
+import { Search, User, Menu, ArrowRight, X, Phone, Mail, MapPin, Instagram, Youtube, Twitter, Linkedin, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { siteData, type SiteData } from "@/data/mockData";
@@ -17,6 +17,7 @@ export function Header({ data, destinations = [] }: { data: SiteData["header"]; 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [expandedMenus, setExpandedMenus] = useState<Record<string, boolean>>({});
 
   if (pathname?.startsWith("/admin")) return null;
 
@@ -49,10 +50,18 @@ export function Header({ data, destinations = [] }: { data: SiteData["header"]; 
 
   const currentSeason = getSeason();
 
+  const toggleSubmenu = (label: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    setExpandedMenus(prev => ({
+      ...prev,
+      [label]: !prev[label]
+    }));
+  };
+
   return (
     <>
       <header className="fixed top-0 z-50 w-full transition-all duration-300">
-        <div className={`w-full transition-all duration-300 ${(mounted && (isScrolled || isMobileMenuOpen)) ? 'h-24 bg-[var(--color-ocean-blue)]/90 backdrop-blur-md shadow-lg border-b border-white/10' : 'h-36 bg-transparent pt-4'} flex items-center`}>
+        <div className={`w-full transition-all duration-300 ${(mounted && (isScrolled || isMobileMenuOpen)) ? 'h-16 md:h-20 lg:h-24 bg-[var(--color-ocean-blue)]/90 backdrop-blur-md shadow-lg border-b border-white/10' : 'h-20 md:h-28 lg:h-36 bg-transparent pt-2 md:pt-4'} flex items-center`}>
           <div className="mx-auto flex w-full max-w-[1920px] items-center justify-between px-6 lg:px-12">
             
             <a href="/" className="flex items-center transition-transform hover:scale-105 z-[60]">
@@ -61,7 +70,7 @@ export function Header({ data, destinations = [] }: { data: SiteData["header"]; 
                 alt={data?.logo || "Beaches to Mountains"} 
                 width={720} 
                 height={240} 
-                className={`${(mounted && isScrolled) ? 'h-20' : 'h-32'} w-auto object-contain brightness-0 invert transition-all duration-300`}
+                className={`${(mounted && (isScrolled || isMobileMenuOpen)) ? 'h-10 md:h-14 lg:h-20' : 'h-12 md:h-20 lg:h-32'} w-auto object-contain brightness-0 invert transition-all duration-300`}
                 priority
               />
             </a>
@@ -88,12 +97,13 @@ export function Header({ data, destinations = [] }: { data: SiteData["header"]; 
                     return (
                       <div key={idx} className="relative group py-4">
                         <a
-                          className={`text-[11px] uppercase tracking-[0.15em] hover:text-white transition-colors whitespace-nowrap ${
+                          className={`text-[11px] uppercase tracking-[0.15em] hover:text-white transition-colors whitespace-nowrap flex items-center gap-1.5 ${
                             isActive ? "text-white font-bold" : "text-white/80 font-medium"
                           }`}
                           href={link.href}
                         >
-                          {link.label}
+                          <span>{link.label}</span>
+                          <ChevronDown size={11} className="opacity-60 group-hover:rotate-180 transition-transform duration-300" />
                         </a>
                         <div className="absolute top-[80%] left-0 hidden group-hover:flex flex-col bg-[var(--color-ocean-blue)]/95 backdrop-blur-xl text-white rounded-xl shadow-2xl overflow-hidden min-w-[220px] border border-white/10 transition-all opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0">
                           {subDestinations.map(dest => (
@@ -191,28 +201,49 @@ export function Header({ data, destinations = [] }: { data: SiteData["header"]; 
                     const isTripsLink = link.href === "/trips/domestic" || link.href === "/trips/international";
                     const linkCategory = link.href.includes("domestic") ? "domestic" : "international";
                     const subDestinations = destinations.filter(d => d.category === linkCategory);
+                    const isExpanded = !!expandedMenus[link.label];
 
                     return (
                       <div key={idx} className="flex flex-col gap-3">
-                        <a
-                          className="text-xl font-bold text-white/80 hover:text-white transition-colors"
-                          href={link.href}
-                        >
-                          {link.label}
-                        </a>
-                        {isTripsLink && subDestinations.length > 0 && (
-                          <div className="flex flex-col gap-2 pl-4 border-l-2 border-white/10 ml-2">
+                        <div className="flex items-center justify-between">
+                          <a
+                            className="text-xl font-bold text-white/80 hover:text-white transition-colors"
+                            href={link.href}
+                          >
+                            {link.label}
+                          </a>
+                          {isTripsLink && subDestinations.length > 0 && (
+                            <button
+                              onClick={(e) => toggleSubmenu(link.label, e)}
+                              className="p-2 text-white/60 hover:text-white transition-colors"
+                              aria-label={`Toggle ${link.label} submenu`}
+                            >
+                              <motion.div
+                                animate={{ rotate: isExpanded ? 180 : 0 }}
+                                transition={{ duration: 0.2 }}
+                              >
+                                <ChevronDown size={20} />
+                              </motion.div>
+                            </button>
+                          )}
+                        </div>
+                        {isTripsLink && subDestinations.length > 0 && isExpanded && (
+                          <motion.div
+                            initial={{ opacity: 0, y: -5 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="flex flex-col gap-2 pl-4 border-l-2 border-white/10 ml-2"
+                          >
                             {subDestinations.map(dest => (
                               <a 
                                 key={dest.id}
                                 href={`/trips/${dest.category}/${dest.slug}`}
-                                className="text-sm font-bold text-white/60 hover:text-white transition-colors"
+                                className="text-sm font-bold text-white/60 hover:text-white transition-colors py-1"
                                 onClick={() => setIsMobileMenuOpen(false)}
                               >
                                 {dest.title}
                               </a>
                             ))}
-                          </div>
+                          </motion.div>
                         )}
                       </div>
                     );
@@ -308,7 +339,7 @@ export function Footer({ data }: { data: SiteData["footer"] }) {
           {/* Middle Section: Quick Links */}
           <div className="lg:col-span-2">
             <h5 className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--color-sun-gold)] mb-10">Quick Links</h5>
-            <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+            <div className="grid grid-cols-2 gap-x-6 gap-y-3 max-w-xs md:max-w-sm">
               {data?.quickLinks?.map((link, idx) => {
                 const isCustom = link.href === "/customised";
                 return isCustom ? (

@@ -158,8 +158,8 @@ export const siteData = {
   social: {
     title: "Follow Our Journey",
     description: "Join our community of explorers. Discover inspiration for your next breathtaking expedition.",
-    instagramUrl: "https://www.instagram.com/beaches2mountains_?igsh=NHhoOXAzbHNxb2I4",
-    youtubeUrl: "https://youtube.com/@beaches2mountainss?si=BreNQUa_N-VPK7zK",
+    instagramUrl: "https://www.instagram.com/beaches2mountains_/",
+    youtubeUrl: "https://www.youtube.com/@Beaches2Mountainss",
     twitterUrl: "https://x.com/b2m39?s=21",
     linkedinUrl: "https://www.linkedin.com/company/beaches2mountains/",
     googleUrl: "#",
