@@ -105,7 +105,11 @@ export function Header({ data, destinations = [] }: { data: SiteData["header"]; 
                           <span>{link.label}</span>
                           <ChevronDown size={11} className="opacity-60 group-hover:rotate-180 transition-transform duration-300" />
                         </a>
-                        <div className="absolute top-[80%] left-0 hidden group-hover:flex flex-col bg-[var(--color-ocean-blue)]/95 backdrop-blur-xl text-white rounded-xl shadow-2xl overflow-hidden min-w-[220px] border border-white/10 transition-all opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0">
+                        <div className={`absolute top-[80%] left-0 hidden group-hover:flex flex-col text-white rounded-xl shadow-2xl overflow-hidden min-w-[220px] border border-white/10 transition-all opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 ${
+                          isScrolled || isMobileMenuOpen
+                            ? "bg-[var(--color-ocean-blue)]/95 backdrop-blur-xl"
+                            : "bg-black/20 backdrop-blur-md"
+                        }`}>
                           {subDestinations.map(dest => (
                             <a 
                               key={dest.id} 
@@ -281,12 +285,12 @@ export function Footer({ data }: { data: SiteData["footer"] }) {
 
   return (
     <>
-    <footer className="bg-[var(--color-ocean-blue)] text-white pt-20 pb-12">
+    <footer className="bg-[var(--color-ocean-blue)] text-white pt-12 pb-8">
       <div className="mx-auto max-w-[1920px] px-6 lg:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-24 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-10">
           
           {/* Left Section: Logo & About */}
-          <div className="lg:col-span-1 space-y-8">
+          <div className="lg:col-span-1 space-y-4">
             <div className="flex items-center">
               <Image 
                 src="/logo.png" 
@@ -301,7 +305,7 @@ export function Footer({ data }: { data: SiteData["footer"] }) {
             </p>
 
             {/* Social Icons */}
-            <div className="flex items-center gap-4 pt-2">
+            <div className="flex items-center gap-4 pt-1">
               {siteData.social.instagramUrl && (
                 <a href={siteData.social.instagramUrl} target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-[var(--color-sun-gold)] hover:text-[var(--color-ocean-blue)] transition-all">
                   <Instagram size={16} />
@@ -323,19 +327,11 @@ export function Footer({ data }: { data: SiteData["footer"] }) {
                 </a>
               )}
             </div>
-
-            <div className="flex flex-col gap-2 pt-4">
-              {data?.bottomLinks?.map((link, idx) => (
-                <a key={idx} href={link.href} className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 hover:text-[var(--color-sun-gold)] transition-colors">
-                  {link.label}
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Middle Section: Quick Links */}
           <div className="lg:col-span-2">
-            <h5 className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--color-sun-gold)] mb-10">Quick Links</h5>
+            <h5 className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--color-sun-gold)] mb-5">Quick Links</h5>
             <div className="grid grid-cols-2 gap-x-6 gap-y-3 max-w-xs md:max-w-sm">
               {data?.quickLinks?.map((link, idx) => {
                 const isCustom = link.href === "/customised";
@@ -360,12 +356,21 @@ export function Footer({ data }: { data: SiteData["footer"] }) {
                 );
               })}
             </div>
+            
+            {/* Terms and Cancellation Policy moved here */}
+            <div className="flex flex-wrap gap-x-6 gap-y-1.5 pt-4 mt-5 border-t border-white/5">
+              {data?.bottomLinks?.map((link, idx) => (
+                <a key={idx} href={link.href} className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40 hover:text-[var(--color-sun-gold)] transition-colors">
+                  {link.label}
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Right Section: Contact Details */}
-          <div className="space-y-10">
+          <div className="space-y-4">
             <h5 className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--color-sun-gold)]">Contact Details</h5>
-            <div className="space-y-6">
+            <div className="space-y-3">
               <a href={`tel:${data?.contactInfo?.phone}`} className="flex items-center gap-4 group">
                 <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-[var(--color-sun-gold)] group-hover:border-[var(--color-sun-gold)] transition-all">
                   <Phone className="w-4 h-4 text-white group-hover:text-[var(--color-ocean-blue)] transition-colors" />
@@ -393,7 +398,7 @@ export function Footer({ data }: { data: SiteData["footer"] }) {
 
         </div>
 
-        <div className="pt-12 border-t border-white/5 flex flex-col md:row-reverse md:flex-row justify-between items-center gap-6">
+        <div className="pt-6 border-t border-white/5 flex flex-col md:row-reverse md:flex-row justify-between items-center gap-6">
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/30">
             {data?.copyright}
           </p>

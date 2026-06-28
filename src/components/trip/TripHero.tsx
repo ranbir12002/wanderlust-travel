@@ -12,7 +12,7 @@ interface TripHeroProps {
 
 export default function TripHero({ title, subtitle, heroImage, videoUrl, routeWaypoints }: TripHeroProps) {
   return (
-    <div className="relative flex min-h-[65vh] sm:min-h-[75vh] md:min-h-[85vh] w-full items-center justify-center pt-24 sm:pt-32 pb-16">
+    <div className="relative flex min-h-[48vh] sm:min-h-[56vh] md:min-h-[64vh] w-full items-center justify-center pt-24 sm:pt-32 pb-16">
       {/* Background Media */}
       {videoUrl ? (
         <video

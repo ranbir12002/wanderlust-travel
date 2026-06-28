@@ -57,7 +57,7 @@ export default async function TripDetailPage({ params }: { params: Promise<{ slu
 
         {/* Dynamic Budget Section (with Fallbacks) */}
         <section id="budget" className="mx-auto max-w-7xl px-4 py-8 sm:py-12 border-t border-neutral-100">
-          <h2 className="mb-4 sm:mb-6 text-2xl sm:text-3xl font-black lowercase tracking-tight">budgeting</h2>
+          <h2 className="mb-4 sm:mb-6 text-2xl sm:text-3xl font-black lowercase tracking-tight text-neutral-900">budgeting</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {inclusions.length > 0 && (
               <div className="rounded-3xl bg-neutral-50 p-8">
@@ -85,7 +85,7 @@ export default async function TripDetailPage({ params }: { params: Promise<{ slu
         {/* Dynamic Essentials Section */}
         {essentials.length > 0 && (
           <section id="essentials" className="mx-auto max-w-7xl px-4 py-6 sm:py-10 border-t border-neutral-100">
-            <h2 className="mb-4 sm:mb-6 text-2xl sm:text-3xl font-black lowercase tracking-tight">essentials</h2>
+            <h2 className="mb-4 sm:mb-6 text-2xl sm:text-3xl font-black lowercase tracking-tight text-neutral-900">essentials</h2>
             <div className="flex flex-wrap gap-2 sm:gap-3">
               {essentials.map((item, idx) => (
                 <div key={idx} className="flex items-center justify-center px-4 py-2 sm:px-5 sm:py-2.5 rounded-full border border-neutral-200 bg-white shadow-sm text-center">
@@ -99,9 +99,9 @@ export default async function TripDetailPage({ params }: { params: Promise<{ slu
         {/* Dynamic Other Info Section */}
         {otherInfo && (
           <section id="other" className="mx-auto max-w-7xl px-4 pt-8 pb-2 sm:pt-12 sm:pb-4 border-t border-neutral-100">
-            <h2 className="mb-4 sm:mb-6 text-2xl sm:text-3xl font-black lowercase tracking-tight">other info</h2>
+            <h2 className="mb-4 sm:mb-6 text-2xl sm:text-3xl font-black lowercase tracking-tight text-neutral-900">other info</h2>
             <div className="rounded-3xl bg-neutral-900 p-8 sm:p-12 text-white">
-              <p className="max-w-2xl text-[10px] sm:text-xs font-bold uppercase tracking-wider leading-relaxed text-neutral-300">
+              <p className="text-[10px] sm:text-xs font-bold uppercase tracking-wider leading-relaxed text-neutral-300">
                 {otherInfo}
               </p>
             </div>

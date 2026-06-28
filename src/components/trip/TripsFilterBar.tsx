@@ -79,7 +79,7 @@ export default function TripsFilterBar({
   ];
 
   return (
-    <div ref={containerRef} className="relative z-20 mx-auto -mt-8 flex w-full max-w-4xl flex-wrap items-center justify-center gap-2 px-4 sm:-mt-10 sm:gap-4 md:gap-6">
+    <div ref={containerRef} className="relative z-20 mx-auto mt-6 flex w-full max-w-4xl flex-wrap items-center justify-center gap-2 px-4 sm:mt-10 sm:gap-4 md:gap-6">
       
       {filters.map(filter => (
         <div key={filter.id} className="group relative">

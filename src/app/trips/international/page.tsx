@@ -19,8 +19,8 @@ export default async function InternationalTripsPage(props: {
       searchParams={searchParams}
     >
       <BlogSection />
-      <ContactForm />
       <Testimonials />
+      <ContactForm />
     </TripsPageContent>
   );
 }

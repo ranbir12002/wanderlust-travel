@@ -37,10 +37,10 @@ export default function ContactForm() {
     <section id="contact" className="w-full overflow-hidden py-8 sm:py-12 md:py-16 bg-white border-t border-neutral-100">
       <div className="mx-auto max-w-4xl px-4 flex flex-col w-full">
         <header className="relative mb-6 sm:mb-8 pt-6 sm:pt-10">
-          <div className="absolute -top-2 -left-2 sm:-left-4 md:-left-8 z-0 text-5xl sm:text-[5rem] md:text-[6rem] tracking-[0.1em] leading-none opacity-5 font-extrabold uppercase pointer-events-none select-none text-[var(--color-ocean-blue)]">
+          <div className="absolute -top-2 -left-2 sm:-left-4 md:-left-8 z-0 text-5xl sm:text-[5rem] md:text-[6rem] tracking-[0.1em] leading-none opacity-5 font-extrabold uppercase pointer-events-none select-none text-neutral-900">
             GET IN TOUCH
           </div>
-          <h2 className="text-2xl sm:text-4xl font-extrabold relative z-10 lowercase mb-3 sm:mb-4 text-[var(--color-ocean-blue)]">
+          <h2 className="text-2xl sm:text-3xl font-black lowercase tracking-tight relative z-10 mb-3 sm:mb-4 text-neutral-900">
             get in touch
           </h2>
           <p className="text-neutral-600 text-sm md:text-base max-w-2xl leading-relaxed relative z-10">

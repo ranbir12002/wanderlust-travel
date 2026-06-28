@@ -119,10 +119,16 @@ export default function ItinerarySection({ itinerary, sidebarTrips }: ItineraryS
           </p>
 
           <div className="flex flex-row items-center gap-3 sm:gap-4 w-full sm:w-auto">
-            <button className="flex-1 sm:flex-initial rounded-full bg-neutral-900 px-6 sm:px-8 py-3 text-sm sm:text-base font-semibold text-white transition-transform hover:scale-105 text-center">
+            <button 
+              className="flex-1 sm:flex-initial rounded-full px-6 sm:px-8 py-3 text-sm sm:text-base font-semibold text-white transition-transform hover:scale-105 text-center focus:outline-none"
+              style={{ backgroundColor: '#3a3a3a' }}
+            >
               BOOK NOW
             </button>
-            <button className="flex-1 sm:flex-initial rounded-full bg-neutral-900 px-6 sm:px-8 py-3 text-sm sm:text-base font-semibold text-white transition-transform hover:scale-105 text-center">
+            <button 
+              className="flex-1 sm:flex-initial rounded-full px-6 sm:px-8 py-3 text-sm sm:text-base font-semibold text-white transition-transform hover:scale-105 text-center focus:outline-none"
+              style={{ backgroundColor: '#3a3a3a' }}
+            >
               INQUIRE
             </button>
           </div>

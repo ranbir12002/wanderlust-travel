@@ -94,41 +94,39 @@ export default function TripsPageContent({
     <div className="min-h-screen bg-[#F5F5F5]">
       
       {/* Hero Section */}
-      <div className="relative flex min-h-[50vh] sm:min-h-[60vh] pt-24 sm:pt-32 w-full flex-col justify-center overflow-hidden">
+      <div className="relative flex min-h-[38vh] sm:min-h-[45vh] pt-24 sm:pt-32 w-full flex-col justify-center overflow-hidden">
         <Image
           src={heroImage}
           alt={title}
           fill
-          className="object-cover"
+          className="object-cover brightness-75"
           priority
         />
         
-        {/* Dark Overlays for text readability */}
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#F5F5F5] via-transparent to-transparent" />
+        {/* Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-[15%] bg-gradient-to-t from-[#F5F5F5] to-transparent opacity-60" />
         
-        {/* Typography */}
-        <div className="relative z-10 px-8 md:px-24">
-          <div className="absolute -left-4 top-1/2 -z-10 -translate-y-1/2 text-[8rem] font-black tracking-tighter text-white/5 sm:text-[14rem] uppercase">
-            {title}
+        {/* Typography & Social Icons Group */}
+        <div className="absolute left-4 top-1/3 sm:left-6 md:left-8 z-20 flex items-center gap-4 sm:gap-5">
+          {/* Social Icons */}
+          <div className="hidden md:flex flex-col gap-3">
+            <a href="#" className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 backdrop-blur-sm shadow-lg transition-all hover:bg-white hover:scale-110" aria-label="Facebook">
+              <Facebook className="h-5 w-5 text-neutral-900" />
+            </a>
+            <a href="#" className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 backdrop-blur-sm shadow-lg transition-all hover:bg-white hover:scale-110" aria-label="Instagram">
+              <Instagram className="h-5 w-5 text-neutral-900" />
+            </a>
+            <a href="#" className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 backdrop-blur-sm shadow-lg transition-all hover:bg-white hover:scale-110" aria-label="YouTube">
+              <Youtube className="h-5 w-5 text-neutral-900" />
+            </a>
           </div>
-          <h1 className="text-5xl font-black uppercase tracking-tight text-white drop-shadow-xl md:text-8xl" style={{ textShadow: '4px 4px 0px rgba(0,0,0,0.3)' }}>
-            {title}
-          </h1>
-          <p className="mt-4 text-lg font-bold text-[var(--color-sun-gold)] uppercase tracking-[0.3em]">{subtitle}</p>
-        </div>
 
-        {/* Social Icons (left floating) */}
-        <div className="hidden md:flex absolute left-6 top-1/3 z-20 flex-col gap-4 rounded-full bg-white p-2 shadow-lg">
-          <a href="#" className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-100 transition-colors hover:bg-neutral-200">
-            <Facebook className="h-4 w-4 text-neutral-900" />
-          </a>
-          <a href="#" className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-100 transition-colors hover:bg-neutral-200">
-            <Instagram className="h-4 w-4 text-neutral-900" />
-          </a>
-          <a href="#" className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-100 transition-colors hover:bg-neutral-200">
-            <Youtube className="h-4 w-4 text-neutral-900" />
-          </a>
+          {/* Typography */}
+          <div className="flex flex-col">
+            <p className="text-sm font-light lowercase sm:text-lg md:text-xl text-white">{subtitle}</p>
+            <h1 className="text-3xl sm:text-4xl font-black lowercase tracking-tight md:text-5xl text-white">{title}</h1>
+          </div>
         </div>
       </div>
 

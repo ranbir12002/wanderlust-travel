@@ -18,8 +18,8 @@ export default async function TripsPage(props: {
       searchParams={searchParams}
     >
       <BlogSection />
-      <ContactForm />
       <Testimonials />
+      <ContactForm />
     </TripsPageContent>
   );
 }
