@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Maximize2, X, Play } from "lucide-react";
+import { ChevronLeft, ChevronRight, Maximize2, X, Play, Images } from "lucide-react";
 import Button from "@/components/ui/Button";
 
 interface TripGalleryProps {
@@ -65,28 +65,26 @@ export default function TripGallery({ images = [], tripTitle = "Trip" }: TripGal
   if (images.length === 0) return null;
 
   return (
-    <section id="experience" className="mx-auto max-w-7xl px-4 py-16">
-      <div className="mb-10 flex items-end justify-between">
+    <section id="experience" className="mx-auto max-w-5xl px-4 py-8">
+      <div className="mb-6 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
         <div>
-          <h2 className="text-4xl font-black lowercase tracking-tighter text-neutral-900 md:text-6xl">
+          <h2 className="text-2xl sm:text-3xl font-black lowercase tracking-tight text-neutral-900">
             the experience
           </h2>
-          <p className="mt-2 text-xs font-medium uppercase tracking-widest text-neutral-500">
+          <p className="mt-1 text-[10px] font-medium uppercase tracking-widest text-neutral-500">
             capturing the soul of the journey
           </p>
         </div>
-        <Button 
-          variant="outline" 
-          size="sm" 
+        <button 
           onClick={() => setShowFullGallery(true)}
-          className="border-neutral-200 text-neutral-900 hover:bg-neutral-100"
+          className="flex items-center gap-2 rounded-full bg-[#3a3a3a] px-5 py-2.5 text-xs font-bold text-white transition-all hover:bg-neutral-800 shadow-md w-fit"
         >
-          <Maximize2 className="mr-2 h-4 w-4 text-neutral-400" /> View Full Gallery
-        </Button>
+          <Images className="h-4 w-4" /> View Full Gallery
+        </button>
       </div>
 
       {/* Main Carousel */}
-      <div className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl bg-neutral-100 shadow-2xl md:aspect-[21/9]">
+      <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-neutral-100 shadow-xl md:aspect-[21/9] max-h-[380px]">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}

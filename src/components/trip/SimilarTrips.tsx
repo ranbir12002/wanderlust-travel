@@ -28,7 +28,7 @@ export default function SimilarTrips() {
   ];
 
   return (
-    <section className="w-full overflow-hidden py-16">
+    <section className="w-full overflow-hidden py-8">
       <SectionHeading title="similar trips" />
       
       <div className="mx-auto grid max-w-7xl grid-cols-2 gap-3 xs:gap-4 sm:gap-6 px-4 md:grid-cols-3">

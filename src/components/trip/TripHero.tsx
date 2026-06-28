@@ -21,14 +21,14 @@ export default function TripHero({ title, subtitle, heroImage, videoUrl, routeWa
           muted
           loop
           playsInline
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover brightness-75"
         />
       ) : heroImage ? (
         <Image
           src={heroImage}
           alt={title}
           fill
-          className="object-cover"
+          className="object-cover brightness-75"
           priority
         />
       ) : (
@@ -39,31 +39,34 @@ export default function TripHero({ title, subtitle, heroImage, videoUrl, routeWa
 
       {/* Overlays */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-[15%] bg-gradient-to-t from-white to-transparent opacity-60" />
 
-      {/* Typography */}
-      <div className="absolute left-6 bottom-16 sm:left-12 md:left-24 sm:bottom-24 z-10 flex flex-col">
-        <h2 className="text-lg font-light lowercase text-neutral-800 sm:text-2xl md:text-3xl">{subtitle}</h2>
-        <h1 className="text-4xl sm:text-6xl font-black lowercase tracking-tight text-black md:text-8xl">{title}</h1>
+      {/* Typography & Social Icons Group */}
+      <div className="absolute left-4 top-1/3 sm:left-6 md:left-8 z-20 flex items-center gap-4 sm:gap-5">
+        {/* Social Icons */}
+        <div className="hidden md:flex flex-col gap-3">
+          <a href="#" className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 backdrop-blur-sm shadow-lg transition-all hover:bg-white hover:scale-110" aria-label="Facebook">
+            <Facebook className="h-5 w-5 text-neutral-900" />
+          </a>
+          <a href="#" className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 backdrop-blur-sm shadow-lg transition-all hover:bg-white hover:scale-110" aria-label="Instagram">
+            <Instagram className="h-5 w-5 text-neutral-900" />
+          </a>
+          <a href="#" className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 backdrop-blur-sm shadow-lg transition-all hover:bg-white hover:scale-110" aria-label="YouTube">
+            <Youtube className="h-5 w-5 text-neutral-900" />
+          </a>
+        </div>
+
+        {/* Typography */}
+        <div className="flex flex-col">
+          <h2 className="text-sm font-light lowercase sm:text-lg md:text-xl" style={{ color: '#ffffff' }}>{subtitle}</h2>
+          <h1 className="text-3xl sm:text-4xl font-black lowercase tracking-tight md:text-5xl" style={{ color: '#ffffff' }}>{title}</h1>
+        </div>
       </div>
 
       {/* Route Map Overlay */}
       {routeWaypoints && routeWaypoints.length >= 2 && (
         <RouteMap waypoints={routeWaypoints} />
       )}
-
-      {/* Social Icons */}
-      <div className="hidden md:flex absolute left-6 top-1/3 z-20 flex-col gap-4 rounded-full bg-white p-2 shadow-lg">
-        <a href="#" className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-100 transition-colors hover:bg-neutral-200" aria-label="Facebook">
-          <Facebook className="h-4 w-4 text-neutral-900" />
-        </a>
-        <a href="#" className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-100 transition-colors hover:bg-neutral-200" aria-label="Instagram">
-          <Instagram className="h-4 w-4 text-neutral-900" />
-        </a>
-        <a href="#" className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-100 transition-colors hover:bg-neutral-200" aria-label="YouTube">
-          <Youtube className="h-4 w-4 text-neutral-900" />
-        </a>
-      </div>
     </div>
   );
 }

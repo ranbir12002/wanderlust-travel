@@ -3,15 +3,15 @@
 import { useState, useEffect } from "react";
 
 const TABS = [
-  { id: "experience", label: "EXPERIENCE" },
   { id: "itinerary", label: "ITINERARY" },
+  { id: "experience", label: "EXPERIENCE" },
   { id: "budget", label: "BUDGET" },
   { id: "essentials", label: "ESSENTIALS" },
   { id: "other", label: "OTHER INFO" },
 ];
 
 export default function TripTabs() {
-  const [activeTab, setActiveTab] = useState("experience");
+  const [activeTab, setActiveTab] = useState("itinerary");
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);

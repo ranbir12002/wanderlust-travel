@@ -35,14 +35,9 @@ export default async function TripDetailPage({ params }: { params: Promise<{ slu
         routeWaypoints={trip.routeWaypoints} 
       />
       
-      <div id="experience">
-        <QuickStats trip={trip} />
-        {trip.gallery && trip.gallery.length > 0 && (
-          <TripGallery images={trip.gallery} tripTitle={trip.title} />
-        )}
-      </div>
+      <QuickStats trip={trip} />
       
-      <main className="pb-16 pt-8">
+      <main className="pb-0 pt-8">
         <TripTabs />
         
         <div id="itinerary">
@@ -56,26 +51,30 @@ export default async function TripDetailPage({ params }: { params: Promise<{ slu
           />
         </div>
 
+        {trip.gallery && trip.gallery.length > 0 && (
+          <TripGallery images={trip.gallery} tripTitle={trip.title} />
+        )}
+
         {/* Dynamic Budget Section (with Fallbacks) */}
-        <section id="budget" className="mx-auto max-w-7xl px-4 py-24 border-t border-neutral-100">
-          <h2 className="mb-8 text-4xl font-black lowercase tracking-tight">budgeting</h2>
+        <section id="budget" className="mx-auto max-w-7xl px-4 py-8 sm:py-12 border-t border-neutral-100">
+          <h2 className="mb-4 sm:mb-6 text-2xl sm:text-3xl font-black lowercase tracking-tight">budgeting</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {inclusions.length > 0 && (
               <div className="rounded-3xl bg-neutral-50 p-8">
-                <h3 className="mb-4 text-xs font-bold uppercase tracking-widest text-neutral-400">Inclusions</h3>
+                <h3 className="mb-4 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-neutral-400">Inclusions</h3>
                 <ul className="space-y-3 text-neutral-600">
                   {inclusions.map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-2">✓ {item}</li>
+                    <li key={idx} className="flex items-start gap-2 text-[10px] sm:text-xs font-bold uppercase tracking-wider">✓ {item}</li>
                   ))}
                 </ul>
               </div>
             )}
             {exclusions.length > 0 && (
               <div className="rounded-3xl bg-neutral-50 p-8">
-                <h3 className="mb-4 text-xs font-bold uppercase tracking-widest text-neutral-400">Exclusions</h3>
-                <ul className="space-y-3 text-neutral-400 font-medium">
+                <h3 className="mb-4 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-neutral-400">Exclusions</h3>
+                <ul className="space-y-3 text-neutral-400">
                   {exclusions.map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-2">✕ {item}</li>
+                    <li key={idx} className="flex items-start gap-2 text-[10px] sm:text-xs font-bold uppercase tracking-wider">✕ {item}</li>
                   ))}
                 </ul>
               </div>
@@ -85,12 +84,12 @@ export default async function TripDetailPage({ params }: { params: Promise<{ slu
 
         {/* Dynamic Essentials Section */}
         {essentials.length > 0 && (
-          <section id="essentials" className="mx-auto max-w-7xl px-4 py-12 sm:py-24 border-t border-neutral-100">
-            <h2 className="mb-6 sm:mb-8 text-3xl sm:text-4xl font-black lowercase tracking-tight">essentials</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
+          <section id="essentials" className="mx-auto max-w-7xl px-4 py-6 sm:py-10 border-t border-neutral-100">
+            <h2 className="mb-4 sm:mb-6 text-2xl sm:text-3xl font-black lowercase tracking-tight">essentials</h2>
+            <div className="flex flex-wrap gap-2 sm:gap-3">
               {essentials.map((item, idx) => (
-                <div key={idx} className="flex flex-col items-center justify-center p-4 sm:p-6 rounded-2xl border border-neutral-100 bg-white shadow-sm text-center">
-                  <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-800">{item}</span>
+                <div key={idx} className="flex items-center justify-center px-4 py-2 sm:px-5 sm:py-2.5 rounded-full border border-neutral-200 bg-white shadow-sm text-center">
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-neutral-700">{item}</span>
                 </div>
               ))}
             </div>
@@ -99,10 +98,10 @@ export default async function TripDetailPage({ params }: { params: Promise<{ slu
 
         {/* Dynamic Other Info Section */}
         {otherInfo && (
-          <section id="other" className="mx-auto max-w-7xl px-4 py-24 border-t border-neutral-100">
-            <h2 className="mb-8 text-4xl font-black lowercase tracking-tight">other info</h2>
-            <div className="rounded-3xl bg-neutral-900 p-12 text-white">
-              <p className="max-w-2xl text-lg font-light leading-relaxed text-neutral-300">
+          <section id="other" className="mx-auto max-w-7xl px-4 pt-8 pb-2 sm:pt-12 sm:pb-4 border-t border-neutral-100">
+            <h2 className="mb-4 sm:mb-6 text-2xl sm:text-3xl font-black lowercase tracking-tight">other info</h2>
+            <div className="rounded-3xl bg-neutral-900 p-8 sm:p-12 text-white">
+              <p className="max-w-2xl text-[10px] sm:text-xs font-bold uppercase tracking-wider leading-relaxed text-neutral-300">
                 {otherInfo}
               </p>
             </div>
