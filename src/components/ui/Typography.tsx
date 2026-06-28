@@ -16,8 +16,8 @@ export function Heading({
   light = false,
 }: HeadingProps) {
   const variants = {
-    hero: "font-headline font-black text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl leading-[0.9] tracking-tighter",
-    section: "font-headline font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight tracking-tight",
+    hero: "font-headline font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl leading-[0.9] tracking-tighter",
+    section: "font-headline font-black text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-7xl leading-tight tracking-tight",
     card: "font-headline font-bold text-base sm:text-lg md:text-xl",
     accent: "font-serif text-lg sm:text-xl md:text-2xl tracking-wide lowercase",
   };

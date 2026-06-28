@@ -25,7 +25,7 @@ export const siteData = {
     }
   },
   values: {
-    title: "WHY TRAVEL \nWITH US?",
+    title: "WHY TRAVEL WITH US?",
     description: "",
     image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=800",
     yearsExperience: "10+",

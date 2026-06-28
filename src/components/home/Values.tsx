@@ -21,33 +21,9 @@ const IconMap: Record<string, React.ElementType> = {
 
 export default function Values({ data }: { data: SiteData["values"] }) {
   return (
-    <section className="py-12 sm:py-14 md:py-20 lg:py-24 bg-surface">
-      <SectionContainer className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 md:gap-16 lg:gap-20 items-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="relative"
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt="Garden values"
-            className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px] object-cover rounded-sm shadow-2xl"
-            src={data.image}
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute -bottom-6 -right-6 md:-bottom-8 md:-right-8 xl:-bottom-10 xl:-right-10 hidden md:flex flex-col justify-center items-center w-40 h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 xl:w-64 xl:h-64 bg-[var(--color-sun-gold)] p-4 md:p-6 xl:p-8 shadow-xl">
-            <span className="text-[var(--color-ocean-blue)] font-headline font-black text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
-              {data.yearsExperience}
-            </span>
-            <Text variant="caption" className="mt-1 md:mt-2 text-center text-[var(--color-ocean-blue)]/80 font-bold uppercase tracking-widest">
-              {data.yearsText}
-            </Text>
-          </div>
-        </motion.div>
-
-        <div className="space-y-8 sm:space-y-10 lg:space-y-12">
+    <section className="py-8 sm:py-10 md:py-12 lg:py-16 bg-surface">
+      <SectionContainer className="max-w-5xl mx-auto items-center">
+        <div className="space-y-8 sm:space-y-10 lg:space-y-12 w-full text-left">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -57,7 +33,7 @@ export default function Values({ data }: { data: SiteData["values"] }) {
           >
             {/* <Subheading accent>[ WHY TRAVEL WITH US? ]</Subheading> */}
 
-            <Heading>
+            <Heading className="!text-3xl sm:!text-4xl md:!text-5xl">
               {data.title}
             </Heading>
 
@@ -68,7 +44,7 @@ export default function Values({ data }: { data: SiteData["values"] }) {
             )}
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 pt-4 sm:pt-6 md:pt-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 pt-2 md:pt-4">
             {data.features.map((feature, idx) => {
               const IconComp = IconMap[feature.iconName] || MapPin;
               return (
@@ -78,15 +54,17 @@ export default function Values({ data }: { data: SiteData["values"] }) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className="space-y-3 sm:space-y-4"
+                  className="space-y-1 sm:space-y-2"
                 >
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-[var(--color-sky-blue)]/20 rounded-full flex items-center justify-center text-[var(--color-ocean-blue)] [&_svg]:w-4 [&_svg]:h-4 sm:[&_svg]:w-5 sm:[&_svg]:h-5 md:[&_svg]:w-6 md:[&_svg]:h-6">
-                    <IconComp />
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[var(--color-sky-blue)]/20 rounded-full flex items-center justify-center shrink-0 text-[var(--color-ocean-blue)] [&_svg]:w-4 [&_svg]:h-4 sm:[&_svg]:w-5 sm:[&_svg]:h-5">
+                      <IconComp />
+                    </div>
+                    <Heading variant="card" as="h4">
+                      {feature.title}
+                    </Heading>
                   </div>
-                  <Heading variant="card" as="h4">
-                    {feature.title}
-                  </Heading>
-                  <Text variant="small">
+                  <Text variant="small" className="pl-11 sm:pl-13 text-neutral-600">
                     {feature.desc}
                   </Text>
                 </motion.div>

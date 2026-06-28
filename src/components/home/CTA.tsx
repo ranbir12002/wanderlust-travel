@@ -6,7 +6,7 @@ import Button from "../ui/Button";
 
 export default function CTA({ data }: { data: SiteData["cta"] }) {
   return (
-    <section className="relative py-14 sm:py-16 md:py-20 lg:py-28 overflow-hidden">
+    <section className="relative py-10 sm:py-14 md:py-20 lg:py-24 overflow-hidden">
       <div className="absolute inset-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -22,7 +22,7 @@ export default function CTA({ data }: { data: SiteData["cta"] }) {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-white font-headline font-black text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl leading-tight max-w-5xl uppercase tracking-tighter"
+          className="text-white font-headline font-black text-2xl sm:text-3xl md:text-5xl lg:text-7xl xl:text-8xl leading-tight max-w-5xl uppercase tracking-tighter"
         >
           {data.title}
         </motion.h2>
@@ -33,7 +33,7 @@ export default function CTA({ data }: { data: SiteData["cta"] }) {
            transition={{ delay: 0.2 }}
            className="w-full sm:w-auto"
         >
-          <button className="px-12 py-5 bg-[var(--color-sun-gold)] text-[var(--color-ocean-blue)] font-headline font-black text-lg sm:text-xl rounded-sm hover:scale-105 transition-transform duration-300 shadow-2xl uppercase tracking-widest">
+          <button className="px-8 py-3 sm:px-12 sm:py-5 bg-[var(--color-sun-gold)] text-[var(--color-ocean-blue)] font-headline font-black text-sm sm:text-xl rounded-sm hover:scale-105 transition-transform duration-300 shadow-2xl uppercase tracking-widest">
             {data.buttonText}
           </button>
         </motion.div>

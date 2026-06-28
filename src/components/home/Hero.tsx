@@ -56,7 +56,7 @@ export default function Hero({ data }: { data: SiteData["hero"] }) {
   };
 
   return (
-    <section className="relative h-[100svh] w-full overflow-hidden bg-[#0A0A0A] text-white font-sans flex items-center">
+    <section className="relative h-[75svh] min-h-[500px] w-full overflow-hidden bg-[#0A0A0A] text-white font-sans flex items-center">
       {/* Background Images */}
       <AnimatePresence initial={false} custom={direction}>
         <motion.img
@@ -88,7 +88,7 @@ export default function Hero({ data }: { data: SiteData["hero"] }) {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <h1 
-              className="text-[2.25rem] xs:text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] font-black leading-[1.05] tracking-tighter uppercase mb-4 sm:mb-6 text-white whitespace-pre-line"
+              className="text-3xl xs:text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-[5.5rem] font-black leading-[1.05] tracking-tighter uppercase mb-4 sm:mb-6 text-white whitespace-pre-line"
               style={{ 
                 textShadow: '4px 4px 0px rgba(0,0,0,0.5), 8px 8px 20px rgba(0,0,0,0.4)' 
               }}
@@ -100,10 +100,10 @@ export default function Hero({ data }: { data: SiteData["hero"] }) {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-              <button className="w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 bg-[var(--color-sun-gold)] text-[var(--color-ocean-blue)] text-sm font-bold hover:brightness-110 transition-all rounded-sm shadow-lg uppercase tracking-wider">
+              <button className="w-full sm:w-auto px-2 py-3 sm:py-4 bg-transparent text-white text-sm font-medium border-b-2 border-[var(--color-sun-gold)] hover:text-[var(--color-sun-gold)] transition-colors uppercase tracking-wider">
                 Explore Trips
               </button>
-              <button className="w-full sm:w-auto px-2 py-3 sm:py-4 bg-transparent text-white text-sm font-medium border-b-2 border-[var(--color-sun-gold)] hover:text-[var(--color-sun-gold)] transition-colors uppercase tracking-wider">
+              <button className="w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 bg-[var(--color-sun-gold)] text-[var(--color-ocean-blue)] text-sm font-bold hover:brightness-110 transition-all rounded-sm shadow-lg uppercase tracking-wider">
                 Plan My Trip
               </button>
             </div>
@@ -128,39 +128,6 @@ export default function Hero({ data }: { data: SiteData["hero"] }) {
               </div>
             </div>
           </motion.div>
-        </div>
-
-
-
-        {/* Bottom-Left: Thumbnails and Slider Controls */}
-        <div className="absolute bottom-6 sm:bottom-12 left-6 lg:left-12 z-30 flex flex-col gap-3 sm:gap-6 w-[calc(100%-3rem)] sm:w-auto pr-6 lg:pr-0">
-          {/* 4 Image Selector */}
-          <div className="hidden sm:flex gap-4">
-            {backgrounds.map((bg, index) => (
-              <button
-                key={index}
-                onClick={() => selectSlide(index)}
-                className={`relative w-20 h-12 md:w-24 md:h-16 overflow-hidden rounded-md transition-all duration-300 border-2 ${currentSlide === index ? "border-white shadow-[0_0_15px_rgba(255,255,255,0.4)] scale-105" : "border-white/20 hover:border-white/60 opacity-60 hover:opacity-100"
-                  }`}
-              >
-                <img src={bg} alt={`Thumbnail ${index + 1}`} className="w-full h-full object-cover" />
-              </button>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-4">
-            <span className="text-sm font-medium w-6 shrink-0 font-mono">0{currentSlide + 1}</span>
-            <div className="relative h-[2px] w-full max-w-xs sm:max-w-sm bg-white/20 overflow-hidden">
-              <motion.div
-                key={currentSlide}
-                className="absolute top-0 left-0 h-full bg-white"
-                initial={{ width: "0%" }}
-                animate={{ width: "100%" }}
-                transition={{ duration: 6, ease: "linear" }}
-              />
-            </div>
-            <span className="text-sm text-white/50 w-6 shrink-0 font-mono text-right">0{backgrounds.length}</span>
-          </div>
         </div>
 
       </div>

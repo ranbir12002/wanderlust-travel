@@ -61,8 +61,8 @@ export function Header({ data, destinations = [] }: { data: SiteData["header"]; 
   return (
     <>
       <header className="fixed top-0 z-50 w-full transition-all duration-300">
-        <div className={`w-full transition-all duration-300 ${(mounted && (isScrolled || isMobileMenuOpen)) ? 'h-16 md:h-20 lg:h-24 bg-[var(--color-ocean-blue)]/90 backdrop-blur-md shadow-lg border-b border-white/10' : 'h-20 md:h-28 lg:h-36 bg-transparent pt-2 md:pt-4'} flex items-center`}>
-          <div className="mx-auto flex w-full max-w-[1920px] items-center justify-between px-6 lg:px-12">
+        <div className={`w-full transition-all duration-300 ${(mounted && (isScrolled || isMobileMenuOpen)) ? 'h-14 md:h-16 lg:h-20 bg-[var(--color-ocean-blue)]/90 backdrop-blur-md shadow-lg border-b border-white/10' : 'h-16 md:h-20 lg:h-24 bg-transparent pt-1 md:pt-2'} flex items-center`}>
+          <div className="mx-auto flex w-full max-w-[1920px] items-center justify-between pl-6 pr-4 lg:pl-12 lg:pr-8">
             
             <a href="/" className="flex items-center transition-transform hover:scale-105 z-[60]">
               <Image 
@@ -75,9 +75,9 @@ export function Header({ data, destinations = [] }: { data: SiteData["header"]; 
               />
             </a>
 
-            <div className="flex items-center gap-8 xl:gap-12">
+            <div className="flex items-center gap-4 xl:gap-6 ml-auto">
               {/* Nav Options */}
-              <nav className="hidden lg:flex items-center gap-6 xl:gap-10">
+              <nav className="hidden lg:flex items-center gap-3 xl:gap-4">
                 {/* Seasonal Link */}
                 <a
                   href={`/trips/seasonal`}
@@ -135,23 +135,20 @@ export function Header({ data, destinations = [] }: { data: SiteData["header"]; 
               </nav>
 
               {/* CTA & Icons */}
-              <div className="flex items-center gap-6 z-[60]">
+              <div className="flex items-center gap-4 z-[60]">
                   <button 
                     onClick={() => setIsModalOpen(true)}
-                    className="hidden sm:inline-flex items-center rounded-sm border border-[var(--color-sun-gold)] px-6 py-2.5 text-[11px] font-bold uppercase tracking-widest text-[var(--color-sun-gold)] transition-all hover:bg-[var(--color-sun-gold)] hover:text-[var(--color-ocean-blue)]"
+                    className="hidden sm:inline-flex items-center rounded-sm border border-[var(--color-sun-gold)] px-5 py-2 text-[11px] font-bold uppercase tracking-widest text-[var(--color-sun-gold)] transition-all hover:bg-[var(--color-sun-gold)] hover:text-[var(--color-ocean-blue)]"
                   >
                     Customised Trips
                   </button>
                  
-                 <div className="flex items-center gap-5 sm:border-l sm:border-white/20 sm:pl-6 text-white">
+                 <div className="flex items-center gap-3 sm:border-l sm:border-white/20 sm:pl-4 text-white">
                   <button 
                     onClick={() => setIsSearchOpen(true)}
                     className="hidden sm:block hover:opacity-70 transition-opacity"
                   >
                     <Search size={18} strokeWidth={2} />
-                  </button>
-                  <button className="hidden sm:block hover:opacity-70 transition-opacity">
-                    <User size={18} strokeWidth={2} />
                   </button>
                   <button 
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

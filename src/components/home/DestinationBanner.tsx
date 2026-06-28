@@ -19,7 +19,7 @@ export default function DestinationBanner() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <section className="py-10 sm:py-16 lg:py-32 bg-white overflow-hidden">
+    <section className="py-6 sm:py-10 lg:py-16 bg-white overflow-hidden">
       <SectionContainer>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
 
@@ -32,7 +32,7 @@ export default function DestinationBanner() {
             className="space-y-6 sm:space-y-8"
           >
             <div className="space-y-3 sm:space-y-4">
-              <Heading as="h2" variant="section" className="text-[var(--color-ocean-blue)] font-headline">
+              <Heading as="h2" variant="section" className="!text-3xl sm:!text-4xl md:!text-5xl text-[var(--color-ocean-blue)] font-headline">
                 Designed for Every <br className="hidden sm:inline" />Destination
               </Heading>
 
@@ -57,14 +57,16 @@ export default function DestinationBanner() {
               Every journey is unique, from mountain peaks to coastal escapes, GoVista helps you find experiences that match your mood, style, and sense of adventure. Our trusted partners ensure every moment of your trip is smooth, safe, and memorable.
             </Text>
 
-            <Button
-              variant="primary"
-              size="lg"
-              className="w-full sm:w-auto bg-[var(--color-sun-gold)] border-none hover:brightness-110 rounded-lg text-[var(--color-ocean-blue)] font-bold tracking-normal py-3.5 px-8 xs:py-4 xs:px-10 shadow-lg shadow-gold-500/20 text-sm sm:text-base"
-              onClick={() => setIsModalOpen(true)}
-            >
-              Get Started
-            </Button>
+            <div className="hidden lg:block">
+              <Button
+                variant="primary"
+                size="lg"
+                className="w-full sm:w-auto bg-[var(--color-sun-gold)] border-none hover:brightness-110 rounded-lg text-[var(--color-ocean-blue)] font-bold tracking-normal py-3.5 px-8 xs:py-4 xs:px-10 shadow-lg shadow-gold-500/20 text-sm sm:text-base"
+                onClick={() => setIsModalOpen(true)}
+              >
+                Get Started
+              </Button>
+            </div>
           </motion.div>
 
           {/* Right Content - Image */}
@@ -75,16 +77,34 @@ export default function DestinationBanner() {
             transition={{ duration: 1 }}
             className="relative"
           >
-            <div className="rounded-2xl sm:rounded-[2rem] overflow-hidden shadow-2xl relative z-10 aspect-[4/3] lg:aspect-auto h-[260px] xs:h-[300px] sm:h-[400px] lg:h-[500px]">
+            <div className="rounded-2xl sm:rounded-[2rem] overflow-hidden shadow-2xl relative z-10 w-full lg:h-[400px]">
               <img
                 src="/hero banner/image.png"
                 alt="Scenic travel"
-                className="w-full h-full object-cover"
+                className="w-full h-auto lg:h-full lg:object-cover"
               />
             </div>
 
             {/* Simple decorative element */}
             <div className="absolute -bottom-4 -right-4 xs:-bottom-6 xs:-right-6 w-24 h-24 xs:w-32 xs:h-32 bg-[var(--color-sun-gold)]/20 rounded-full blur-2xl -z-10"></div>
+          </motion.div>
+
+          {/* Mobile Button (Shows after Image) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+            className="lg:hidden"
+          >
+            <Button
+              variant="primary"
+              size="lg"
+              className="w-full sm:w-auto bg-[var(--color-sun-gold)] border-none hover:brightness-110 rounded-lg text-[var(--color-ocean-blue)] font-bold tracking-normal py-3.5 px-8 xs:py-4 xs:px-10 shadow-lg shadow-gold-500/20 text-sm sm:text-base"
+              onClick={() => setIsModalOpen(true)}
+            >
+              Get Started
+            </Button>
           </motion.div>
 
         </div>

@@ -33,7 +33,7 @@ export default function Portfolio({ data }: { data: PortfolioData }) {
   };
 
   return (
-    <section className="py-12 sm:py-14 md:py-16 lg:py-20 bg-bg-alt overflow-hidden">
+    <section className="py-8 sm:py-10 md:py-12 lg:py-16 bg-bg-alt overflow-hidden">
       <SectionContainer className="mb-8 sm:mb-10 md:mb-12 lg:mb-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -41,7 +41,7 @@ export default function Portfolio({ data }: { data: PortfolioData }) {
           viewport={{ once: true }}
           className="space-y-3 sm:space-y-4"
         >
-          <Heading>
+          <Heading className="!text-3xl sm:!text-4xl md:!text-5xl">
             {data.title}
             <span className="text-[var(--color-sun-gold)]"> {data.highlightText}</span>
           </Heading>
@@ -50,7 +50,7 @@ export default function Portfolio({ data }: { data: PortfolioData }) {
 
       <div className="relative pl-4 sm:pl-6 md:pl-12 lg:pl-16 xl:pl-24 max-w-[1600px] mx-auto">
         <motion.div
-          className="flex gap-4 sm:gap-6 md:gap-8 [--card-width:85%] sm:[--card-width:60%] md:[--card-width:45%] lg:[--card-width:30%] [--card-gap:1rem] sm:[--card-gap:1.5rem] md:[--card-gap:2rem]"
+          className="flex gap-4 sm:gap-6 md:gap-8 [--card-width:75%] sm:[--card-width:50%] md:[--card-width:35%] lg:[--card-width:25%] [--card-gap:1rem] sm:[--card-gap:1.5rem] md:[--card-gap:2rem]"
           animate={{
             x: `calc(-${currentIndex} * var(--card-width) - ${currentIndex} * var(--card-gap))`,
           }}

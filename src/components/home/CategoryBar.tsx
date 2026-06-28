@@ -21,21 +21,21 @@ const categories: CategoryItem[] = [
 
 export default function CategoryBar() {
   return (
-    <div className="w-full bg-white border-b border-neutral-100 sticky top-16 md:top-20 lg:top-24 z-40 shadow-sm transition-all duration-300">
+    <div className="w-full bg-white border-b border-neutral-100 sticky top-14 md:top-16 lg:top-20 z-40 shadow-sm transition-all duration-300">
       <div className="mx-auto max-w-[1920px] px-6 lg:px-12">
         {/* Horizontal scroll container with fade effects */}
         <div className="relative flex items-center">
-          <div className="flex w-full items-center justify-between overflow-x-auto py-4 gap-6 no-scrollbar -mx-6 px-6 lg:mx-0 lg:px-0">
+          <div className="flex w-full items-center justify-between overflow-x-auto py-2.5 gap-5 no-scrollbar -mx-6 px-6 lg:mx-0 lg:px-0">
             {categories.map((cat, idx) => {
               const Icon = cat.icon;
               return (
                 <a
                   key={idx}
                   href={cat.href}
-                  className="group flex items-center gap-2.5 whitespace-nowrap text-xs font-bold uppercase tracking-wider text-[var(--color-ocean-blue)] hover:text-[var(--color-sun-gold)] transition-colors duration-300 relative py-2"
+                  className="group flex items-center gap-2 whitespace-nowrap text-[11px] font-bold uppercase tracking-[0.15em] text-[var(--color-ocean-blue)] hover:text-[var(--color-sun-gold)] transition-colors duration-300 relative py-1.5"
                 >
-                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[var(--color-sky-blue)]/10 text-[var(--color-ocean-blue)] group-hover:bg-[var(--color-sun-gold)] group-hover:text-[var(--color-ocean-blue)] transition-all duration-300">
-                    <Icon size={14} className="transition-transform duration-300 group-hover:scale-110" />
+                  <div className="flex items-center justify-center w-6 h-6 rounded-full bg-[var(--color-sky-blue)]/10 text-[var(--color-ocean-blue)] group-hover:bg-[var(--color-sun-gold)] group-hover:text-[var(--color-ocean-blue)] transition-all duration-300">
+                    <Icon size={12} className="transition-transform duration-300 group-hover:scale-110" />
                   </div>
                   <span>{cat.label}</span>
                   <motion.div
